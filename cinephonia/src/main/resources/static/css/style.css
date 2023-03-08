@@ -1,0 +1,22 @@
+#registerButton{
+    color:#6c757d;
+    background-color: #c8e2e7;
+}
+
+#loginButton{
+    color:#6c757d;
+    background-color: #1cabc4;
+}
+
+#buttons {
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+    justify-content: center;
+}
+
+#buttons > * {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
