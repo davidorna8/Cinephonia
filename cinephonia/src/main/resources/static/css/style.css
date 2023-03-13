@@ -1,22 +1,28 @@
+body{
+    margin-left: 3%;
+    margin-top:3%;
+}
+#ourNavbar{
+    background-color: #CBE9EE;
+}
+
 #registerButton{
+    margin-left: 10px;
+    color:whitesmoke;
+    background-color: #40737C;
+}
+#registerButton:hover{
     color:#6c757d;
-    background-color: #c8e2e7;
+    background-color: #CBE9EE;
 }
 
 #loginButton{
+    color:whitesmoke;
+    background-color: #85B9C2;
+}
+#loginButton:hover{
     color:#6c757d;
-    background-color: #1cabc4;
+    background-color: #CBE9EE;
 }
 
-#buttons {
-    display:flex;
-    flex-direction: column;
-    position:absolute;
-    justify-content: center;
-}
 
-#buttons > * {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
