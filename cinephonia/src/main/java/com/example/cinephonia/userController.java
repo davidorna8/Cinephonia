@@ -1,20 +1,16 @@
 package com.example.cinephonia;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
-
 @Controller
-public class mainController {
-    private Map<Long, User> users = new ConcurrentHashMap<>();
-    private AtomicLong lastid = new AtomicLong();
-    private Map<String, Long> usernames = new ConcurrentHashMap<>();
+public class userController {
 
+    @Autowired
+    userService userService;
     @GetMapping("/register")
     public String resgisterButton(){
         return "register";
@@ -36,11 +32,9 @@ public class mainController {
     }
 
 
-    @PostMapping("/register/newuser/{username}")
+    @PostMapping("/register/newUser")
     public String newUser(Model model, User user){
-        long id = lastid.incrementAndGet();
-        user.setId(id);
-        users.put(id,user);
+        userService.createUser(user);
         return "newuser";
     }
 }
