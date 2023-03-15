@@ -72,3 +72,16 @@ hr{
     margin-bottom: 50px;
     color: whitesmoke;
 }
+
+.differentButtons{
+    border-radius: 18px;
+    font-size: 20px;
+    line-height: 50px;
+    text-align: center;
+    width: 20%;
+    height: 20%;
+
+    margin-left: 20%
+
+}
+
