@@ -8,6 +8,7 @@ public class User {
     String password;
     String email;
     String region;
+    long id;
 
     public User(String name, String surname, String username, String age, String password, String email, String region) {
         this.name = name;
@@ -73,5 +74,13 @@ public class User {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

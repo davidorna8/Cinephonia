@@ -1,7 +1,9 @@
 body{
     margin-left: 3%;
     margin-top:3%;
+    background: radial-gradient(circle, rgba(0,130,152,1) 0%, rgba(143,203,213,1) 100%);
 }
+
 #ourNavbar{
     background-color: #CBE9EE;
 }
@@ -25,4 +27,48 @@ body{
     background-color: #CBE9EE;
 }
 
+.userLink{
+    color: whitesmoke;
+}
 
+.userLink:hover{
+    color: #cccccc;
+}
+
+#mainTitle{
+    color: #F1F9FA;
+    font-size: 140px;
+    font-family: "garamond";
+}
+
+#slogan{
+    color: #e8f0f1;
+    font-size: 25px;
+    font-family: "Copperplate";
+}
+
+.mainText{
+    margin-top: 130px;
+}
+
+.ourButton{
+    background-color: whitesmoke;
+    color: cornflowerblue;
+}
+
+.sectionTitle{
+    color: #F1F9FA;
+    font-size: 100px;
+    margin-top: 130px;
+    font-family: "garamond";
+}
+
+hr{
+    position: relative;
+    top: 70px;
+    border: none;
+    height: 3px;
+    background: whitesmoke;
+    margin-bottom: 50px;
+    color: whitesmoke;
+}
