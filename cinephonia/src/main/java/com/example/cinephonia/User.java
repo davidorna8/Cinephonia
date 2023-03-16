@@ -1,14 +1,14 @@
 package com.example.cinephonia;
 
 public class User {
-    String name;
-    String surname;
-    String username;
-    String age;
-    String password;
-    String email;
-    String region;
-    long id;
+    private String name;
+    private String surname;
+    private String username;
+    private String age;
+    private String password;
+    private String email;
+    private String region;
+    private long id;
 
     public User(String name, String surname, String username, String age, String password, String email, String region) {
         this.name = name;

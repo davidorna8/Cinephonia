@@ -1,7 +1,7 @@
 package com.example.cinephonia;
 
 public class Cover {
-    String imageURL;
+    private String imageURL;
 
     public Cover(String imageURL) {
         this.imageURL = imageURL;

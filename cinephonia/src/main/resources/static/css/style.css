@@ -9,7 +9,6 @@ body{
 }
 
 #registerButton{
-    margin-left: 10px;
     color:whitesmoke;
     background-color: #40737C;
 }
@@ -19,6 +18,7 @@ body{
 }
 
 #loginButton{
+    margin-right: 10px;
     color:whitesmoke;
     background-color: #85B9C2;
 }
@@ -73,15 +73,23 @@ hr{
     color: whitesmoke;
 }
 
-.differentButtons{
+.uploadButtons{
+    border-radius: 18px;
+}
+.showButtons{
     border-radius: 18px;
     font-size: 20px;
     line-height: 50px;
     text-align: center;
-    width: 20%;
-    height: 20%;
-
-    margin-left: 20%
-
+    margin-left: 16.66%;
 }
 
+#filmButtons{
+    display:flex;
+    justify-content: center;
+    padding: 150px;
+}
+
+#uploadFilms{
+    display: none;
+}

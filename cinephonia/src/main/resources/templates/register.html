@@ -39,7 +39,7 @@
         <h1>Register</h1>
     </div>
     <div class="text-center container d-flex justify-content-center">
-        <form type="Submit" class="text-center" action="/register/newUser">
+        <form type="Submit" class="text-center" action="/register/newUser" method="post">
             <div class="row d-flex mb-2">
                 <div class="col-auto">
                     <input type="text" class="form-control" placeholder="First name" name="name">
@@ -48,7 +48,7 @@
                     <input type="text" class="form-control" placeholder="Last name" name="surname">
                 </div>
             </div>
-            <div class="row d-flex  mb-2">
+            <div class="row d-flex  mb-2 col-12 pl-2">
                 <input type="text" class="form-control" placeholder="Username" name="username">
             </div>
             <div class="row d-flex mb-2">
@@ -60,18 +60,19 @@
                 </div>
             </div>
             <div class="row d-flex mb-2">
-                <div class="col-sm">
+                <div class="col-3">
                     <select id="inputAge" class="form-control" name="age">
                         <option selected>Age</option>
                         <option>13</option>
                         <option>20</option>
                     </select>
                 </div>
-                <div class="col-md">
+                <div class="col-9">
                     <select id="inputRegion" class="form-control" name="region">
                         <option selected>Region</option>
-                        <option>Madrid</option>
-                        <option>Barcelona</option>
+                        {{#regionList}}
+                        <option>{{.}}</option>
+                        {{/regionList}}
                     </select>
                 </div>
             </div>

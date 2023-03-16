@@ -6,13 +6,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class userController {
-
+    private static String regionList[]={"North America","Caribbean","South America","Asia","East Asia","Oceania","Middle East",
+                                        "Africa","Western Europe","Eastern Europe"};
     @Autowired
     userService userService;
     @GetMapping("/register")
-    public String resgisterButton(){
+    public String resgisterButton(Model model){
+        List<String> regList= Arrays.asList(regionList);
+        model.addAttribute("regionList",regList);
         return "register";
     }
 
@@ -35,6 +41,7 @@ public class userController {
     @PostMapping("/register/newUser")
     public String newUser(Model model, User user){
         userService.createUser(user);
+        model.addAttribute("username",user.getUsername());
         return "newuser";
     }
 }

@@ -1,11 +1,11 @@
 package com.example.cinephonia;
 
 public class Song {
-    String name;
-    String year;
-    String minutes;
-    String seconds;
-    String author;
+    private String name;
+    private String year;
+    private String minutes;
+    private String seconds;
+    private String author;
 
     public Song(String name, String year, String minutes, String seconds, String author) {
         this.name = name;

@@ -1,16 +1,18 @@
 package com.example.cinephonia;
 
 public class Film {
-    String name;
-    String year;
-    String director;
-    String synopsis;
+    private String name;
+    private String year;
+    private String director;
+    private String synopsis;
+    private String genre;
 
-    public Film(String name, String year, String director, String synopsis) {
+    public Film(String name, String year, String director, String synopsis,String genre) {
         this.name = name;
         this.year = year;
         this.director = director;
         this.synopsis = synopsis;
+        this.genre=genre;
     }
 
     public String getName() {
@@ -43,5 +45,13 @@ public class Film {
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }
