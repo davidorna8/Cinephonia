@@ -6,6 +6,7 @@ public class Film {
     private String director;
     private String synopsis;
     private String genre;
+    private long id;
 
     public Film(String name, String year, String director, String synopsis,String genre) {
         this.name = name;
@@ -53,5 +54,13 @@ public class Film {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

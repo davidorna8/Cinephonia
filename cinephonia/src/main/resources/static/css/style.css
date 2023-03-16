@@ -90,6 +90,20 @@ hr{
     padding: 150px;
 }
 
+#songButtons{
+    display:flex;
+    justify-content: center;
+    padding: 150px;
+}
+
 #uploadFilms{
     display: none;
+}
+
+#uploadSongs{
+    display: none;
+}
+
+#congratsText{
+    color: snow;
 }

@@ -22,23 +22,13 @@ public class userController {
         return "register";
     }
 
-    @GetMapping("/films")
-    public String filmsSection(){
-        return "films";
-    }
-
-    @GetMapping("/songs")
-    public String songsSection(){
-        return "songs";
-    }
-
     @GetMapping("/login")
     public String loginButton(){
         return "login";
     }
 
 
-    @PostMapping("/register/newUser")
+    @PostMapping("/register/newuser")
     public String newUser(Model model, User user){
         userService.createUser(user);
         model.addAttribute("username",user.getUsername());

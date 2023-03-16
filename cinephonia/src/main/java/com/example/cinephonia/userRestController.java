@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 public class userRestController {
     @Autowired
     userService userService;
-    /*@GetMapping("/jj")
-    //public Collection<User> showUsers(){
+    /*@GetMapping("/")
+    public ResponseEntity<User> showUsers(){
         return users.values();
     }*/
 

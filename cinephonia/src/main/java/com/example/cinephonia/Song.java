@@ -6,6 +6,8 @@ public class Song {
     private String minutes;
     private String seconds;
     private String author;
+    private String genre;
+    private long id;
 
     public Song(String name, String year, String minutes, String seconds, String author) {
         this.name = name;
@@ -53,5 +55,21 @@ public class Song {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

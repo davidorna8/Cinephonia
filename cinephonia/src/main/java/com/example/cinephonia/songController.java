@@ -9,25 +9,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.Arrays;
 import java.util.List;
 
-
 @Controller
-public class filmController {
-    private static String genreList[]={"Action","Comedy","Western","Romance","Horror",
-            "Science fiction","Thriller","Fantasy"};
-
+public class songController {
+    private static String genreList[]={"Punk","Rock","Pop","Classic", "Indie", "Blues", "Rap"};
     @Autowired
-    filmService filmService;
-    @GetMapping("/films")
-    public String filmsSection(Model model){
+    songService songService;
+    @GetMapping("/songs")
+    public String songsSection(Model model){
         List<String> genresList= Arrays.asList(genreList);
         model.addAttribute("genreList",genresList);
-        return "films";
+        return "songs";
     }
 
-    @PostMapping("/films")
-    public String newFilm(Model model, Film film){
-        filmService.createFilm(film);
-        model.addAttribute("name",film.getName());
-        return "films";
+    @PostMapping("/songs")
+    public String newSong(Model model, Song song){
+        songService.createSong(song);
+        //model.addAttribute("name",song.getName());
+        return "songs";
     }
 }
