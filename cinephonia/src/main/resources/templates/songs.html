@@ -55,7 +55,7 @@
 
     <div id="uploadSongs">
         <div class="text-center container d-flex justify-content-center">
-            <form type="Submit" class="text-center" action="/" method="post">
+            <form type="Submit" class="text-center" onsubmit="return newSong()" method="post">
                 <div class="row d-flex mb-2">
                     <input type="text" class="form-control" placeholder="Title" name="name">
                 </div>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="row d-flex mb-2">
                     <div class="col-6 px-0">
-                        <input type="number" class="form-control" placeholder="Minutes" name="minutes" min="0" max="10">
+                        <input type="number" class="form-control" placeholder="Minutes" name="minutes" min="0" max="60">
                     </div>
                     <div class="col-6 px-0">
                         <input type="number" class="form-control" placeholder="Seconds" name="seconds" min="0" max="59">

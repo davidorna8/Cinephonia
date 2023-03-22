@@ -6,6 +6,8 @@ function showFilmsForm(){
     }else{
         content.style.display='none';
     }
+    let content2=document.getElementById('allFilms');
+    content2.style.display='none';
 }
 
 function showSongsForm(){
@@ -23,4 +25,23 @@ function newFilm(){
     content3.style.display='none';
    alert("Film correctly registered!");
    return false;
+}
+
+function newSong(){
+    let content4=document.getElementById('uploadSongs')
+    content4.style.display='none';
+    alert("Song correctly registered!");
+    return false;
+}
+
+function showAllFilms(){
+    let content=document.getElementById('allFilms');
+    let display=content.style.display;
+    if(display==="none"|display===""){
+        content.style.display='block';
+    }else{
+        content.style.display='none';
+    }
+    let content2=document.getElementById('uploadFilms');
+    content2.style.display='none';
 }

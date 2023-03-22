@@ -51,7 +51,7 @@
 
     <div id="filmButtons">
         <button type="button" class="uploadButtons col-3 " onclick="showFilmsForm()">Upload<br>new film</button>
-        <button type="button" class="showButtons col-3 ">Show all</button>
+        <button type="button" class="showButtons col-3 " onclick="showAllFilms()">Show all</button>
     </div>
 
     <div id="uploadFilms">
@@ -84,6 +84,23 @@
         </div>
     </div>
     <br>
-
+    <div id="allFilms">
+        <div class="d-flex row mb-2">
+        {{#films}}
+                <div class="col-4 card ml-1">
+                    <img class="card-img" alt={{name}}>
+                    <div class="card-body">
+                        <h5 class="titles">{{name}}</h5>
+                        <p>{{synopsis}}</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="card-link">See more</a>
+                        <a href="#" class="card-link">Delete</a>
+                        <a href="#" class="card-link">Update</a>
+                    </div>
+                </div>
+        {{/films}}
+        </div>
+    </div>
 </body>
 </html>

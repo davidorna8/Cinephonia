@@ -9,12 +9,13 @@ public class Song {
     private String genre;
     private long id;
 
-    public Song(String name, String year, String minutes, String seconds, String author) {
+    public Song(String name, String year, String minutes, String seconds, String author, String genre) {
         this.name = name;
         this.year = year;
         this.minutes = minutes;
         this.seconds = seconds;
         this.author = author;
+        this.genre= genre;
     }
 
     public String getName() {

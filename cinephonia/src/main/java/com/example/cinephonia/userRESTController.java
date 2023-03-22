@@ -9,12 +9,12 @@ import java.util.Collection;
 
 
 @RestController
-public class userRestController {
+public class userRESTController {
     @Autowired
     userService userService;
 
    @GetMapping("/users/{id}")
-    public ResponseEntity<User> loginUser(@RequestParam long id){
+    public ResponseEntity<User> getUser(@PathVariable long id){
         User user = userService.getUserById(id);
         if(user!=null){
             return new ResponseEntity<>(user, HttpStatus.OK);
@@ -45,7 +45,7 @@ public class userRestController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> putAnuncio(@PathVariable long id, @RequestBody User us){
+    public ResponseEntity<User> putUser(@PathVariable long id, @RequestBody User us){
         User user = userService.getUserById(id);
         if(user!=null){
             userService.putUser(us,id);

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Controller
 public class filmController {
     private static String genreList[]={"Action","Comedy","Western","Romance","Horror",
-            "Science fiction","Thriller","Fantasy"};
+            "Science fiction","Thriller","Fantasy","Musical"};
 
     @Autowired
     filmService filmService;
@@ -21,6 +22,8 @@ public class filmController {
     public String filmsSection(Model model){
         List<String> genresList= Arrays.asList(genreList);
         model.addAttribute("genreList",genresList);
+        List<Film> filmList=new ArrayList<>(filmService.filmList());
+        model.addAttribute("films",filmList);
         return "films";
     }
 

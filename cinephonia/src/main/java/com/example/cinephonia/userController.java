@@ -5,9 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
-
+@RequestMapping("/api/")
 @Controller
 public class userController {
     private static String regionList[]={"North America","Caribbean","South America","Asia","East Asia","Oceania","Middle East",
@@ -24,13 +25,6 @@ public class userController {
     @GetMapping("/login")
     public String loginButton(){
         return "login";
-    }
-
-    @GetMapping("/prueba")
-    public String hhh(Model model){
-        List<User> list= new ArrayList<>(userService.userList());
-        model.addAttribute("users",list);
-        return "pruebita";
     }
 
 
