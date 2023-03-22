@@ -12,22 +12,17 @@ import java.util.Collection;
 public class userRestController {
     @Autowired
     userService userService;
-    /*@GetMapping("/")
-    public ResponseEntity<User> showUsers(){
-        return users.values();
-    }*/
 
-/*    @GetMapping("/jiuji")
-    public ResponseEntity<User> loginUser(@RequestParam String username){
-        long id = usernames.get(username);
-        User u = users.get(id);
-        if(u!=null){
-            return new ResponseEntity<>(u, HttpStatus.OK);
+   @GetMapping("/users/{id}")
+    public ResponseEntity<User> loginUser(@RequestParam long id){
+        User user = userService.getUserById(id);
+        if(user!=null){
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
         else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }*/
+    }
     @GetMapping("/users")
     public Collection<User> showUsers(){
         return userService.userList();

@@ -104,6 +104,10 @@ hr{
     display: none;
 }
 
+#filmRegistered{
+    display: none;
+}
+
 #congratsText{
     color: snow;
 }
