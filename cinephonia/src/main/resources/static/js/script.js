@@ -17,3 +17,10 @@ function showSongsForm(){
         content2.style.display='none';
     }
 }
+
+function newFilm(){
+   let content3=document.getElementById('uploadFilms')
+    content3.style.display='none';
+   alert("Film correctly registered!");
+   return false;
+}
