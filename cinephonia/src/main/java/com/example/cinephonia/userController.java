@@ -6,8 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class userController {
@@ -25,6 +24,13 @@ public class userController {
     @GetMapping("/login")
     public String loginButton(){
         return "login";
+    }
+
+    @GetMapping("/prueba")
+    public String hhh(Model model){
+        List<User> list= new ArrayList<>(userService.userList());
+        model.addAttribute("users",list);
+        return "pruebita";
     }
 
 

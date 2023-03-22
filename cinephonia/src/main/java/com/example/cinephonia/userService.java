@@ -12,8 +12,23 @@ public class userService {
     private Map<Long, User> users = new ConcurrentHashMap<>();
     private AtomicLong lastid = new AtomicLong();
     private Map<String, Long> usernames = new ConcurrentHashMap<>();
-    // create User method
 
+    public userService(){
+        User user=new User("David","Orna","david345","20","urjclol23","de.orna.2020@alumnos.urjc.es","Western Europe");
+        long id=lastid.incrementAndGet();
+        user.setId(id);
+        users.put(id,user);
+        user=new User("Eva","Gomez","eva.g","20","%Ri8#kKl92","e.gomezf.2020@alumnos.urjc.es","Western Europe");
+        id=lastid.incrementAndGet();
+        user.setId(id);
+        users.put(id,user);
+        user=new User("John","Doe","yondou","56","JJnewof7","j.doe.fresh@hotmail.com","Asia");
+        id=lastid.incrementAndGet();
+        user.setId(id);
+        users.put(id,user);
+    }
+
+    // create User method
     public void createUser(User user){
         long id=lastid.incrementAndGet();
         user.setId(id);
