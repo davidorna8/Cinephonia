@@ -56,7 +56,7 @@
 
     <div id="uploadFilms">
         <div class="text-center container d-flex justify-content-center">
-            <form type="Submit" class="text-center" onsubmit="return newFilm()" method="post">
+            <form type="Submit" class="text-center" method="post" onsubmit="newFilm()">
                 <div class="row d-flex mb-2">
                     <input type="text" class="form-control" placeholder="Title" name="name">
                 </div>
@@ -84,14 +84,14 @@
         </div>
     </div>
     <br>
-    <div id="allFilms">
-        <div class="d-flex row mb-2">
+    <div id="allFilms" class="container mx-3">
+        <div class="d-flex row mb-2 gap-3">
         {{#films}}
-                <div class="col-4 card ml-1">
+                <div class="col-3 card">
                     <img class="card-img" alt={{name}}>
                     <div class="card-body">
                         <h5 class="titles">{{name}}</h5>
-                        <p>{{synopsis}}</p>
+                        <p class="synopsis">{{synopsis}}</p>
                     </div>
                     <div class="card-body">
                         <a href="#" class="card-link">See more</a>

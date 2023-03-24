@@ -21,15 +21,11 @@ function showSongsForm(){
 }
 
 function newFilm(){
-   let content3=document.getElementById('uploadFilms')
-    content3.style.display='none';
    alert("Film correctly registered!");
    return false;
 }
 
 function newSong(){
-    let content4=document.getElementById('uploadSongs')
-    content4.style.display='none';
     alert("Song correctly registered!");
     return false;
 }

@@ -111,3 +111,8 @@ hr{
 #congratsText{
     color: snow;
 }
+
+.synopsis{
+    height: 250px;
+    text-overflow: ellipsis;
+}
