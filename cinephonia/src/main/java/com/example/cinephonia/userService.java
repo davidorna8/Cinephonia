@@ -1,8 +1,11 @@
 package com.example.cinephonia;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -11,6 +14,10 @@ import java.util.concurrent.atomic.AtomicLong;
 public class userService {
     private Map<Long, User> users = new ConcurrentHashMap<>();
     private AtomicLong lastid = new AtomicLong();
+    @Autowired
+    songService songService;
+    @Autowired
+    filmService filmService;
 
     public userService(){
         User user= new User("Admin", "", "admin", "", "admin", "admin@admin.com", "");
@@ -59,6 +66,28 @@ public class userService {
             if(u.getUsername().equals(username)) return u;
         }
         return new User();
+    }
+
+    public List<Song> getSongList(long id){
+        List<Song> allSongs=new ArrayList<>(songService.songList());
+        List<Song> userSongList=new ArrayList<>();
+        for(Song s: allSongs){
+            if(s.getUserId()==id){
+                userSongList.add(s);
+            }
+        }
+        return userSongList;
+    }
+
+    public List<Film> getFilmList(long id){
+        List<Film> allFilms=new ArrayList<>(filmService.filmList());
+        List<Film> userFilmList=new ArrayList<>();
+        for(Film s: allFilms){
+            if(s.getUserId()==id){
+                userFilmList.add(s);
+            }
+        }
+        return userFilmList;
     }
 
 }

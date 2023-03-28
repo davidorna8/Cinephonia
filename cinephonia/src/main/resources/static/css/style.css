@@ -121,3 +121,7 @@ hr{
     text-overflow: ellipsis;
 }
 
+#userTable{
+    background-color: whitesmoke;
+
+}
