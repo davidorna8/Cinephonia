@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ public class songController {
         return "songs";
     }
 
-    @PostMapping("/songs")
+    @PostMapping("/songInfo")
     public String newSong(Model model, Song song){
         songService.createSong(song);
         //model.addAttribute("name",song.getName());
-        return "songs";
+        return "songPage";
     }
 
     @GetMapping("/prueba")
@@ -36,4 +37,10 @@ public class songController {
         return "pruebita";
     }
 
+    @GetMapping("/song/{id}")
+    public String songPage(Model model, @PathVariable long id){
+        Song song=songService.getSongById(id);
+        model.addAttribute("song",song);
+        return "filmPage";
+    }
 }
