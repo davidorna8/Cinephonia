@@ -18,7 +18,7 @@ public class filmService {
                         "England during five frantic weeks before Christmas follows a web-like " +
                         "pattern of inter-related, losely related and unrelated stories of a dozen " +
                         "or more various individuals with their love lives, or lack of them."
-                ,"Romance" );
+                ,"Romance", "" );
         long id = lastid.incrementAndGet();
         film.setId(id);
         films.put(id,film);
@@ -28,7 +28,8 @@ public class filmService {
                         "When humanity is facing extinction, a mysterious rip in the space-time " +
                         "continuum is discovered, giving mankind the opportunity to widen their " +
                         "lifespan. A group of explorers must travel beyond our solar system in " +
-                        "search of a planet that can sustain life.", "Science fiction");
+                        "search of a planet that can sustain life.", "Science fiction",
+                    "/images/interstellar.jpg");
         id = lastid.incrementAndGet();
         film.setId(id);
         films.put(id,film);
@@ -41,7 +42,7 @@ public class filmService {
                         "three days, but during this time she must win the kiss of true love from Eric " +
                         "otherwise Ursula will own her forever. Ariel agrees but to add to the " +
                         "difficulty Ursula also takes Ariel's voice as price of the deal and then " +
-                        "schemes to ensure that Ariel fails.", "Fantasy");
+                        "schemes to ensure that Ariel fails.", "Fantasy", "");
         id = lastid.incrementAndGet();
         film.setId(id);
         films.put(id,film);

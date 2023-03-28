@@ -7,13 +7,15 @@ public class Film {
     private String synopsis;
     private String genre;
     private long id;
+    private String url;
 
-    public Film(String name, String year, String director, String synopsis,String genre) {
+    public Film(String name, String year, String director, String synopsis,String genre, String url) {
         this.name = name;
         this.year = year;
         this.director = director;
         this.synopsis = synopsis;
         this.genre=genre;
+        this.url= url;
     }
 
     public String getName() {
@@ -62,5 +64,13 @@ public class Film {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

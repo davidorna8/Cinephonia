@@ -6,8 +6,6 @@ function showFilmsForm(){
     }else{
         content.style.display='none';
     }
-    let content2=document.getElementById('allFilms');
-    content2.style.display='none';
 }
 
 function showSongsForm(){
@@ -19,12 +17,13 @@ function showSongsForm(){
         content2.style.display='none';
     }
 }
-
-function newFilm(){
-   alert("Film correctly registered!");
-   return false;
+function newFilm() {
+    fs = new ActiveXObject("Scripting.FileSystemObject");
+    fs.copyFile(getObjectById("inputImg").src,
+        'C:\\Users\\rosa2\\OneDrive\\Documentos\\GitHub\\WebSSDD' +
+        '\\cinephonia\\src\\main\\resources\\static\\images' + getObjectById("inputImg"));
+    alert("Film correctly registered!");
 }
-
 function newSong(){
     alert("Song correctly registered!");
     return false;
@@ -38,6 +37,4 @@ function showAllFilms(){
     }else{
         content.style.display='none';
     }
-    let content2=document.getElementById('uploadFilms');
-    content2.style.display='none';
 }
