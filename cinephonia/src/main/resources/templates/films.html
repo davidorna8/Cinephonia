@@ -58,6 +58,14 @@
         <div class="text-center container d-flex justify-content-center">
             <form type="Submit" class="text-center" method="post" onsubmit="newFilm()" action="/filmInfo">
                 <div class="row d-flex mb-2">
+                    <select class="form-control" name="username">
+                        <option selected>Who are you?</option>
+                        {{#users}}
+                        <option>{{username}}</option>
+                        {{/users}}
+                    </select>
+                </div>
+                <div class="row d-flex mb-2">
                     <input type="text" class="form-control" placeholder="Title" name="name">
                 </div>
                 <div class="row d-flex mb-2">
@@ -79,10 +87,14 @@
                             {{/genreList}}
                    </select>
                 </div>
+                <label>Select film cover:</label>
                 <div class="row d-flex mb-2">
                     <input type="file" accept="image/*" class="form-control" name="url" id="inputImg">
                 </div>
-                <input type="submit" class="ourButton" value="Submit">
+                <!--<div class="row d-flex mb-2">
+                    <input type="text" class="form-control" name="photographer" id="inputImg">
+                </div>-->
+               <input type="submit" class="ourButton" value="Submit">
             </form>
         </div>
     </div>
@@ -97,8 +109,8 @@
                         <p class="synopsis">{{synopsis}}</p>
                     </div>
                     <div class="card-body">
-                        <a href="/films/{{-index}}" class="card-link">See more</a>
-                        <a href="#" class="card-link">Delete</a>
+                        <a href="/films/{{id}}" class="card-link">See more</a>
+                        <a class="card-link" onclick="delete('{{-index}}')">Delete</a>
                         <a href="#" class="card-link">Update</a>
                     </div>
                 </div>

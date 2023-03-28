@@ -20,18 +20,27 @@ public class filmController {
 
     @Autowired
     filmService filmService;
+
+    @Autowired
+    userService userService;
     @GetMapping("/films")
     public String filmsSection(Model model){
         List<String> genresList= Arrays.asList(genreList);
         model.addAttribute("genreList",genresList);
         List<Film> filmList=new ArrayList<>(filmService.filmList());
         model.addAttribute("films",filmList);
+        List<User> usersList = new ArrayList<>(userService.userList());
+        usersList= usersList.subList(1,usersList.size());
+        model.addAttribute("users",usersList);
         return "films";
     }
 
     @PostMapping("/filmInfo")
-    public String newFilm(Model model, Film film){
+    public String newFilm(Model model, Film film, @RequestParam String username){
         filmService.createFilm(film);
+        long userId= userService.getUserByUsername(username).getId();
+        film.setUserId(userId);
+        model.addAttribute("username",username);
         model.addAttribute("film",film);
         return "filmPage";
     }
@@ -41,6 +50,9 @@ public class filmController {
         Film film=filmService.getFilmById(id);
         model.addAttribute("id",film.getId());
         model.addAttribute("film",film);
+        User u = userService.getUserById(film.getUserId());
+        model.addAttribute("username",u.getUsername());
+
         return "filmPage";
     }
 }

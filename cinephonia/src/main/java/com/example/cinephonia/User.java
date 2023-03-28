@@ -1,5 +1,8 @@
 package com.example.cinephonia;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class User {
     private String name;
     private String surname;
@@ -9,7 +12,6 @@ public class User {
     private String email;
     private String region;
     private long id;
-
     public User(String name, String surname, String username, String age, String password, String email, String region) {
         this.name = name;
         this.surname = surname;

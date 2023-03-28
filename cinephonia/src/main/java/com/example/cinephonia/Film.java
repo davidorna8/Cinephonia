@@ -6,6 +6,7 @@ public class Film {
     private String director;
     private String synopsis;
     private String genre;
+    private long userId;
     private long id;
     private String url;
 
@@ -72,5 +73,13 @@ public class Film {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

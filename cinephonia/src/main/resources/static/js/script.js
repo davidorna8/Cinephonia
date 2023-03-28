@@ -56,3 +56,10 @@ function showAllSongs(){
     let content2=document.getElementById('uploadSongs');
     content2.style.display='none';
 }
+
+/*function delete(index){
+    var ans = window.confirm("Are you sure you want to delete "+index+"?")
+    if(ans) {
+       location.href="delete/{index}"
+    }
+}*/

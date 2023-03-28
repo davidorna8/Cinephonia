@@ -34,7 +34,7 @@ public class filmRESTController {
         return film;
     }
     @DeleteMapping("/films/{id}")
-    public ResponseEntity<Film> deleteSong(@PathVariable long id){
+    public ResponseEntity<Film> deleteFilm(@PathVariable long id){
         Film film=filmService.removeFilm(id);
         if(film!=null){
             return new ResponseEntity<>(film, HttpStatus.OK);
@@ -45,7 +45,7 @@ public class filmRESTController {
     }
 
     @PutMapping("/films/{id}")
-    public ResponseEntity<Film> putSong(@PathVariable long id, @RequestBody Film fm){
+    public ResponseEntity<Film> putFilm(@PathVariable long id, @RequestBody Film fm){
         Film film = filmService.getFilmById(id);
         if(film!=null){
             filmService.putFilm(fm,id);

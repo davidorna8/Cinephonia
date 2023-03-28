@@ -11,10 +11,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public class userService {
     private Map<Long, User> users = new ConcurrentHashMap<>();
     private AtomicLong lastid = new AtomicLong();
-    private Map<String, Long> usernames = new ConcurrentHashMap<>();
 
     public userService(){
-        User user=new User("David","Orna","david345","20","urjclol23","de.orna.2020@alumnos.urjc.es","Western Europe");
+        User user= new User("Admin", "", "admin", "", "admin", "admin@admin.com", "");
+        user.setId(0);
+        users.put((long)0,user);
+        user=new User("David","Orna","david345","20","urjclol23","de.orna.2020@alumnos.urjc.es","Western Europe");
         long id=lastid.incrementAndGet();
         user.setId(id);
         users.put(id,user);
@@ -50,6 +52,13 @@ public class userService {
 
     public User getUserById(long id){
         return users.get(id);
+    }
+
+    public User getUserByUsername(String username){
+        for(User u : users.values()){
+            if(u.getUsername().equals(username)) return u;
+        }
+        return new User();
     }
 
 }
