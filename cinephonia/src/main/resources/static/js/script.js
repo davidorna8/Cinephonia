@@ -6,6 +6,8 @@ function showFilmsForm(){
     }else{
         content.style.display='none';
     }
+    let content2=document.getElementById('allFilms');
+    content2.style.display='none';
 }
 
 function showSongsForm(){
@@ -16,6 +18,8 @@ function showSongsForm(){
     }else{
         content2.style.display='none';
     }
+    let content3=document.getElementById('allSongs');
+    content3.style.display='none';
 }
 function newFilm() {
     fs = new ActiveXObject("Scripting.FileSystemObject");
@@ -37,4 +41,18 @@ function showAllFilms(){
     }else{
         content.style.display='none';
     }
+    let content2=document.getElementById('uploadFilms');
+    content2.style.display='none';
+}
+
+function showAllSongs(){
+    let content=document.getElementById('allSongs');
+    let display=content.style.display;
+    if(display==="none"|display===""){
+        content.style.display='block';
+    }else{
+        content.style.display='none';
+    }
+    let content2=document.getElementById('uploadSongs');
+    content2.style.display='none';
 }

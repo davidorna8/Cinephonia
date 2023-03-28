@@ -20,6 +20,8 @@ public class songController {
     public String songsSection(Model model){
         List<String> genresList= Arrays.asList(genreList);
         model.addAttribute("genreList",genresList);
+        List<Song> songList=new ArrayList<>(songService.songList());
+        model.addAttribute("songs",songList);
         return "songs";
     }
 
@@ -41,6 +43,6 @@ public class songController {
     public String songPage(Model model, @PathVariable long id){
         Song song=songService.getSongById(id);
         model.addAttribute("song",song);
-        return "filmPage";
+        return "songPage";
     }
 }

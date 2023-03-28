@@ -36,7 +36,7 @@ public class filmController {
         return "filmPage";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/films/{id}")
     public String filmPage(Model model, @PathVariable long id){
         Film film=filmService.getFilmById(id);
         model.addAttribute("id",film.getId());

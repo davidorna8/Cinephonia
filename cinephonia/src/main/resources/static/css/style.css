@@ -108,6 +108,10 @@ hr{
     display: none;
 }
 
+#allSongs{
+    display: none;
+}
+
 #congratsText{
     color: snow;
 }
