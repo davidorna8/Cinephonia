@@ -7,6 +7,7 @@ public class Song {
     private String seconds;
     private String author;
     private String genre;
+    private long userId;
     private long id;
 
     public Song(String name, String year, String minutes, String seconds, String author, String genre) {
@@ -72,5 +73,13 @@ public class Song {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

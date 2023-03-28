@@ -57,6 +57,14 @@
         <div class="text-center container d-flex justify-content-center">
             <form type="Submit" class="text-center" onsubmit="newSong()" method="post" action="/songInfo">
                 <div class="row d-flex mb-2">
+                    <select class="form-control" name="username">
+                        <option selected>Who are you?</option>
+                        {{#users}}
+                        <option>{{username}}</option>
+                        {{/users}}
+                    </select>
+                </div>
+                <div class="row d-flex mb-2">
                     <input type="text" class="form-control" placeholder="Title" name="name">
                 </div>
                 <div class="row d-flex mb-2">
@@ -97,7 +105,7 @@
                     <p class="synopsis">{{author}}</p>
                 </div>
                 <div class="card-body">
-                    <a href="/song/{{-index}}" class="card-link">See more</a>
+                    <a href="/song/{{id}}" class="card-link">See more</a>
                     <a href="#" class="card-link">Delete</a>
                     <a href="#" class="card-link">Update</a>
                 </div>
