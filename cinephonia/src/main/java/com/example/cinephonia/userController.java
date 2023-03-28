@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
-@RequestMapping("/api/")
+
 @Controller
 public class userController {
     private static String regionList[]={"North America","Caribbean","South America","Asia","East Asia","Oceania","Middle East",
