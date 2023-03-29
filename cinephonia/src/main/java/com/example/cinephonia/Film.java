@@ -8,15 +8,14 @@ public class Film {
     private String genre;
     private long userId;
     private long id;
-    private String url;
+    private Cover cover;
 
-    public Film(String name, String year, String director, String synopsis,String genre, String url) {
+    public Film(String name, String year, String director, String synopsis,String genre) {
         this.name = name;
         this.year = year;
         this.director = director;
         this.synopsis = synopsis;
         this.genre=genre;
-        this.url= url;
     }
 
     public String getName() {
@@ -67,14 +66,17 @@ public class Film {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
+    public Cover getCover() {
+        return cover;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void createCover(String url, String style) {
+        this.cover = new Cover(url,style);
     }
 
+    public void setCover(Cover cover){
+        this.cover=cover;
+    }
     public long getUserId() {
         return userId;
     }

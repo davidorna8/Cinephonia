@@ -56,4 +56,25 @@ public class songController {
         model.addAttribute("username",u.getUsername());
         return "songPage";
     }
+
+    @GetMapping("/updateSong/{id}")
+    public String updateSongPage(Model model, @PathVariable long id){
+        Song song = songService.getSongById(id);
+        model.addAttribute("song",song);
+        String username= userService.getUserById(song.getUserId()).getUsername();
+        model.addAttribute("username",username);
+        List<String> genresList= Arrays.asList(genreList);
+        model.addAttribute("genreList",genresList);
+        return "updateSong";
+    }
+
+    @PostMapping("/songInfo/{id}")
+    public String updateSong(Model model,Song song,@PathVariable long id){
+        song.setId(id);
+        String username= userService.getUserById(song.getUserId()).getUsername();
+        model.addAttribute("username",username);
+        model.addAttribute("song", song);
+        songService.putSong(song,id);
+        return "songPage";
+    }
 }

@@ -22,11 +22,8 @@ function showSongsForm(){
     content3.style.display='none';
 }
 function newFilm() {
-    fs = new ActiveXObject("Scripting.FileSystemObject");
-    fs.copyFile(getObjectById("inputImg").src,
-        'C:\\Users\\rosa2\\OneDrive\\Documentos\\GitHub\\WebSSDD' +
-        '\\cinephonia\\src\\main\\resources\\static\\images' + getObjectById("inputImg"));
     alert("Film correctly registered!");
+    return false;
 }
 function newSong(){
     alert("Song correctly registered!");
@@ -57,9 +54,9 @@ function showAllSongs(){
     content2.style.display='none';
 }
 
-/*function delete(index){
-    var ans = window.confirm("Are you sure you want to delete "+index+"?")
-    if(ans) {
-       location.href="delete/{index}"
+function deleteFilm(id){
+    var ans = window.confirm("Are you sure you want to delete "+id+"?")
+    if(ans){
+
     }
-}*/
+}

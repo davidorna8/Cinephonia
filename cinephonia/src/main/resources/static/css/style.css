@@ -123,5 +123,10 @@ hr{
 
 #userTable{
     background-color: whitesmoke;
-
 }
+
+.userTitles{
+    font-family: "garamond";
+    color: whitesmoke;
+}
+

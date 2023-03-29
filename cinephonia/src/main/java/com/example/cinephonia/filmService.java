@@ -1,5 +1,6 @@
 package com.example.cinephonia;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -18,9 +19,10 @@ public class filmService {
                         "England during five frantic weeks before Christmas follows a web-like " +
                         "pattern of inter-related, losely related and unrelated stories of a dozen " +
                         "or more various individuals with their love lives, or lack of them."
-                ,"Romance", "" );
+                ,"Romance");
         long id = lastid.incrementAndGet();
         film.setId(id);
+        film.createCover("","");
         films.put(id,film);
         film = new Film("Interstellar", "2014", "Christopher Nolan",
                 "In the near future Earth has been devastated by drought and " +
@@ -28,10 +30,10 @@ public class filmService {
                         "When humanity is facing extinction, a mysterious rip in the space-time " +
                         "continuum is discovered, giving mankind the opportunity to widen their " +
                         "lifespan. A group of explorers must travel beyond our solar system in " +
-                        "search of a planet that can sustain life.", "Science fiction",
-                    "/images/interstellar.jpg");
+                        "search of a planet that can sustain life.", "Science fiction");
         id = lastid.incrementAndGet();
         film.setId(id);
+        film.createCover("interstellar.jpg","");
         films.put(id,film);
         film= new Film("The little Mermaid","2023","Rob Marshall",
                 "The mermaid Ariel, daughter of King Triton, is fascinated with " +
@@ -42,9 +44,10 @@ public class filmService {
                         "three days, but during this time she must win the kiss of true love from Eric " +
                         "otherwise Ursula will own her forever. Ariel agrees but to add to the " +
                         "difficulty Ursula also takes Ariel's voice as price of the deal and then " +
-                        "schemes to ensure that Ariel fails.", "Fantasy", "");
+                        "schemes to ensure that Ariel fails.", "Fantasy");
         id = lastid.incrementAndGet();
         film.setId(id);
+        film.createCover("","");
         films.put(id,film);
     }
     // create Film method
@@ -59,6 +62,7 @@ public class filmService {
     }
 
     public Film removeFilm(long id){
+
         return films.remove(id);
     }
 
