@@ -44,11 +44,37 @@
         </div>
     </nav>
 
+    <div class="text-center my-3">
+        <h1>{{user.username}}</h1>
+    </div>
+    <div class="container d-flex row">
+        <div class="container justify-content-center px-5 mx-5 py-5 col-8">
+            <p><strong>Full name:</strong> {{user.name}} {{user.surname}}</p>
+            <p><strong>E-mail:</strong> {{user.email}}</p>
+            <div class="d-flex row">
+                <p class="col-5"><strong>Age:</strong> {{user.age}}</p>
+                <p class="col-5"><strong>Region:</strong> {{user.region}}</p>
+            </div>
+        </div>
+        <div class="container justify-content-center px-5 mx-5 py-5 col-4">
+            <button class="rounded-pill">Delete</button>
+        </div>
+    </div>
     <div class="container d-flex gap-2">
 
         <div class="container my-2 py-5 mr-3 col-6">
             <h2 class="userTitles text-center">FILMS</h2>
-
+            <div class="card-group d-flex row row-cols-md-2 gap-2">
+                {{#filmList}}
+                <div class="card filmCard">
+                    <img class="card-img" alt={{name}} src="/images/{{cover.imageURL}}">
+                    <div class="card-body">
+                        <a href="/films/{{id}}" class="titles">{{name}}</a>
+                        <p class="synopsis">{{director}}</p>
+                    </div>
+                </div>
+                {{/filmList}}
+            </div>
         </div>
         <div class="container my-2 py-5 mr-3 col-6">
             <h2 class="userTitles text-center">SONGS</h2>

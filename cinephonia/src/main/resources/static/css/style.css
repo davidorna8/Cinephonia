@@ -130,3 +130,11 @@ hr{
     color: whitesmoke;
 }
 
+.songCard{
+    width: 1px;
+}
+
+.filmCard{
+    height: auto;
+}
+

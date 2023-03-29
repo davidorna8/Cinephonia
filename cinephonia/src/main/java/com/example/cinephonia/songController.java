@@ -77,4 +77,11 @@ public class songController {
         songService.putSong(song,id);
         return "songPage";
     }
+
+    @GetMapping("/songs/delete/{id}")
+    public String deleteSong(Model model,@PathVariable long id){
+        Song song = songService.removeSong(id);
+        model.addAttribute("name",song.getName());
+        return "deleted";
+    }
 }

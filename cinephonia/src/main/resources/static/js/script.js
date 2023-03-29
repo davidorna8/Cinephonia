@@ -54,9 +54,16 @@ function showAllSongs(){
     content2.style.display='none';
 }
 
-function deleteFilm(id){
-    var ans = window.confirm("Are you sure you want to delete "+id+"?")
+function deleteFilm(id,name){
+    var ans = window.confirm("Are you sure you want to delete "+name+"?")
     if(ans){
+        location.href="/films/delete/" + id;
+    }
+}
 
+function deleteSong(id,name){
+    var ans = window.confirm("Are you sure you want to delete "+name+"?")
+    if(ans){
+        location.href="/songs/delete/" + id;
     }
 }

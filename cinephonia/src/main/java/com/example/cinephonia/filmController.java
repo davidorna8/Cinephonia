@@ -73,11 +73,12 @@ public class filmController {
         return "filmPage";
     }
 
-    @DeleteMapping("/films/delete/{id}")
+    @GetMapping("/films/delete/{id}")
     public String deleteFilm(Model model, @PathVariable long id){
-        filmService.removeFilm(id);
+        Film film= filmService.removeFilm(id);
+        model.addAttribute("name",film.getName());
         //userService.removeFilm()
-        return "films";
+        return "deleted";
     }
 
     @GetMapping("/updateFilm/{id}")
