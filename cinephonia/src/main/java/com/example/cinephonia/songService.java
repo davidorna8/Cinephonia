@@ -48,4 +48,12 @@ public class songService {
         return songs.get(id);
     }
 
+    public void deleteUser(long userId){
+        for(Song s: songs.values()){
+            if(s.getUserId()==userId){
+                s.setUserId(0);
+            }
+        }
+    }
+
 }

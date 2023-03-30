@@ -13,6 +13,10 @@ public class userController {
                                         "Africa","Western Europe","Eastern Europe"};
     @Autowired
     userService userService;
+    @Autowired
+    filmService filmService;
+    @Autowired
+    songService songService;
 
     @GetMapping("/users")
     public String usersMain(Model model){
@@ -52,7 +56,8 @@ public class userController {
     public String deleteUser(Model model, @PathVariable long id){
         User user = userService.removeUser(id);
         model.addAttribute("name",user.getUsername());
-        //userService.removeFilm()
+        filmService.deleteUser(id);
+        songService.deleteUser(id);
         return "deleted";
     }
 

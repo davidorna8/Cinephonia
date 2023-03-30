@@ -73,7 +73,7 @@ function deleteUser(id,name){
         alert("You can't delete user admin.")
     }
     else {
-        var ans = window.confirm("Are you sure you want to delete user " + name + "?")
+        var ans = window.confirm("Are you sure you want to delete user " + name + "?\n(Your uploaded films and songs will be admin's property)")
         if (ans) {
             location.href = "/users/delete/" + id;
         }

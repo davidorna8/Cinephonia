@@ -75,4 +75,11 @@ public class filmService {
         return films.get(id);
     }
 
+    public void deleteUser(long userId){
+        for(Film f: films.values()){
+            if(f.getUserId()==userId){
+                f.setUserId(0);
+            }
+        }
+    }
 }

@@ -47,7 +47,7 @@ public class filmController {
         film.setUserId(userId);
 
         if(!imageURL.isEmpty()) {
-            Path directory = Paths.get("cinephonia//src//main//resources//static/images");
+            Path directory = Paths.get("src//main//resources//static/images");
             String absolutePath = directory.toFile().getAbsolutePath();
             try {
                 Path completePath = Paths.get(absolutePath + "//" + imageURL.getOriginalFilename());
