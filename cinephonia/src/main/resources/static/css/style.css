@@ -17,21 +17,31 @@ body{
     background-color: #CBE9EE;
 }
 
-#loginButton{
+#deleteButton{
     margin-right: 10px;
-    color:whitesmoke;
-    background-color: #85B9C2;
+    color:#85B9C2;
+    background-color: whitesmoke;
 }
-#loginButton:hover{
+#deleteButton:hover{
     color:#6c757d;
     background-color: #CBE9EE;
 }
 
-.userLink{
+#updateButton{
+    margin-right: 10px;
+    color:lightgrey;
+    background-color: #85B9C2;
+}
+#updateButton:hover{
+    color:#6c757d;
+    background-color: #CBE9EE;
+}
+
+.link{
     color: whitesmoke;
 }
 
-.userLink:hover{
+.link:hover{
     color: #cccccc;
 }
 

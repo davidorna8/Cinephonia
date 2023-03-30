@@ -55,15 +55,35 @@ function showAllSongs(){
 }
 
 function deleteFilm(id,name){
-    var ans = window.confirm("Are you sure you want to delete "+name+"?")
+    var ans = window.confirm("Are you sure you want to delete film "+name+"?")
     if(ans){
         location.href="/films/delete/" + id;
     }
 }
 
 function deleteSong(id,name){
-    var ans = window.confirm("Are you sure you want to delete "+name+"?")
+    var ans = window.confirm("Are you sure you want to delete song "+name+"?")
     if(ans){
         location.href="/songs/delete/" + id;
+    }
+}
+
+function deleteUser(id,name){
+    if(id=="0"){
+        alert("You can't delete user admin.")
+    }
+    else {
+        var ans = window.confirm("Are you sure you want to delete user " + name + "?")
+        if (ans) {
+            location.href = "/users/delete/" + id;
+        }
+    }
+}
+
+function updateUser(id) {
+    if (id == "0") {
+        alert("You can't update user admin.")
+    } else {
+        location.href = "/updateUser/" + id;
     }
 }
