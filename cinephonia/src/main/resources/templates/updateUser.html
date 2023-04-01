@@ -47,29 +47,29 @@
     <form type="Submit" class="text-center" action="/userInfo/{{id}}" method="post">
       <div class="row d-flex mb-2">
         <div class="col-auto">
-          <input type="text" class="form-control" placeholder="First name" name="name" value="{{user.name}}">
+          <input type="text" class="form-control" placeholder="First name" name="name" value="{{user.name}}" required/>
         </div>
         <div class="col-auto">
-          <input type="text" class="form-control" placeholder="Last name" name="surname" value="{{user.surname}}">
+          <input type="text" class="form-control" placeholder="Last name" name="surname" value="{{user.surname}}" required/>
         </div>
       </div>
       <div class="row d-flex  mb-2 col-12 mx-0">
-        <input type="text" class="form-control" placeholder="Username" name="username" value="{{user.username}}">
+        <input type="text" class="form-control" placeholder="Username" name="username" value="{{user.username}}" required/>
       </div>
       <div class="row d-flex mb-2">
         <div class="col-auto">
-          <input type="text" class="form-control" placeholder="Email" name="email" value="{{user.email}}">
+          <input type="text" class="form-control" placeholder="Email" name="email" value="{{user.email}}" required/>
         </div>
         <div class="col-auto">
-          <input type="password" class="form-control" placeholder="Password" name="password" value="{{user.password}}">
+          <input type="password" class="form-control" placeholder="Password" name="password" value="{{user.password}}" required/>
         </div>
       </div>
       <div class="row d-flex mb-2">
         <div class="col-3">
-          <input type="number" class="form-control" placeholder="Age" name="age" min="0" max="99" value="{{user.age}}">
+          <input type="number" class="form-control" placeholder="Age" name="age" min="0" max="99" value="{{user.age}}" required/>
         </div>
         <div class="col-9">
-          <select id="inputRegion" class="form-control" name="region">
+          <select id="inputRegion" class="form-control" name="region" required>
             <option selected>{{user.region}}</option>
             {{#regionList}}
             <option>{{.}}</option>

@@ -46,24 +46,24 @@
     <div class="text-center container d-flex justify-content-center">
       <form type="Submit" enctype="multipart/form-data" class="text-center" method="post" action="/filmInfo/{{id}}">
         <div class="row d-flex mb-2">
-          <input type="text" class="form-control" name="username" value="{{username}}">
+          <input type="text" class="form-control" name="username" value="{{username}}" disabled>
         </div>
         <div class="row d-flex mb-2">
-          <input type="text" class="form-control" placeholder="Title" value="{{film.name}}" name="name">
+          <input type="text" class="form-control" placeholder="Title" value="{{film.name}}" name="name" required/>
         </div>
         <div class="row d-flex mb-2">
           <div class="col-8 px-0 mr-1">
-            <input type="text" class="form-control" placeholder="Director" value="{{film.director}}" name="director">
+            <input type="text" class="form-control" placeholder="Director" value="{{film.director}}" name="director" required/>
           </div>
           <div class="col-4 px-0">
-            <input type="number" class="form-control" placeholder="Year" name="year" value="{{film.year}}" min="1920" max="2050">
+            <input type="number" class="form-control" placeholder="Year" name="year" value="{{film.year}}" min="1920" max="2050" required/>
           </div>
         </div>
         <div class="row d-flex mb-2">
-          <textarea class="form-control" placeholder="Synopsis" name="synopsis">{{film.synopsis}}</textarea>
+          <textarea class="form-control" placeholder="Synopsis" name="synopsis" required>{{film.synopsis}}</textarea>
         </div>
         <div class="row d-flex mb-2">
-          <select id="inputGenre" class="form-control" name="genre">
+          <select id="inputGenre" class="form-control" name="genre" required>
             <option selected>{{film.genre}}</option>
             {{#genreList}}
             <option>{{.}}</option>

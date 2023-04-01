@@ -42,30 +42,31 @@
         <form type="Submit" class="text-center" action="/register/newuser" method="post">
             <div class="row d-flex mb-2">
                 <div class="col-auto">
-                    <input type="text" class="form-control" placeholder="First name" name="name">
+                    <input type="text" class="form-control" placeholder="First name" name="name" required/>
                 </div>
                 <div class="col-auto">
-                    <input type="text" class="form-control" placeholder="Last name" name="surname">
+                    <input type="text" class="form-control" placeholder="Last name" name="surname" required/>
                 </div>
             </div>
             <div class="row d-flex  mb-2 col-12 mx-0">
-                <input type="text" class="form-control" placeholder="Username" name="username">
+                <input type="text" class="form-control" placeholder="Username" name="username" required/>
             </div>
             <div class="row d-flex mb-2">
                 <div class="col-auto">
-                    <input type="text" class="form-control" placeholder="Email" name="email">
+                    <input type="email" class="form-control" placeholder="Email" name="email" required/>
                 </div>
                 <div class="col-auto">
-                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <input type="password" class="form-control" placeholder="Password"
+                           name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/>
                 </div>
             </div>
             <div class="row d-flex mb-2">
                 <div class="col-3">
-                    <input type="number" class="form-control" placeholder="Age" name="age" min="0" max="99">
+                    <input type="number" class="form-control" placeholder="Age" name="age" min="0" max="99" required/>
                 </div>
                 <div class="col-9">
-                    <select id="inputRegion" class="form-control" name="region">
-                        <option selected>Region</option>
+                    <select id="inputRegion" class="form-control" name="region" required>
+                        <option value="">Region</option>
                         {{#regionList}}
                         <option>{{.}}</option>
                         {{/regionList}}
@@ -74,6 +75,9 @@
             </div>
             <input type="submit" class="ourButton" value="Submit">
         </form>
+    </div>
+    <div class="text-center container d-flex justify-content-center mt-1">
+        Password must contain at least 8 characters including numbers, uppercase and lowercase letters
     </div>
     <div class="text-center container d-flex justify-content-center mt-5">
         <p>Do you already have an account? <a class="link" href="/users">Click here</a></p>
