@@ -49,8 +49,7 @@ public class filmController {
         film.setUserId(userId);
 
         if(!imageURL.isEmpty()) {
-            Path directory = Paths.get("src//main//resources//static/images");
-            String absolutePath = directory.toFile().getAbsolutePath();
+            String absolutePath = "C://Cinephonia//covers";
             try {
                 Path completePath = Paths.get(absolutePath + "//" + imageURL.getOriginalFilename());
                 Files.write(completePath, imageURL.getBytes());

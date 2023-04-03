@@ -3,6 +3,9 @@ package com.example.cinephonia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -51,6 +54,12 @@ public class filmService {
         film.setId(id);
         film.createCover("","");
         films.put(id,film);
+
+        try {
+            Files.createDirectories(Paths.get("C:/Cinephonia/covers"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     // create Film method
     public void createFilm(Film film){
