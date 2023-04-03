@@ -40,28 +40,44 @@
 
         </div>
     </nav>
-    <div class="container justify-content-center px-5 py-5 mx-5 my-5" >
-        <h1>{{film.name}}</h1>
-        <p><strong>Directed by:</strong> {{film.director}}</p>
-        <p><strong>Year:</strong> {{film.year}}</p>
-        <p><strong>Genre:</strong> {{film.genre}}</p>
-        <p><strong>Synopsis:</strong> {{film.synopsis}}</p>
-        <p><strong>Uploaded by:</strong> {{username}}</p>
+    <div class="container justify-content-center px-5 py-5 mx-5 my-5 row" >
+        <div class="col-8">
+            <h1>{{film.name}}</h1>
+            <p><strong>Directed by:</strong> {{film.director}}</p>
+            <p><strong>Year:</strong> {{film.year}}</p>
+            <p><strong>Genre:</strong> {{film.genre}}</p>
+            <p><strong>Synopsis:</strong> {{film.synopsis}}</p>
+            <p><strong>Uploaded by:</strong> {{username}}</p>
+            <strong>Songs:</strong>
+            <ul class="d-flex row">
+                {{#film.songs}}
+                <div class="col-3">
+                    <li>{{name}}</li>
+                </div>
+                {{/film.songs}}
+            </ul>
+
+        </div>
+        <div class="col-4">
+            <img class="cover" alt="{{film.name}}" src="/covers/{{film.cover.imageURL}}">
+            <p class="text-center"><strong>Style:</strong> {{film.cover.style}}</p>
+        </div>
     </div>
 
-    <button class="btn" onclick="addSongs()">Add songs</button>
-    <div class="container justify-content-center" id="songCheckBox">
-        <form id="songForm" action="#" method="post" onsubmit="submitAction('{{film.id}}')">
-            <ul>
+    <div class="container justify-content-center px-5 py-5 mx-5 my-5 " >
+        <button class="btn" id="addSongsButton" onclick="addSongs()">Add songs</button>
+            <br>
+        <div class="container justify-content-center d-flex row" id="songCheckBox">
+            <form id="songForm" method="post" onsubmit="submitAction('{{film.id}}')">
                 {{#songList}}
-                <li>
+                <div class="col-3">
                     <label><input type="checkbox" name="selectedSongs" value="{{id}}">{{name}}</label>
-                </li>
+                </div>
                 {{/songList}}
-            </ul>
-            <input type="submit" value="Submit">
-        </form>
-        <script src="/js/addSongScript.js"></script>
+                <input type="submit" class="submitButton" value="Submit">
+            </form>
+            <script src="/js/addSongScript.js"></script>
+        </div>
     </div>
 </body>
 </html>

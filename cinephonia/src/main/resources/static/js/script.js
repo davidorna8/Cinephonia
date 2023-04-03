@@ -105,16 +105,17 @@ function addFilms(){
 }
 
 function addSongs(){
-    /*function checkAll() {
-        var inputs = document.querySelectorAll('.pl');
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].checked = true;
-        }
-}  */
     let content=document.getElementById('songCheckBox');
     let display=content.style.display;
     if(display==="none"|display===""){
         content.style.display='block';
+        /*var inputs = document.querySelectorAll('input[name="selectedFilms"]');
+        for (var i = 0; i < inputs.length; i++) {
+            if(inputs[i]==={{film.songs}})
+            if(document.ge)
+            inputs[i].checked = true;
+        }
+        */
     }else{
         content.style.display='none';
     }

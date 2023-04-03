@@ -173,3 +173,24 @@ hr{
     display: none;
 }
 
+.cover{
+    width: 333px;
+    height: 480px;
+}
+
+#addSongsButton{
+    background-color: powderblue;
+    color: whitesmoke;
+}
+
+#addSongsButton:hover{
+    background-color: whitesmoke;
+    color: powderblue;
+}
+
+.submitButton{
+    border-radius: 18px;
+    text-align: center;
+    color: lightgrey;
+    background-color: steelblue;
+}

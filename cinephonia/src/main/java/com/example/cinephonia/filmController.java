@@ -139,7 +139,7 @@ public class filmController {
         for(long songId : selectedSongs){
             Song song = songService.getSongById(songId);
             songs.add(song);
-            songService.addFilm(id,film);
+            songService.addFilm(songId,film);
         }
         film.setSongs(songs);
         model.addAttribute("film", film);
