@@ -1,12 +1,15 @@
 package com.example.cinephonia;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 public class Cover {
+    @JsonView(Film.Basic.class)
     private String imageURL;
+    @JsonView(Film.Basic.class)
     private String style;
 
     public Cover(String imageURL, String style) {

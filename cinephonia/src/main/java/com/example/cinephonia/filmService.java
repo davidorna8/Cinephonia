@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +18,7 @@ public class filmService {
     private Map<Long, Film> films = new ConcurrentHashMap<>();
     private AtomicLong lastid = new AtomicLong();
 
-    public filmService(){
+    public filmService() throws IOException {
         Film film = new Film("Love Actually","2003", "Richard Curtis",
                 "This ultimate romantic comedy weaves together a spectacular number " +
                         "of love affairs into one amazing story. Set almost entirely in London, " +
@@ -27,7 +28,7 @@ public class filmService {
                 ,"Romance");
         long id = lastid.incrementAndGet();
         film.setId(id);
-        film.createCover("","");
+        film.createCover("loveactually.jpg","Collage");
         films.put(id,film);
         film = new Film("Interstellar", "2014", "Christopher Nolan",
                 "In the near future Earth has been devastated by drought and " +
@@ -38,7 +39,7 @@ public class filmService {
                         "search of a planet that can sustain life.", "Science fiction");
         id = lastid.incrementAndGet();
         film.setId(id);
-        film.createCover("interstellar.jpg","");
+        film.createCover("interstellar.jpg","Landscape");
         films.put(id,film);
         film= new Film("The little Mermaid","2023","Rob Marshall",
                 "The mermaid Ariel, daughter of King Triton, is fascinated with " +
@@ -52,14 +53,16 @@ public class filmService {
                         "schemes to ensure that Ariel fails.", "Fantasy");
         id = lastid.incrementAndGet();
         film.setId(id);
-        film.createCover("","");
+        film.createCover("littlemermaid.jpg","Photograph");
         films.put(id,film);
 
-        try {
-            Files.createDirectories(Paths.get("C:/Cinephonia/covers"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Files.createDirectories(Paths.get("C:/Cinephonia/covers"));
+        Files.copy(Paths.get("cinephonia//src//main//resources//static//images/interstellar.jpg"),
+                Paths.get("C:/Cinephonia/covers/interstellar.jpg"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(Paths.get("cinephonia//src//main//resources//static//images/loveactually.jpg"),
+                Paths.get("C:/Cinephonia/covers/loveactually.jpg"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(Paths.get("cinephonia//src//main//resources//static//images/littlemermaid.jpg"),
+                Paths.get("C:/Cinephonia/covers/littlemermaid.jpg"), StandardCopyOption.REPLACE_EXISTING);
     }
     // create Film method
     public void createFilm(Film film){
