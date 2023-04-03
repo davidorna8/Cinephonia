@@ -165,4 +165,11 @@ hr{
     font-family: Garamond;
 }
 
+#filmCheckBox{
+    display: none;
+}
+
+#songCheckBox{
+    display: none;
+}
 

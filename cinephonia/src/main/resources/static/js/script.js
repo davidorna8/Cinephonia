@@ -87,3 +87,36 @@ function updateUser(id) {
         location.href = "/updateUser/" + id;
     }
 }
+
+function addFilms(){
+    /*function checkAll() {
+        var inputs = document.querySelectorAll('.pl');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].checked = true;
+        }
+}  */
+    let content=document.getElementById('filmCheckBox');
+    let display=content.style.display;
+    if(display==="none"|display===""){
+        content.style.display='block';
+    }else{
+        content.style.display='none';
+    }
+}
+
+function addSongs(){
+    /*function checkAll() {
+        var inputs = document.querySelectorAll('.pl');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].checked = true;
+        }
+}  */
+    let content=document.getElementById('songCheckBox');
+    let display=content.style.display;
+    if(display==="none"|display===""){
+        content.style.display='block';
+    }else{
+        content.style.display='none';
+    }
+}
+

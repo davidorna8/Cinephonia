@@ -25,6 +25,8 @@ public class filmController {
     filmService filmService;
     @Autowired
     userService userService;
+    @Autowired
+    songService songService;
     @GetMapping("/films")
     public String filmsSection(Model model){
         List<String> genresList= Arrays.asList(genreList);
@@ -60,6 +62,8 @@ public class filmController {
 
         model.addAttribute("username",username);
         model.addAttribute("film",film);
+        List<Song> songList = new ArrayList<>(songService.songList());
+        model.addAttribute("songList", songList);
         return "filmPage";
     }
 
@@ -70,6 +74,8 @@ public class filmController {
         model.addAttribute("film",film);
         User u = userService.getUserById(film.getUserId());
         model.addAttribute("username",u.getUsername());
+        List<Song> songList = new ArrayList<>(songService.songList());
+        model.addAttribute("songList", songList);
         return "filmPage";
     }
 
@@ -77,7 +83,15 @@ public class filmController {
     public String deleteFilm(Model model, @PathVariable long id){
         Film film= filmService.removeFilm(id);
         model.addAttribute("name",film.getName());
-        //userService.removeFilm()
+        for(Song song:film.getSongs()){
+            List<Film> newfilms = new ArrayList<>();
+            for(Film thisFilm: song.getFilms()){
+                if(thisFilm.getId()!=id){
+                    newfilms.add(thisFilm);
+                }
+            }
+            song.setFilms(newfilms);
+        }
         return "deleted";
     }
 
@@ -97,10 +111,39 @@ public class filmController {
         Film oldFilm = filmService.getFilmById(id);
         film.setCover(oldFilm.getCover());
         film.setId(id);
+        film.setSongs(oldFilm.getSongs());
         String username= userService.getUserById(film.getUserId()).getUsername();
         model.addAttribute("username",username);
         model.addAttribute("film",film);
         filmService.putFilm(film,id);
+        List<Song> songList = new ArrayList<>(songService.songList());
+        model.addAttribute("songList", songList);
+        for(Song song:oldFilm.getSongs()){
+            List<Film> newfilms = new ArrayList<>();
+            for(Film thisFilm: song.getFilms()){
+                if(thisFilm.getId()!=id){
+                    newfilms.add(thisFilm);
+                }
+                else{
+                    newfilms.add(film);
+                }
+            }
+            song.setFilms(newfilms);
+        }
         return "filmPage";
+    }
+
+    @PostMapping("/films/{id}")
+    public String addSongs(Model model,@RequestParam List<Long> selectedSongs, @PathVariable long id){
+        Film film = filmService.getFilmById(id);
+        ArrayList<Song> songs = new ArrayList<>();
+        for(long songId : selectedSongs){
+            Song song = songService.getSongById(songId);
+            songs.add(song);
+            songService.addFilm(id,film);
+        }
+        film.setSongs(songs);
+        model.addAttribute("film", film);
+        return "redirect:/films/{id}";
     }
 }

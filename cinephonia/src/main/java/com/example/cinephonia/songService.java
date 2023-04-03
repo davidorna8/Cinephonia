@@ -3,7 +3,9 @@ package com.example.cinephonia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -56,4 +58,11 @@ public class songService {
         }
     }
 
+    public void addFilm(long id, Film film){
+        List<Film> films = getSongById(id).getFilms();
+        films.add(film);
+        getSongById(id).setFilms(films);
+    }
+
 }
+

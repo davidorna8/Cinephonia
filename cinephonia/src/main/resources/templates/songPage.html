@@ -48,5 +48,19 @@
     <p><strong>Duration:</strong> {{song.minutes}} minute(s) {{song.seconds}} second(s)</p>
     <p><strong>Uploaded by:</strong> {{username}}</p>
 </div>
+<button class="btn" onclick="addFilms()">Add films</button>
+<div class="container justify-content-center" id="filmCheckBox">
+    <form id="filmForm" action="#" method="post" onsubmit="submitAction('{{id}}')">
+        <ul>
+        {{#filmList}}
+            <li>
+                <label><input type="checkbox" name="selectedFilms" value="{{id}}">{{name}}</label>
+            </li>
+        {{/filmList}}
+        </ul>
+        <input type="submit" value="Submit">
+    </form>
+    <script src="/js/addFilmScript.js"></script>
+</div>
 </body>
 </html>

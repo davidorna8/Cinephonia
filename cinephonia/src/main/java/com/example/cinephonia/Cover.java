@@ -1,5 +1,10 @@
 package com.example.cinephonia;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class Cover {
     private String imageURL;
     private String style;

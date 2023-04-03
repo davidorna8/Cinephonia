@@ -1,14 +1,37 @@
 package com.example.cinephonia;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Film {
+    interface Basic{}
+    interface Songs{}
+    @JsonView(Basic.class)
     private String name;
+    @JsonView(Basic.class)
     private String year;
+    @JsonView(Basic.class)
     private String director;
+    @JsonView(Basic.class)
     private String synopsis;
+    @JsonView(Basic.class)
     private String genre;
+    @JsonView(Basic.class)
     private long userId;
+    @JsonView(Basic.class)
     private long id;
+    @JsonView(Basic.class)
     private Cover cover;
+    @JsonView(Songs.class)
+    private List<Song> songs= new ArrayList<>();
 
     public Film(String name, String year, String director, String synopsis,String genre) {
         this.name = name;
@@ -84,4 +107,13 @@ public class Film {
     public void setUserId(long userId) {
         this.userId = userId;
     }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
+
 }
