@@ -18,7 +18,7 @@ public class filmService {
     private Map<Long, Film> films = new ConcurrentHashMap<>();
     private AtomicLong lastid = new AtomicLong();
 
-    public filmService() throws IOException {
+    public filmService() throws IOException { // initial films
         Film film = new Film("Love Actually","2003", "Richard Curtis",
                 "This ultimate romantic comedy weaves together a spectacular number " +
                         "of love affairs into one amazing story. Set almost entirely in London, " +
@@ -64,11 +64,12 @@ public class filmService {
         Files.copy(Paths.get("src//main//resources//static//images/littlemermaid.jpg"),
                 Paths.get("C:/Cinephonia/covers/littlemermaid.jpg"), StandardCopyOption.REPLACE_EXISTING);
     }
+
     // create Film method
     public void createFilm(Film film){
-        long id=lastid.incrementAndGet();
+        long id=lastid.incrementAndGet(); // increment id
         film.setId(id);
-        films.put(id,film);
+        films.put(id,film); // add film to the map
     }
 
     public Collection<Film> filmList(){
@@ -80,16 +81,17 @@ public class filmService {
         return films.remove(id);
     }
 
-    public void putFilm(Film film, long id){
+    public void putFilm(Film film, long id){ // change an existing film
         film.setId(id);
         films.put(id,film);
     }
 
     public Film getFilmById(long id){
         return films.get(id);
-    }
+    } // returns film knowing its id
 
     public void deleteUser(long userId){
+        // when a user is deleted, its films are admin's (user 0) property
         for(Film f: films.values()){
             if(f.getUserId()==userId){
                 f.setUserId(0);
@@ -97,7 +99,7 @@ public class filmService {
         }
     }
 
-    public void addSong(long id, Song song){
+    public void addSong(long id, Song song){ // add one song to the songs list of a film knowing its id
         List<Song> songs = getFilmById(id).getSongs();
         songs.add(song);
         getFilmById(id).setSongs(songs);

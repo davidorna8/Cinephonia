@@ -19,7 +19,7 @@ public class userService {
    @Autowired
     filmService filmService;
 
-    public userService(){
+    public userService(){ // initial users
         User user= new User("Admin", "", "admin", "", "admin", "admin@admin.com", "");
         user.setId(0);
         users.put((long)0,user);
@@ -52,26 +52,26 @@ public class userService {
         return users.remove(id);
     }
 
-    public void putUser(User user, long id){
+    public void putUser(User user, long id){ // change an existing user
         user.setId(id);
         users.put(id,user);
     }
 
     public User getUserById(long id){
         return users.get(id);
-    }
+    } // returns a user knowing its id
 
-    public User getUserByUsername(String username){
-        for(User u : users.values()){
+    public User getUserByUsername(String username){ // we may need to search a user by its username (unique)
+        for(User u : users.values()){ // we search the user in the full user list
             if(u.getUsername().equals(username)) return u;
         }
         return new User();
     }
 
-    public List<Song> getSongList(long id){
-        List<Song> allSongs=new ArrayList<>(songService.songList());
+    public List<Song> getSongList(long id){ // returns the songs list of a user
+        List<Song> allSongs=new ArrayList<>(songService.songList());// first we get the full song list
         List<Song> userSongList=new ArrayList<>();
-        for(Song s: allSongs){
+        for(Song s: allSongs){ // if a song was uploaded by the user we want we added to the returned list
             if(s.getUserId()==id){
                 userSongList.add(s);
             }
@@ -79,10 +79,10 @@ public class userService {
         return userSongList;
     }
 
-   public List<Film> getFilmList(long id){
-        List<Film> allFilms=new ArrayList<>(filmService.filmList());
+   public List<Film> getFilmList(long id){ // returns the films list of a user
+        List<Film> allFilms=new ArrayList<>(filmService.filmList()); // first we get the full films list
         List<Film> userFilmList=new ArrayList<>();
-        for(Film s: allFilms){
+        for(Film s: allFilms){// if a film was uploaded by the user we want we added to the returned list
             if(s.getUserId()==id){
                 userFilmList.add(s);
             }

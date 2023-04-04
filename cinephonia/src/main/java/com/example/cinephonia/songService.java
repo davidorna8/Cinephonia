@@ -14,7 +14,7 @@ public class songService {
     private Map<Long, Song> songs = new ConcurrentHashMap<>();
     private AtomicLong lastid = new AtomicLong();
 
-    public songService(){
+    public songService(){ // initial songs
         Song song = new Song("The Trouble With Love Is", "2003",
                 "3","41","Kelly Clarkson", "Pop");
         long id = lastid.incrementAndGet();
@@ -26,6 +26,7 @@ public class songService {
         song.setId(id);
         songs.put(id,song);
     }
+
     // create Song method
     public void createSong(Song song){
         long id=lastid.incrementAndGet();
@@ -41,16 +42,17 @@ public class songService {
         return songs.remove(id);
     }
 
-    public void putSong(Song song, long id){
+    public void putSong(Song song, long id){ // change an existing song
         song.setId(id);
         songs.put(id,song);
     }
 
     public Song getSongById(long id){
         return songs.get(id);
-    }
+    } // returns a song knowing its id
 
     public void deleteUser(long userId){
+        // when a user is deleted, its songs will be admin's (user 0) property
         for(Song s: songs.values()){
             if(s.getUserId()==userId){
                 s.setUserId(0);
@@ -58,7 +60,7 @@ public class songService {
         }
     }
 
-    public void addFilm(long id, Film film){
+    public void addFilm(long id, Film film){ // add a film to the films list of song
         List<Film> films = getSongById(id).getFilms();
         films.add(film);
         getSongById(id).setFilms(films);
