@@ -57,11 +57,11 @@ public class filmService {
         films.put(id,film);
 
         Files.createDirectories(Paths.get("C:/Cinephonia/covers"));
-        Files.copy(Paths.get("cinephonia//src//main//resources//static//images/interstellar.jpg"),
+        Files.copy(Paths.get("src//main//resources//static//images/interstellar.jpg"),
                 Paths.get("C:/Cinephonia/covers/interstellar.jpg"), StandardCopyOption.REPLACE_EXISTING);
-        Files.copy(Paths.get("cinephonia//src//main//resources//static//images/loveactually.jpg"),
+        Files.copy(Paths.get("src//main//resources//static//images/loveactually.jpg"),
                 Paths.get("C:/Cinephonia/covers/loveactually.jpg"), StandardCopyOption.REPLACE_EXISTING);
-        Files.copy(Paths.get("cinephonia//src//main//resources//static//images/littlemermaid.jpg"),
+        Files.copy(Paths.get("src//main//resources//static//images/littlemermaid.jpg"),
                 Paths.get("C:/Cinephonia/covers/littlemermaid.jpg"), StandardCopyOption.REPLACE_EXISTING);
     }
     // create Film method

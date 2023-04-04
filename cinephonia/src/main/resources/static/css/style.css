@@ -1,9 +1,10 @@
+/* body : margin and background */
 body{
     margin-left: 3%;
     margin-top:3%;
     background: radial-gradient(circle, rgba(0,130,152,1) 0%, rgba(143,203,213,1) 100%);
 }
-
+/* Navbar: color and  register button*/
 #ourNavbar{
     background-color: #CBE9EE;
 }
@@ -16,6 +17,8 @@ body{
     color:#6c757d;
     background-color: #CBE9EE;
 }
+
+/*Different purpose buttons*/
 
 #deleteButton{
     margin-right: 10px;
@@ -48,50 +51,19 @@ body{
     background-color: #CBE9EE;
 }
 
-.link{
-    color: whitesmoke;
+#backButton{
+    background-color: #f1f1f1;
+    color: #6494ec;
 }
 
-.link:hover{
-    color: #cccccc;
-}
-
-#mainTitle{
-    color: #F1F9FA;
-    font-size: 140px;
-    font-family: "garamond";
-}
-
-#slogan{
-    color: #e8f0f1;
-    font-size: 25px;
-    font-family: "Copperplate";
-}
-
-.mainText{
-    margin-top: 130px;
+#backButton:hover{
+    color: #707981;
+    background-color: #c8e5ea;
 }
 
 .ourButton{
     background-color: whitesmoke;
     color: cornflowerblue;
-}
-
-.sectionTitle{
-    color: #F1F9FA;
-    font-size: 100px;
-    margin-top: 130px;
-    font-family: "garamond";
-}
-
-hr{
-    position: relative;
-    top: 70px;
-    border: none;
-    height: 3px;
-    background: whitesmoke;
-    margin-bottom: 50px;
-    color: whitesmoke;
 }
 
 .uploadButtons{
@@ -117,67 +89,6 @@ hr{
     padding: 150px;
 }
 
-#uploadFilms{
-    display: none;
-}
-
-#uploadSongs{
-    display: none;
-}
-
-#allFilms{
-    display: none;
-}
-
-#allSongs{
-    display: none;
-}
-
-#congratsText{
-    color: snow;
-}
-
-.synopsis{
-    height: 250px;
-    text-overflow: ellipsis;
-}
-
-#userTable{
-    background-color: whitesmoke;
-}
-
-.userTitles{
-    font-family: "garamond";
-    color: whitesmoke;
-}
-
-.songCard{
-    width: 1px;
-}
-
-.filmCard{
-    height: auto;
-}
-
-.errorPageText{
-    color:whitesmoke;
-    font-size: 27px;
-    font-family: Garamond;
-}
-
-#filmCheckBox{
-    display: none;
-}
-
-#songCheckBox{
-    display: none;
-}
-
-.cover{
-    width: 333px;
-    height: 480px;
-}
-
 #addSongsButton{
     background-color: powderblue;
     color: whitesmoke;
@@ -193,4 +104,115 @@ hr{
     text-align: center;
     color: lightgrey;
     background-color: steelblue;
+}
+
+/* Light color links*/
+.link{
+    color: whitesmoke;
+}
+
+.link:hover{
+    color: #cccccc;
+}
+
+/* Titles */
+#mainTitle{
+    color: #F1F9FA;
+    font-size: 140px;
+    font-family: "garamond";
+}
+
+.sectionTitle{
+    color: #F1F9FA;
+    font-size: 100px;
+    margin-top: 130px;
+    font-family: "garamond";
+}
+
+.userTitles{
+    font-family: "garamond";
+    color: whitesmoke;
+}
+
+/* Texts: slogan, subtitles, paragraphs...*/
+.mainText{
+    margin-top: 130px;
+}
+
+#slogan{
+    color: #e8f0f1;
+    font-size: 25px;
+    font-family: "Copperplate";
+}
+
+#congratsText{
+    color: snow;
+}
+
+.synopsis{
+    height: 250px;
+    text-overflow: ellipsis;
+}
+
+.generalPageText{
+    color:whitesmoke;
+    font-size: 27px;
+    font-family: Garamond;
+}
+
+/* Horizontal line, separation between title and body*/
+hr{
+    position: relative;
+    top: 70px;
+    border: none;
+    height: 3px;
+    background: whitesmoke;
+    margin-bottom: 50px;
+    color: whitesmoke;
+}
+
+/* Tables */
+#userTable{
+    background-color: whitesmoke;
+}
+
+/* Cards */
+.songCard{
+    width: 1px;
+}
+
+.filmCard{
+    height: auto;
+}
+
+/* Images*/
+.cover{
+    width: 333px;
+    height: 480px;
+}
+
+/* Hidden checkboxes */
+#filmCheckBox{
+    display: none;
+}
+
+#songCheckBox{
+    display: none;
+}
+
+/*Some containersthat are hidden*/
+#uploadFilms{
+    display: none;
+}
+
+#uploadSongs{
+    display: none;
+}
+
+#allFilms{
+    display: none;
+}
+
+#allSongs{
+    display: none;
 }

@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User { // Java class for users
+    /*
+    Attributes
+     */
     private String name;
     private String surname;
     private String username;
@@ -15,6 +18,9 @@ public class User {
     private String email;
     private String region;
     private long id;
+    /*
+    Constructors
+     */
     public User(String name, String surname, String username, String age, String password, String email, String region) {
         this.name = name;
         this.surname = surname;
@@ -24,7 +30,9 @@ public class User {
         this.email = email;
         this.region = region;
     }
-
+    /*
+    Getters and Setters
+     */
     public String getName() {
         return name;
     }

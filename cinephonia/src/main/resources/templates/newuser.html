@@ -11,12 +11,15 @@
     <link rel="icon" type="/image/x-icon" href="images/logoet.jpg" /> <!--favicon-->
 </head>
 <body>
-    <div id="congratsText">
-    <p>Congratulations, {{username}}! You have correctly joined our website.
-        <br>Now you can add all the films and songs you'd like once you have logged in :)</p>
+    <div class="text-center">
+        <p class="sectionTitle"> Congratulations, {{username}}!!</p>
     </div>
-    <div>
-    <button class="btn rounded-pill ourButton"  onclick="window.location.href='/'">Take me back</button>
+    <div class="text-center">
+        <p class="generalPageText">You have correctly joined our website.</p>
+        <p class="generalPageText">Now you can add all the films and songs you'd like once you have logged in :)</p>
+    </div>
+    <div class="justify-content-center d-flex mt-4 p-3">
+        <button class="btn rounded-pill ourButton" id="backButton"  onclick="window.location.href='/'">Go to home page</button>
     </div>
 </body>
 </html>

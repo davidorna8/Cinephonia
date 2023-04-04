@@ -6,17 +6,23 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Cover {
+public class Cover { // java class for film covers
     @JsonView(Film.Basic.class)
-    private String imageURL;
+    private String imageURL; // image path
     @JsonView(Film.Basic.class)
     private String style;
 
+    /*
+    Constructor
+     */
     public Cover(String imageURL, String style) {
         this.imageURL = imageURL;
         this.style=style;
     }
 
+    /*
+    Getters and Setters
+     */
     public String getImageURL() {
         return imageURL;
     }

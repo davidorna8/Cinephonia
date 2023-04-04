@@ -11,9 +11,15 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Song {
+public class Song { // Java class for songs
+    /*
+    Interfaces for JsonView
+     */
     interface Basic {}
     interface Films {}
+    /*
+    Attributes
+     */
     @JsonView(Basic.class)
     private String name;
     @JsonView(Basic.class)
@@ -27,12 +33,14 @@ public class Song {
     @JsonView(Basic.class)
     private String genre;
     @JsonView(Basic.class)
-    private long userId;
+    private long userId; // each song is uploaded by one user (1:N relationship) (user foreign key)
     @JsonView(Basic.class)
     private long id;
     @JsonView(Films.class)
-    private List<Film> films= new ArrayList<>();
-
+    private List<Film> films= new ArrayList<>(); // each song has many films (N:M relationship)
+    /*
+    Constructor
+     */
     public Song(String name, String year, String minutes, String seconds, String author, String genre) {
         this.name = name;
         this.year = year;
@@ -42,6 +50,9 @@ public class Song {
         this.genre= genre;
     }
 
+    /*
+    Getters and Setters
+     */
     public String getName() {
         return name;
     }

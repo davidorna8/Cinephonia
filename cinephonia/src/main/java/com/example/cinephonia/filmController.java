@@ -16,38 +16,49 @@ import java.util.List;
 
 
 @Controller
-public class filmController {
+public class filmController { // Controller for different pages containing films
     private static String genreList[]={"Action","Comedy","Western","Romance","Horror",
             "Science fiction","Thriller","Fantasy","Musical"};
 
     private static String stylesList[]={"Collage","Animation","Photograph","Landscape"};
+
+    /*
+    Services used in the controller
+     */
     @Autowired
     filmService filmService;
     @Autowired
     userService userService;
     @Autowired
     songService songService;
-    @GetMapping("/films")
+    @GetMapping("/films") // Films main page
     public String filmsSection(Model model){
+
+        // Model different lists for selects in the form
         List<String> genresList= Arrays.asList(genreList);
         model.addAttribute("genreList",genresList);
         List<String> styleList= Arrays.asList(stylesList);
         model.addAttribute("styleList",styleList);
-        List<Film> filmList=new ArrayList<>(filmService.filmList());
-        model.addAttribute("films",filmList);
         List<User> usersList = new ArrayList<>(userService.userList());
         usersList= usersList.subList(1,usersList.size());
         model.addAttribute("users",usersList);
+
+        // Model the full film list
+        List<Film> filmList=new ArrayList<>(filmService.filmList());
+        model.addAttribute("films",filmList);
+
         return "films";
     }
 
-    @PostMapping("/filmInfo")
+    @PostMapping("/filmInfo") // once the user has uploaded a new film, it is redirected to this page
     public String newFilm(Model model, Film film, @RequestParam("imageURL") MultipartFile imageURL,
                           @RequestParam String style, @RequestParam String username) throws IOException {
-        filmService.createFilm(film);
+        filmService.createFilm(film); // creates the film with form data
+        // it takes the username of the user that uploaded the film in order to take its id
         long userId= userService.getUserByUsername(username).getId();
         film.setUserId(userId);
 
+        // image saving:
         if(!imageURL.isEmpty()) {
             String absolutePath = "C://Cinephonia//covers";
             try {
@@ -58,7 +69,7 @@ public class filmController {
                 e.printStackTrace();
             }
         }
-
+        // Model for the page (username and all film information)
         model.addAttribute("username",username);
         model.addAttribute("film",film);
         List<Song> songList = new ArrayList<>(songService.songList());
@@ -66,23 +77,32 @@ public class filmController {
         return "filmPage";
     }
 
-    @GetMapping("/films/{id}")
+    @GetMapping("/films/{id}") // when the user clicks "See more" we show the information of the film
     public String filmPage(Model model, @PathVariable long id){
+        // take the film by id and model it
         Film film=filmService.getFilmById(id);
         model.addAttribute("id",film.getId());
         model.addAttribute("film",film);
+
+        // user that uploaded the film:
         User u = userService.getUserById(film.getUserId());
         model.addAttribute("username",u.getUsername());
+
+        // songs that appear in the film
         List<Song> songList = new ArrayList<>(songService.songList());
         model.addAttribute("songList", songList);
         return "filmPage";
     }
 
-    @GetMapping("/films/delete/{id}")
+    @GetMapping("/films/delete/{id}") // page returned when you delete a film from the website
     public String deleteFilm(Model model, @PathVariable long id){
+        // remove it from the map
         Film film= filmService.removeFilm(id);
         model.addAttribute("name",film.getName());
+
+        // when you delete a film, it has to be deleted from all the films list of the songs containing that film
         for(Song song:film.getSongs()){
+            // create a new list that doesn't contain the deleted film
             List<Film> newfilms = new ArrayList<>();
             for(Film thisFilm: song.getFilms()){
                 if(thisFilm.getId()!=id){
@@ -94,8 +114,9 @@ public class filmController {
         return "deleted";
     }
 
-    @GetMapping("/updateFilm/{id}")
+    @GetMapping("/updateFilm/{id}") // page with a form where the user can change some attributes values
     public String updateFilmPage(Model model, @PathVariable long id){
+        // get the film by the id in the URL and model it to show its information in the form fields
         Film film = filmService.getFilmById(id);
         model.addAttribute("film",film);
         String username= userService.getUserById(film.getUserId()).getUsername();
@@ -106,19 +127,25 @@ public class filmController {
     }
 
     @PostMapping("/filmInfo/{id}")
+    // once the user updates film information, it is redirected to a page showing the new information
     public String updateFilm(Model model,Film film,@PathVariable long id){
-        Film oldFilm = filmService.getFilmById(id);
+        Film oldFilm = filmService.getFilmById(id); // the old film values are needed to mantain the cover and id
         film.setCover(oldFilm.getCover());
         film.setId(id);
         film.setSongs(oldFilm.getSongs());
         String username= userService.getUserById(film.getUserId()).getUsername();
+
+        // Model the film in order to show its information
         model.addAttribute("username",username);
         model.addAttribute("film",film);
-        filmService.putFilm(film,id);
+        filmService.putFilm(film,id); // the new film (info taken from the form) is put in the map
         List<Song> songList = new ArrayList<>(songService.songList());
         model.addAttribute("songList", songList);
+
+        // if film information is changed, songs containing this film must update their film list too
         for(Song song:oldFilm.getSongs()){
             List<Film> newfilms = new ArrayList<>();
+            // create a new list in which the old film is deleted and the new film is added
             for(Film thisFilm: song.getFilms()){
                 if(thisFilm.getId()!=id){
                     newfilms.add(thisFilm);
@@ -129,17 +156,18 @@ public class filmController {
             }
             song.setFilms(newfilms);
         }
-        return "filmPage";
+        return "redirect:/films/{id}";
     }
 
-    @PostMapping("/films/{id}")
+    @PostMapping("/films/{id}") // in the film page when the user adds songs to the film
     public String addSongs(Model model,@RequestParam List<Long> selectedSongs, @PathVariable long id){
+        // film id is taken from the URL, songs list from the form of the html file
         Film film = filmService.getFilmById(id);
         ArrayList<Song> songs = new ArrayList<>();
-        for(long songId : selectedSongs){
+        for(long songId : selectedSongs){ // the form returns a list with ids of selected songs
             Song song = songService.getSongById(songId);
-            songs.add(song);
-            songService.addFilm(songId,film);
+            songs.add(song); //add songs to the songs list of the film
+            songService.addFilm(songId,film); // add the film to the films list of each song
         }
         film.setSongs(songs);
         model.addAttribute("film", film);
