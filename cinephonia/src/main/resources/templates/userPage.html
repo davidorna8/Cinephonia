@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!--User info page-->
     <title>{{user.username}}</title>
 
     <link href="/css/style.css" rel="stylesheet" />
@@ -13,38 +14,41 @@
     <link rel="icon" type="image/x-icon" href="/images/logoet.jpg" /> <!--favicon-->
 </head>
 <body>
-    <nav id="ourNavbar" class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="/images/logoet.jpg" width="30" height="30" alt="">
-                Cinephonia
-            </a>
+    <header>
+        <nav id="ourNavbar" class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/logoet.jpg" width="30" height="30" alt="">
+                    Cinephonia
+                </a>
 
-            <div class="navbar-collapse" id="navbarSupportedContent" >
-                <div class="col-11">
-                    <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/films">Films</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/songs">Songs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users">Users</a>
-                        </li>
-                    </ul>
+                <div class="navbar-collapse" id="navbarSupportedContent" >
+                    <div class="col-11">
+                        <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/films">Films</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/songs">Songs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users">Users</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-1">
+                        <button id="registerButton" class="btn rounded-pill" type="button"  onclick="window.location.href='/register'">Register</button>
+                    </div>
                 </div>
-                <div class="col-1">
-                    <button id="registerButton" class="btn rounded-pill" type="button"  onclick="window.location.href='/register'">Register</button>
-                </div>
+
             </div>
-
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <div class="text-center my-3">
         <h1>{{user.username}}</h1>
     </div>
+    <!--User info-->
     <div class="container d-flex row">
         <div class="container justify-content-center px-5 mx-5 py-5 col-8">
             <p><strong>Full name:</strong> {{user.name}} {{user.surname}}</p>
@@ -60,7 +64,7 @@
         </div>
     </div>
     <div class="container d-flex gap-2">
-
+        <!--Two columns containing films and songs uploaded by the user-->
         <div class="container my-2 py-5 mr-3 col-6">
             <h2 class="userTitles text-center">FILMS</h2>
             <div class="card-group d-flex row row-cols-md-2 gap-2">

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--When a user deletes an object (film,song or user), it is redirected to this page, confirming de deletion-->
     <meta charset="UTF-8">
-    <title>Film Deleted</title>
+    <title>Deleted</title>
     <link href="/css/style.css" rel="stylesheet" />
     <script src="/js/script.js"></script>
 
@@ -12,34 +13,37 @@
     <link rel="icon" type="image/x-icon" href="/images/logoet.jpg" /> <!--favicon-->
 </head>
 <body>
-<nav id="ourNavbar" class="navbar navbar-expand-lg navbar-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <img src="/images/logoet.jpg" width="30" height="30" alt="">
-      Cinephonia
-    </a>
+    <header>
+        <!--Navbar-->
+        <nav id="ourNavbar" class="navbar navbar-expand-lg navbar-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+              <img src="/images/logoet.jpg" width="30" height="30" alt="">
+              Cinephonia
+            </a>
 
-    <div class="navbar-collapse" id="navbarSupportedContent" >
-      <div class="col-11">
-        <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="/films">Films</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/songs">Songs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/users">Users</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-1">
-        <button id="registerButton" class="btn rounded-pill" type="button"  onclick="window.location.href='/register'">Register</button>
-      </div>
-    </div>
+            <div class="navbar-collapse" id="navbarSupportedContent" >
+              <div class="col-11">
+                <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/films">Films</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/songs">Songs</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/users">Users</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-1">
+                <button id="registerButton" class="btn rounded-pill" type="button"  onclick="window.location.href='/register'">Register</button>
+              </div>
+            </div>
 
-  </div>
-</nav>
+          </div>
+        </nav>
+    </header>
     <div class="container d-flex justify-content-center pt-5 mt-5">
         <div class="text-center ">
             <p class="generalPageText">You have correctly deleted: {{name}}</p>

@@ -12,46 +12,53 @@
     <link rel="icon" type="image/x-icon" href="/images/logoet.jpg" /> <!--favicon-->
 </head>
 <body>
+    <header>
+        <!--Navbar-->
+        <nav id="ourNavbar" class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/logoet.jpg" width="30" height="30" alt="">
+                    Cinephonia
+                </a>
 
-    <nav id="ourNavbar" class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="/images/logoet.jpg" width="30" height="30" alt="">
-                Cinephonia
-            </a>
+                <div class="navbar-collapse" id="navbarSupportedContent" >
+                    <div class="col-11">
+                        <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/films">Films</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/songs">Songs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users">Users</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-1">
+                        <button id="registerButton" class="btn rounded-pill" type="button"  onclick="window.location.href='/register'">Register</button>
+                    </div>
+                </div>
 
-            <div class="navbar-collapse" id="navbarSupportedContent" >
-                <div class="col-11">
-                    <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/films">Films</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/songs">Songs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users">Users</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-1">
-                    <button id="registerButton" class="btn rounded-pill" type="button"  onclick="window.location.href='/register'">Register</button>
-                </div>
             </div>
+        </nav>
+    </header>
 
-        </div>
-    </nav>
+    <!--Title-->
     <div class="text-center">
         <p class="sectionTitle">FILMS</p>
         <hr class="mx-5">
     </div>
 
-
     <div id="filmButtons">
+        <!--Button that shows a form to upload a new film (if films list is being shown, it will hide it)-->
         <button type="button" class="uploadButtons col-3 " onclick="showFilmsForm()">Upload<br>new film</button>
+        <!--Button that shows the films list (if the form is shown, it will hide it)-->
         <button type="button" class="showButtons col-3 " onclick="showAllFilms()">Show all</button>
     </div>
 
+    <!--Upload new film form-->
+    <!--required: the form is not valid if there are empty fields-->
     <div id="uploadFilms">
         <div class="text-center container d-flex justify-content-center">
             <form type="Submit" enctype="multipart/form-data" class="text-center" onsubmit="newFilm()" method="post" action="/filmInfo">
@@ -102,9 +109,10 @@
         </div>
     </div>
     <br>
+    <!--Films-->
     <div id="allFilms" class="container mx-3">
-        <div class="d-flex row mb-2 gap-3">
-        {{#films}}
+        <div class="d-flex row mb-2 gap-3"> <!--each film is placed in a card which occupies 3 columns so we can show 4 films in a row -->
+            {{#films}}
                 <div class="col-3 card">
                     <img class="card-img" alt="{{name}}" src="/covers/{{cover.imageURL}}">
                     <div class="card-body">
@@ -112,12 +120,12 @@
                         <p class="synopsis">{{synopsis}}</p>
                     </div>
                     <div class="card-body">
-                        <a href="/films/{{id}}" class="card-link">See more</a>
-                        <a class="card-link" onclick="deleteFilm('{{id}}','{{name}}')">Delete</a>
-                        <a href="/updateFilm/{{id}}" class="card-link">Update</a>
+                        <a href="/films/{{id}}" class="card-link">See more</a> <!--Film info-->
+                        <a class="card-link" onclick="deleteFilm('{{id}}','{{name}}')">Delete</a> <!--Delete film, shows an alert to confirm-->
+                        <a href="/updateFilm/{{id}}" class="card-link">Update</a> <!--Update film: redirects to a new page in which the user can change some values-->
                     </div>
                 </div>
-        {{/films}}
+            {{/films}}
         </div>
     </div>
 </body>

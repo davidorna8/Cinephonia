@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!--Page containing full songs info-->
     <title>{{song.name}}</title>
     <link href="/css/style.css" rel="stylesheet" />
     <script src="/js/script.js"></script>
@@ -12,55 +13,74 @@
     <link rel="icon" type="image/x-icon" href="/images/logoet.jpg" /> <!--favicon-->
 </head>
 <body>
-<nav id="ourNavbar" class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-            <img src="/images/logoet.jpg" width="30" height="30" alt="">
-            Cinephonia
-        </a>
+    <header>
+        <!--navbar-->
+        <nav id="ourNavbar" class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/logoet.jpg" width="30" height="30" alt="">
+                    Cinephonia
+                </a>
 
-        <div class="navbar-collapse" id="navbarSupportedContent" >
-            <div class="col-11">
-                <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/films">Films</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/songs">Songs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users">Users</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-1">
-                <button id="registerButton" class="btn rounded-pill" type="button"  onclick="window.location.href='/register'">Register</button>
-            </div>
-        </div>
+                <div class="navbar-collapse" id="navbarSupportedContent" >
+                    <div class="col-11">
+                        <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/films">Films</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/songs">Songs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users">Users</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-1">
+                        <button id="registerButton" class="btn rounded-pill" type="button"  onclick="window.location.href='/register'">Register</button>
+                    </div>
+                </div>
 
-    </div>
-</nav>
-<div class="container justify-content-center px-5 py-5 mx-5 my-5" >
-    <h1>{{song.name}}</h1>
-    <p><strong>Author:</strong> {{song.author}}</p>
-    <p><strong>Year:</strong> {{song.year}}</p>
-    <p><strong>Genre:</strong> {{song.genre}}</p>
-    <p><strong>Duration:</strong> {{song.minutes}} minute(s) {{song.seconds}} second(s)</p>
-    <p><strong>Uploaded by:</strong> {{username}}</p>
-</div>
-<button class="btn" onclick="addFilms()">Add films</button>
-<div class="container justify-content-center" id="filmCheckBox">
-    <form id="filmForm" action="#" method="post" onsubmit="submitAction('{{song.id}}')">
-        <ul>
-        {{#filmList}}
-            <li>
-                <label><input type="checkbox" name="selectedFilms" value="{{id}}">{{name}}</label>
-            </li>
-        {{/filmList}}
+            </div>
+        </nav>
+    </header>
+
+    <div class="container justify-content-center px-5 py-5 mx-5 my-5" >
+        <h1>{{song.name}}</h1>
+        <p><strong>Author:</strong> {{song.author}}</p>
+        <p><strong>Year:</strong> {{song.year}}</p>
+        <p><strong>Genre:</strong> {{song.genre}}</p>
+        <p><strong>Duration:</strong> {{song.minutes}} minute(s) {{song.seconds}} second(s)</p>
+        <p><strong>Uploaded by:</strong> {{username}}</p>
+        <strong>Films:</strong>
+        <ul class="d-flex row">
+            {{#song.films}} <!--print films containing the song-->
+            <div class="col-3">
+                <li>{{name}}</li>
+            </div>
+            {{/song.films}}
         </ul>
-        <input type="submit" value="Submit">
-    </form>
-    <script src="/js/addFilmScript.js"></script>
-</div>
+    </div>
+
+    <div class="container justify-content-center px-5 py-5 mx-5 my-5 " >
+        <button class="btn" onclick="addFilms()">Add films</button>
+        <!--button that shows the full film list so the user can add films to the song-->
+        <br>
+        <div class="container justify-content-center" id="filmCheckBox">
+            <form id="filmForm" action="#" method="post" onsubmit="submitAction('{{song.id}}')">
+                {{#filmList}}
+                <div class="col-3">
+                    <label><input type="checkbox" name="selectedSongs" value="{{id}}">{{name}}</label>
+                    <!--checkboxes values are the films' ids, so we can receive a list of ids and then transform it to a Film list and add it to the song-->
+                </div>
+                {{/filmList}}
+                <input type="submit" class="submitButton" value="Submit">
+                <!--when the submit button is clicked, a javascript method is called.
+                This method takes the checked checkboxes list and "gives" it to the URL of the song info
+                where the list is set to the song-->
+            </form>
+            <script src="/js/addFilmScript.js"></script>
+        </div>
+    </div>
 </body>
 </html>

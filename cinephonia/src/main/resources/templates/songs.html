@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!--Songs main page-->
     <title>Songs</title>
 
     <link href="css/style.css" rel="stylesheet" />
@@ -13,48 +14,56 @@
     <link rel="icon" type="image/x-icon" href="images/logoet.jpg" /> <!--favicon-->
 </head>
 <body>
-    <nav id="ourNavbar" class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="images/logoet.jpg" width="30" height="30" alt="">
-                Cinephonia
-            </a>
+    <header>
+        <nav id="ourNavbar" class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="images/logoet.jpg" width="30" height="30" alt="">
+                    Cinephonia
+                </a>
 
-            <div class="navbar-collapse" id="navbarSupportedContent" >
-                <div class="col-11">
-                    <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/films">Films</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/songs">Songs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users">Users</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-1">
-                    <button id="registerButton" class="btn rounded-pill" type="button"  onclick="window.location.href='/register'">Register</button>
+                <div class="navbar-collapse" id="navbarSupportedContent" >
+                    <div class="col-11">
+                        <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/films">Films</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/songs">Songs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users">Users</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-1">
+                        <button id="registerButton" class="btn rounded-pill" type="button"  onclick="window.location.href='/register'">Register</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
+
+    <!--Title-->
     <div class="text-center">
         <p class="sectionTitle">SONGS</p>
         <hr class="mx-5">
-  </div>
-
+    </div>
 
     <div id="songButtons">
+        <!--Button that shows a form to upload a new song (if songs list is being shown, it will hide it)-->
         <button type="button" class="uploadButtons col-3" onclick="showSongsForm()">Upload<br>new song</button>
+        <!--Button that shows the songs list (if the form is shown, it will hide it)-->
         <button type="button" class="showButtons col-3 "  onclick="showAllSongs()">Show all</button>
     </div>
 
+    <!--Upload new song form-->
+    <!--required: the form is not valid if there are empty fields-->
     <div id="uploadSongs">
         <div class="text-center container d-flex justify-content-center mb-3">
             <form type="Submit" class="text-center" onsubmit="newSong()" method="post" action="/songInfo">
                 <div class="row d-flex mb-2">
+                    <!--Select which user is uploading the song-->
                     <select class="form-control" name="username" required/>
                         <option value="">Who are you?</option>
                         {{#users}}
@@ -94,20 +103,22 @@
             <br>
         </div>
     </div>
+    <!--Songs-->
     <div id="allSongs" class="container mx-3">
         <div class="d-flex row mb-2 gap-3">
+            <!--each song is placed in a card which occupies 3 columns, so we can show 4 songs in a row -->
             {{#songs}}
-            <div class="col-3 card">
-                <div class="card-body">
-                    <h5 class="titles">{{name}}</h5>
-                    <p class="synopsis">{{author}}</p>
+                <div class="col-3 card">
+                    <div class="card-body">
+                        <h5 class="titles">{{name}}</h5>
+                        <p class="synopsis">{{author}}</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="/song/{{id}}" class="card-link">See more</a> <!--song info-->
+                        <a onclick="deleteSong('{{id}}','{{name}}')" class="card-link">Delete</a> <!--Delete song, shows an alert to confirm-->
+                        <a href="/updateSong/{{id}}" class="card-link">Update</a> <!--Update song: redirects to a new page in which the user can change some values-->
+                    </div>
                 </div>
-                <div class="card-body">
-                    <a href="/song/{{id}}" class="card-link">See more</a>
-                    <a onclick="deleteSong('{{id}}','{{name}}')" class="card-link">Delete</a>
-                    <a href="/updateSong/{{id}}" class="card-link">Update</a>
-                </div>
-            </div>
             {{/songs}}
         </div>
     </div>
