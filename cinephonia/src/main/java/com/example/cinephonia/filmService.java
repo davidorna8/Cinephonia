@@ -84,6 +84,7 @@ public class filmService {
     public void putFilm(Film film, long id){ // change an existing film
         film.setId(id);
         films.put(id,film);
+
     }
 
     public Film getFilmById(long id){
@@ -104,5 +105,37 @@ public class filmService {
         songs.add(song);
         getFilmById(id).setSongs(songs);
     }
+
+    public void deleteFilmFromSongs(Film film, long id){
+        // when you delete a film, it has to be deleted from all the films list of the songs containing that film
+        for(Song song:film.getSongs()){
+            // create a new list that doesn't contain the deleted film
+            List<Film> newfilms = new ArrayList<>();
+            for(Film thisFilm: song.getFilms()){
+                if(thisFilm.getId()!=id){
+                    newfilms.add(thisFilm);
+                }
+            }
+            song.setFilms(newfilms);
+        }
+    }
+
+    public void updateFilmFromSongs(Film film,Film oldFilm, long id){
+        // if film information is changed, songs containing this film must update their film list too
+        for(Song song:oldFilm.getSongs()){
+            List<Film> newfilms = new ArrayList<>();
+            // create a new list in which the old film is deleted and the new film is added
+            for(Film thisFilm: song.getFilms()){
+                if(thisFilm.getId()!=id){
+                    newfilms.add(thisFilm);
+                }
+                else{
+                    newfilms.add(film);
+                }
+            }
+            song.setFilms(newfilms);
+        }
+    }
+
 }
 

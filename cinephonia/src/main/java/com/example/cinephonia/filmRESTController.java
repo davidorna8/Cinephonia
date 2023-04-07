@@ -50,15 +50,7 @@ public class filmRESTController {
     public ResponseEntity<Film> deleteFilm(@PathVariable long id){
         Film film=filmService.removeFilm(id); // gets the film by id
         if(film!=null){ // if it is found the film is deleted, from the list and the films list of each song
-            for(Song song:film.getSongs()){
-                List<Film> newfilms = new ArrayList<>();
-                for(Film thisFilm: song.getFilms()){
-                    if(thisFilm.getId()!=id){
-                        newfilms.add(thisFilm);
-                    }
-                }
-                song.setFilms(newfilms);
-            }
+            filmService.deleteFilmFromSongs(film,id);
             return new ResponseEntity<>(film, HttpStatus.OK);
         }
         else{
@@ -71,18 +63,7 @@ public class filmRESTController {
         Film film = filmService.getFilmById(id);
         if(film!=null){ // if the film exists
             filmService.putFilm(fm,id); // update film in the map
-            for(Song song:film.getSongs()){ // change it in each film list of songs
-                List<Film> newfilms = new ArrayList<>();
-                for(Film thisFilm: song.getFilms()){
-                    if(thisFilm.getId()!=id){
-                        newfilms.add(thisFilm);
-                    }
-                    else{
-                        newfilms.add(fm);
-                    }
-                }
-                song.setFilms(newfilms);
-            }
+            filmService.updateFilmFromSongs(fm,film,id);
             return new ResponseEntity<>(fm,HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

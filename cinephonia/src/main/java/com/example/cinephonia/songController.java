@@ -72,18 +72,7 @@ public class songController { // Controller for pages containing songs
         // remove it from the map
         Song song = songService.removeSong(id);
         model.addAttribute("name",song.getName());
-
-        // when you delete a song, it has to be deleted from all the songs list of the films containing that song
-        for(Film film: song.getFilms()){
-            // create a new list that doesn't contain the deleted song
-            List<Song> newsongs = new ArrayList<>();
-            for(Song thisSong: film.getSongs()){
-                if(thisSong.getId()!=id){
-                    newsongs.add(thisSong);
-                }
-            }
-            film.setSongs(newsongs);
-        }
+        songService.deleteSongFromFilms(song,id);
         return "deleted";
     }
 
@@ -112,20 +101,7 @@ public class songController { // Controller for pages containing songs
         model.addAttribute("username",username);
         model.addAttribute("song", song);
         songService.putSong(song,id);// the new song (info taken from the form) is put in the map
-        // if song information is changed, films containing this song must update their songs list too
-        for(Film film: oldSong.getFilms()){
-            // create a new list in which the old song is deleted and the new song is added
-            List<Song> newsongs = new ArrayList<>();
-            for(Song thisSong: film.getSongs()){
-                if(thisSong.getId()!=id){
-                    newsongs.add(thisSong);
-                }
-                else{
-                    newsongs.add(song);
-                }
-            }
-            film.setSongs(newsongs);
-        }
+        songService.updateSongFromFilms(song,oldSong,id);
         return "redirect:/song/{id}";
     }
 

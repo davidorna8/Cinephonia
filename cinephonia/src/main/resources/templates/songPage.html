@@ -70,7 +70,7 @@
             <form id="filmForm" action="#" method="post" onsubmit="submitAction('{{song.id}}')">
                 {{#filmList}}
                 <div class="col-3">
-                    <label><input type="checkbox" name="selectedSongs" value="{{id}}">{{name}}</label>
+                    <label><input type="checkbox" name="selectedFilms" value="{{id}}">{{name}}</label>
                     <!--checkboxes values are the films' ids, so we can receive a list of ids and then transform it to a Film list and add it to the song-->
                 </div>
                 {{/filmList}}

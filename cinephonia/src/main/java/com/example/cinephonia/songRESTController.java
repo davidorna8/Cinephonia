@@ -46,15 +46,7 @@ public class songRESTController {
     public ResponseEntity<Song> deleteSong(@PathVariable long id){
         Song song=songService.removeSong(id);
         if(song!=null){
-            for(Film film: song.getFilms()){
-                List<Song> newsongs = new ArrayList<>();
-                for(Song thisSong: film.getSongs()){
-                    if(thisSong.getId()!=id){
-                        newsongs.add(thisSong);
-                    }
-                }
-                film.setSongs(newsongs);
-            }
+            songService.deleteSongFromFilms(song,id);
             return new ResponseEntity<>(song, HttpStatus.OK);
         }
         else{
@@ -68,18 +60,7 @@ public class songRESTController {
         Song song = songService.getSongById(id);
         if(song!=null){
             songService.putSong(sn,id);
-            for(Film film: song.getFilms()){
-                List<Song> newsongs = new ArrayList<>();
-                for(Song thisSong: film.getSongs()){
-                    if(thisSong.getId()!=id){
-                        newsongs.add(thisSong);
-                    }
-                    else{
-                        newsongs.add(sn);
-                    }
-                }
-                film.setSongs(newsongs);
-            }
+            songService.updateSongFromFilms(sn,song,id);
             return new ResponseEntity<>(sn,HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -66,5 +66,35 @@ public class songService {
         getSongById(id).setFilms(films);
     }
 
+    public void deleteSongFromFilms(Song song, long id){
+        // when you delete a song, it has to be deleted from all the songs list of the films containing that song
+        for(Film film: song.getFilms()){
+            // create a new list that doesn't contain the deleted song
+            List<Song> newsongs = new ArrayList<>();
+            for(Song thisSong: film.getSongs()){
+                if(thisSong.getId()!=id){
+                    newsongs.add(thisSong);
+                }
+            }
+            film.setSongs(newsongs);
+        }
+    }
+
+    public void updateSongFromFilms(Song song, Song oldSong, long id){
+        // if song information is changed, films containing this song must update their songs list too
+        for(Film film: oldSong.getFilms()){
+            // create a new list in which the old song is deleted and the new song is added
+            List<Song> newsongs = new ArrayList<>();
+            for(Song thisSong: film.getSongs()){
+                if(thisSong.getId()!=id){
+                    newsongs.add(thisSong);
+                }
+                else{
+                    newsongs.add(song);
+                }
+            }
+            film.setSongs(newsongs);
+        }
+    }
 }
 

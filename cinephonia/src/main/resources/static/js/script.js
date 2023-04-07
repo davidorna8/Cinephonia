@@ -121,3 +121,15 @@ function addSongs(){
     }
 }
 
+function getCurrentURL () {
+    return window.location.href
+}
+
+function hideAddSongs(){
+    const url = getCurrentURL()
+    let content=document.getElementById('addSongs')
+    if(url==="/filmInfo"){
+        content.style.display='none'
+    }
+}
+
