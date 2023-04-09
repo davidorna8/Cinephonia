@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 public class songController { // Controller for pages containing songs
-    private static String genreList[]={"Punk","Rock","Pop","Classic", "Indie", "Blues", "Rap", "Original Soundtrack"};
+    private static String genreList[]={"Punk","Rock","Pop","Classic", "Indie", "Blues", "Rap", "Original Soundtrack","Soul"};
     /*
     Services
      */

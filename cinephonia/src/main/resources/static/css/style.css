@@ -112,13 +112,22 @@ body{
     background-color: steelblue;
 }
 
-/* Light color links*/
+/* Light colored links*/
 .link{
     color: whitesmoke;
 }
 
 .link:hover{
     color: #cccccc;
+}
+
+/*Dark colored links*/
+.darkLink{
+    color: #3b4448;
+}
+
+.darkLink:hover{
+    color: #94a4a6;
 }
 
 /* Titles */

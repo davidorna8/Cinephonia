@@ -25,6 +25,33 @@ public class songService {
         id = lastid.incrementAndGet();
         song.setId(id);
         songs.put(id,song);
+
+        song = new Song("All Along the Watchtower","1968","4", "1",
+                "Jimi Hendrix","Rock");
+        id = lastid.incrementAndGet();
+        song.setId(id);
+        songs.put(id,song);
+
+        song = new Song("Stayin' Alive","1977","4", "9",
+                "Bee Gees","Rock");
+        id = lastid.incrementAndGet();
+        song.setId(id);
+        song.setUserId(2);
+        songs.put(id,song);
+
+        song = new Song("Mrs. Robinson","1967","3", "55",
+                "Simon and Garfunkel","Original Soundtrack");
+        id = lastid.incrementAndGet();
+        song.setId(id);
+        song.setUserId(1);
+        songs.put(id,song);
+
+        song = new Song("California Somnolienta","1965","3", "2",
+                "The Mamas and The Papas","Soul");
+        id = lastid.incrementAndGet();
+        song.setId(id);
+        song.setUserId(3);
+        songs.put(id,song);
     }
 
     // create Song method

@@ -89,7 +89,7 @@ function updateUser(id) {
 }
 
 function addFilms(){
-    
+
     let content=document.getElementById('filmCheckBox');
     let display=content.style.display;
     if(display==="none"|display===""){

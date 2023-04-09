@@ -56,6 +56,43 @@ public class filmService {
         film.createCover("littlemermaid.jpg","Photograph");
         films.put(id,film);
 
+        film= new Film("Forrest Gump","1994","Robert Zemeckis",
+                "Despite Forrest's (Tom Hanks) low IQ, he is not your average guy. " +
+                        "Learning early on from his mother (Sally Field) that 'life is like a box of chocolates, you never know what you're gonna get'," +
+                        " Gump, without trying, stumbles upon some exciting events. " +
+                        "Meanwhile, as the remarkable parade of his life goes by, Forrest never forgets Jenny (Robin Wright), " +
+                        "the girl he loved as a boy, who makes her own journey through the turbulence of the 1960s and 1970s " +
+                        "that is far more troubled than the path Forrest happens upon."
+                , "Drama");
+        id = lastid.incrementAndGet();
+        film.setId(id);
+        film.createCover("forrestgump.jpg","Photograph");
+        film.setUserId(1);
+        films.put(id,film);
+
+        film= new Film("The Graduate","1967","Mike Nichols",
+                "In the mid-1960s, Benjamin Braddock (Dustin Hoffman), a confused college graduate, is pulled in myriad " +
+                        "directions by his wealthy family, friends, and associates just days after receiving his degree." +
+                        " Seduced by alcoholic and a neurotic Mrs. Robinson (Anne Bancroft), an older friend of the" +
+                        " family and the wife of his father's law partner, Ben carries on an affair with the married" +
+                        " woman even as he falls for her daughter, Elaine (Katharine Ross).","Romance");
+        id = lastid.incrementAndGet();
+        film.setId(id);
+        film.createCover("thegraduate.jpg","Photograph");
+        films.put(id,film);
+
+        film= new Film("Madagascar","2005","Eric Darnell",
+                "At New York's Central Park Zoo, a lion, a zebra, a giraffe, and a hippo are best friends and stars of " +
+                        "the show. But when one of the animals goes missing from their cage, the other three break free " +
+                        "to look for him, only to find themselves reunited ... on a ship en route to Africa. When their" +
+                        " vessel is hijacked, however, the friends, who have all been raised in captivity, learn " +
+                        "first-hand what life can be like in the wild.","Comedy");
+        id = lastid.incrementAndGet();
+        film.setId(id);
+        film.setUserId(2);
+        film.createCover("madagascar.jpg","Animation");
+        films.put(id,film);
+
         Files.createDirectories(Paths.get("C:/Cinephonia/covers"));
         Files.copy(Paths.get("src//main//resources//static//images/interstellar.jpg"),
                 Paths.get("C:/Cinephonia/covers/interstellar.jpg"), StandardCopyOption.REPLACE_EXISTING);
@@ -63,6 +100,12 @@ public class filmService {
                 Paths.get("C:/Cinephonia/covers/loveactually.jpg"), StandardCopyOption.REPLACE_EXISTING);
         Files.copy(Paths.get("src//main//resources//static//images/littlemermaid.jpg"),
                 Paths.get("C:/Cinephonia/covers/littlemermaid.jpg"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(Paths.get("src//main//resources//static//images/forrestgump.jpg"),
+                Paths.get("C:/Cinephonia/covers/forrestgump.jpg"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(Paths.get("src//main//resources//static//images/thegraduate.jpg"),
+                Paths.get("C:/Cinephonia/covers/thegraduate.jpg"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(Paths.get("src//main//resources//static//images/madagascar.jpg"),
+                Paths.get("C:/Cinephonia/covers/madagascar.jpg"), StandardCopyOption.REPLACE_EXISTING);
     }
 
     // create Film method

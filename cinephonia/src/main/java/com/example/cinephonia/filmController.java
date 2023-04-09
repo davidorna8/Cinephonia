@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 public class filmController { // Controller for different pages containing films
     private static String genreList[]={"Action","Comedy","Western","Romance","Horror",
-            "Science fiction","Thriller","Fantasy","Musical"};
+            "Science fiction","Thriller","Fantasy","Musical","Drama"};
 
     private static String stylesList[]={"Collage","Animation","Photograph","Landscape"};
 

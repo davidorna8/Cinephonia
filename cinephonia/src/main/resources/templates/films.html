@@ -110,27 +110,27 @@
     </div>
     <br>
     <!--Films-->
-    <div id="allFilms">
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-        {{#films}}
-        <div class="col">
-            <div class="card h-100">
-                <img alt="{{name}}" src="/covers/{{cover.imageURL}}" class="card-img-top"/>
-                <div class="card-body">
-                    <h5 class="titles">{{name}}</h5>
-                    <p class="synopsis">
-                        {{synopsis}}
-                    </p>
-                </div>
-                <div class="card-footer">
-                    <a href="/films/{{id}}" class="card-link">See more</a> <!--Film info-->
-                    <a class="card-link" onclick="deleteFilm('{{id}}','{{name}}')">Delete</a> <!--Delete film, shows an alert to confirm-->
-                    <a href="/updateFilm/{{id}}" class="card-link">Update</a> <!--Update film: redirects to a new page in which the user can change some values-->
+    <div id="allFilms" class="container p-1">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            {{#films}}
+            <div class="col">
+                <div class="card h-100">
+                    <img alt="{{name}}" src="/covers/{{cover.imageURL}}" class="card-img-top"/>
+                    <div class="card-body">
+                        <h5 class="titles">{{name}}</h5>
+                        <p class="synopsis">
+                            {{synopsis}}
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/films/{{id}}" class="darkLink">See more</a> <!--Film info-->
+                        <a class="darkLink" onclick="deleteFilm('{{id}}','{{name}}')">Delete</a> <!--Delete film, shows an alert to confirm-->
+                        <a href="/updateFilm/{{id}}" class="darkLink">Update</a> <!--Update film: redirects to a new page in which the user can change some values-->
+                    </div>
                 </div>
             </div>
+            {{/films}}
         </div>
-        {{/films}}
-    </div>
     </div>
 
 </body>
