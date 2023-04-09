@@ -72,6 +72,8 @@ public class filmController { // Controller for different pages containing films
         // Model for the page (username and all film information)
         model.addAttribute("username",username);
         model.addAttribute("film",film);
+        long id=film.getId();
+        model.addAttribute("id",id);
         List<Song> songList = new ArrayList<>(songService.songList());
         model.addAttribute("songList", songList);
         return "filmPage";
