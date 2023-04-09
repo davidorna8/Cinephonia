@@ -125,5 +125,7 @@ public class Song { // Java class for songs
         this.films = films;
     }
 
-
+    public boolean containsFilm(Film film){
+        return films.contains(film);
+    }
 }

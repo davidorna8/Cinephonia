@@ -68,6 +68,12 @@
         <br>
         <div class="container justify-content-center" id="filmCheckBox">
             <form id="filmForm" action="#" method="post" onsubmit="submitAction('{{song.id}}')">
+                {{#song.films}}
+                <div class="col-3">
+                    <label><input type="checkbox" name="selectedFilms" value="{{id}}" checked>{{name}}</label>
+                    <!--these films are already part of the song, so they appear checked-->
+                </div>
+                {{/song.films}}
                 {{#filmList}}
                 <div class="col-3">
                     <label><input type="checkbox" name="selectedFilms" value="{{id}}">{{name}}</label>

@@ -45,7 +45,12 @@ public class songController { // Controller for pages containing songs
         song.setUserId(userId);
         // Model for the page (username and all film information)
         model.addAttribute("username",username);
-        List<Film> filmList= new ArrayList<>(filmService.filmList());
+        List<Film> filmList= new ArrayList<>();
+        for(Film film: filmService.filmList()){
+            if(!song.containsFilm(film)){
+                filmList.add(film);
+            }
+        }
         model.addAttribute("filmList",filmList);
         return "songPage";
     }
@@ -61,8 +66,13 @@ public class songController { // Controller for pages containing songs
         User u = userService.getUserById(song.getUserId());
         model.addAttribute("username",u.getUsername());
 
-        // list containing all uploaded films
-        List<Film> filmList= new ArrayList<>(filmService.filmList());
+        // list containing all uploaded films except for the ones in the song
+        List<Film> filmList= new ArrayList<>();
+        for(Film film: filmService.filmList()){
+            if(!song.containsFilm(film)){
+                filmList.add(film);
+            }
+        }
         model.addAttribute("filmList",filmList);
         return "songPage";
     }

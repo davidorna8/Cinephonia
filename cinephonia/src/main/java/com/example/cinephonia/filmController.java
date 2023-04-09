@@ -90,8 +90,13 @@ public class filmController { // Controller for different pages containing films
         User u = userService.getUserById(film.getUserId());
         model.addAttribute("username",u.getUsername());
 
-        // songs that appear in the film
-        List<Song> songList = new ArrayList<>(songService.songList());
+        // songs that don't appear in the film
+        List<Song> songList = new ArrayList<>();
+        for(Song song: songService.songList()){
+            if(!film.containsSong(song)){
+                songList.add(song);
+            }
+        }
         model.addAttribute("songList", songList);
         return "filmPage";
     }
