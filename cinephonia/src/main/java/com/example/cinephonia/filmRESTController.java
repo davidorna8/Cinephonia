@@ -39,6 +39,7 @@ public class filmRESTController {
 
 
     // create film with body of the API REST client (Postman)
+    @JsonView(Film.Basic.class)
     @PostMapping("/films")
     @ResponseStatus(HttpStatus.CREATED)
     public Film newFilm(@RequestBody Film film){
@@ -46,11 +47,12 @@ public class filmRESTController {
         return film;
     }
 
+    @JsonView(Film.Basic.class)
     @DeleteMapping("/films/{id}")
     public ResponseEntity<Film> deleteFilm(@PathVariable long id){
         Film film=filmService.removeFilm(id); // gets the film by id
         if(film!=null){ // if it is found the film is deleted, from the list and the films list of each song
-            filmService.deleteFilmFromSongs(film,id);
+            filmService.deleteFilmFromSongs(film);
             return new ResponseEntity<>(film, HttpStatus.OK);
         }
         else{
@@ -58,6 +60,7 @@ public class filmRESTController {
         }
     }
 
+    @JsonView(Film.Basic.class)
     @PutMapping("/films/{id}")
     public ResponseEntity<Film> putFilm(@PathVariable long id, @RequestBody Film fm){
         Film film = filmService.getFilmById(id);

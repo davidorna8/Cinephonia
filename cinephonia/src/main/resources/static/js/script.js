@@ -105,23 +105,23 @@ function addFilms(){
 }
 
 function addSongs(){
-    let content=document.getElementById('songCheckBox');
-    let display=content.style.display;
-    if(display==="none"|display===""){
-        content.style.display='block';
-        /*var inputs = document.querySelectorAll('input[name="selectedFilms"]');
+    /*var inputs = document.querySelectorAll('input[name="selectedFilms"]');
         for (var i = 0; i < inputs.length; i++) {
             if(inputs[i]==={{film.songs}})
             if(document.ge)
             inputs[i].checked = true;
         }
         */
+    let content=document.getElementById('songCheckBox');
+    let display=content.style.display;
+    if(display==="none"|display===""){
+        content.style.display='block';
     }else{
         content.style.display='none';
     }
 }
 
-function getCurrentURL () {
+/*function getCurrentURL () {
     return window.location.href
 }
 
@@ -131,5 +131,5 @@ function hideAddSongs(){
     if(url==="/filmInfo"){
         content.style.display='none'
     }
-}
+}*/
 

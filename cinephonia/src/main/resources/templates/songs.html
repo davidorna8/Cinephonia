@@ -104,14 +104,15 @@
         </div>
     </div>
     <!--Songs-->
-    <div id="allSongs" class="container mx-3">
-        <div class="d-flex row mb-2 gap-3">
+    <div id="allSongs" class="container mx-3 my-5">
+        <div class="row row-cols-md-4 row-cols-1 g-2">
             <!--each song is placed in a card which occupies 3 columns, so we can show 4 songs in a row -->
             {{#songs}}
-                <div class="col-3 card">
+            <div class="col">
+                <div class="card h-100">
                     <div class="card-body">
                         <h5 class="titles">{{name}}</h5>
-                        <p class="synopsis">{{author}}</p>
+                        <p>{{author}}</p>
                     </div>
                     <div class="card-body">
                         <a href="/song/{{id}}" class="card-link">See more</a> <!--song info-->
@@ -119,6 +120,7 @@
                         <a href="/updateSong/{{id}}" class="card-link">Update</a> <!--Update song: redirects to a new page in which the user can change some values-->
                     </div>
                 </div>
+            </div>
             {{/songs}}
         </div>
     </div>

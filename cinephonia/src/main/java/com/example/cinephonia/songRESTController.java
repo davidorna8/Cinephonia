@@ -35,6 +35,7 @@ public class songRESTController {
         return songService.songList();
     }
 
+    @JsonView(Song.Basic.class)
     @PostMapping("/songs")
     @ResponseStatus(HttpStatus.CREATED)
     public Song newSong(@RequestBody Song song){
@@ -42,11 +43,12 @@ public class songRESTController {
         return song;
     }
 
+    @JsonView(Song.Basic.class)
     @DeleteMapping("/songs/{id}")
     public ResponseEntity<Song> deleteSong(@PathVariable long id){
         Song song=songService.removeSong(id);
         if(song!=null){
-            songService.deleteSongFromFilms(song,id);
+            songService.deleteSongFromFilms(song);
             return new ResponseEntity<>(song, HttpStatus.OK);
         }
         else{
@@ -54,7 +56,7 @@ public class songRESTController {
         }
     }
 
-
+    @JsonView(Song.Basic.class)
     @PutMapping("/songs/{id}")
     public ResponseEntity<Song> putSong(@PathVariable long id, @RequestBody Song sn){
         Song song = songService.getSongById(id);

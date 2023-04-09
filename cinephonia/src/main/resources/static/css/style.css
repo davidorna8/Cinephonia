@@ -89,14 +89,20 @@ body{
     padding: 150px;
 }
 
-#addSongsButton{
+.addCheckBoxButton{
     background-color: powderblue;
-    color: whitesmoke;
+    color: darkslategray;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
 }
 
-#addSongsButton:hover{
+.addCheckBoxButton:hover{
     background-color: whitesmoke;
-    color: powderblue;
+    color: darkslategray;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .submitButton{
@@ -174,15 +180,6 @@ hr{
 /* Tables */
 #userTable{
     background-color: whitesmoke;
-}
-
-/* Cards */
-.songCard{
-    width: 1px;
-}
-
-.filmCard{
-    height: auto;
 }
 
 /* Images*/

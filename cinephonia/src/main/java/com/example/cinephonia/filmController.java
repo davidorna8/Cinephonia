@@ -101,7 +101,7 @@ public class filmController { // Controller for different pages containing films
         // remove it from the map
         Film film= filmService.removeFilm(id);
         model.addAttribute("name",film.getName());
-        filmService.deleteFilmFromSongs(film,id);
+        filmService.deleteFilmFromSongs(film);
         return "deleted";
     }
 

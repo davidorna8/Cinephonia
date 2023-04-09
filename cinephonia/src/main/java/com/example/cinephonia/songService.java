@@ -66,7 +66,8 @@ public class songService {
         getSongById(id).setFilms(films);
     }
 
-    public void deleteSongFromFilms(Song song, long id){
+    public void deleteSongFromFilms(Song song){
+        long id = song.getId();
         // when you delete a song, it has to be deleted from all the songs list of the films containing that song
         for(Film film: song.getFilms()){
             // create a new list that doesn't contain the deleted song

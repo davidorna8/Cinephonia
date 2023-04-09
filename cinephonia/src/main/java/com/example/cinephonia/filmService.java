@@ -57,11 +57,11 @@ public class filmService {
         films.put(id,film);
 
         Files.createDirectories(Paths.get("C:/Cinephonia/covers"));
-        Files.copy(Paths.get("src//main//resources//static//images/interstellar.jpg"),
+        Files.copy(Paths.get("cinephonia//src//main//resources//static//images/interstellar.jpg"),
                 Paths.get("C:/Cinephonia/covers/interstellar.jpg"), StandardCopyOption.REPLACE_EXISTING);
-        Files.copy(Paths.get("src//main//resources//static//images/loveactually.jpg"),
+        Files.copy(Paths.get("cinephonia//src//main//resources//static//images/loveactually.jpg"),
                 Paths.get("C:/Cinephonia/covers/loveactually.jpg"), StandardCopyOption.REPLACE_EXISTING);
-        Files.copy(Paths.get("src//main//resources//static//images/littlemermaid.jpg"),
+        Files.copy(Paths.get("cinephonia//src//main//resources//static//images/littlemermaid.jpg"),
                 Paths.get("C:/Cinephonia/covers/littlemermaid.jpg"), StandardCopyOption.REPLACE_EXISTING);
     }
 
@@ -106,7 +106,8 @@ public class filmService {
         getFilmById(id).setSongs(songs);
     }
 
-    public void deleteFilmFromSongs(Film film, long id){
+    public void deleteFilmFromSongs(Film film){
+        long id = film.getId();
         // when you delete a film, it has to be deleted from all the films list of the songs containing that film
         for(Song song:film.getSongs()){
             // create a new list that doesn't contain the deleted film

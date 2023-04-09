@@ -67,12 +67,12 @@
         </div>
     </div>
 
-    <div class="container justify-content-center px-5 py-5 mx-5 my-5 " id="addSongs">
-        <button class="btn" id="addSongsButton" onclick="addSongs()">Add songs</button>
+    <div class="container justify-content-center px-5 py-5 mx-5 my-5">
+        <button class="addCheckBoxButton" onclick="addSongs()">Add songs</button>
         <!--button that shows the full song list so the user can add songs to the film-->
-            <br>
-        <div class="container justify-content-center d-flex row" id="songCheckBox"> <!--checkboxes to add songs-->
-            <form id="songForm" method="post" onsubmit="submitAction('{{film.id}}')">
+        <br>
+        <div class="container justify-content-center" id="songCheckBox"> <!--checkboxes to add songs-->
+            <form id="songForm" action="#" method="post" onsubmit="submitAction('{{film.id}}')">
                 {{#songList}}
                 <div class="col-3">
                     <label><input type="checkbox" name="selectedSongs" value="{{id}}">{{name}}</label>
