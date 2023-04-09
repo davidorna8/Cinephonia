@@ -89,12 +89,7 @@ function updateUser(id) {
 }
 
 function addFilms(){
-    /*function checkAll() {
-        var inputs = document.querySelectorAll('.pl');
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].checked = true;
-        }
-}  */
+    
     let content=document.getElementById('filmCheckBox');
     let display=content.style.display;
     if(display==="none"|display===""){
@@ -105,13 +100,7 @@ function addFilms(){
 }
 
 function addSongs(){
-    /*var inputs = document.querySelectorAll('input[name="selectedFilms"]');
-        for (var i = 0; i < inputs.length; i++) {
-            if(inputs[i]==={{film.songs}})
-            if(document.ge)
-            inputs[i].checked = true;
-        }
-        */
+
     let content=document.getElementById('songCheckBox');
     let display=content.style.display;
     if(display==="none"|display===""){
@@ -121,15 +110,22 @@ function addSongs(){
     }
 }
 
-/*function getCurrentURL () {
+function getCurrentURL () {
     return window.location.href
 }
 
 function hideAddSongs(){
     const url = getCurrentURL()
     let content=document.getElementById('addSongs')
-    if(url==="/filmInfo"){
+    if(url.includes("/filmInfo")){
         content.style.display='none'
     }
-}*/
+}
 
+function hideAddFilms(){
+    const url = getCurrentURL()
+    let content=document.getElementById('addFilms')
+    if(url.includes("/songInfo")){
+        content.style.display='none'
+    }
+}
