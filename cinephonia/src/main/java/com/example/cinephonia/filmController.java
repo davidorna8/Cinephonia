@@ -145,6 +145,7 @@ public class filmController { // Controller for different pages containing films
     public String addSongs(Model model,@RequestParam List<Long> selectedSongs, @PathVariable long id){
         // film id is taken from the URL, songs list from the form of the html file
         Film film = filmService.getFilmById(id);
+        filmService.deleteFilmFromSongs(film); // delete from the previous song list where the film appeared
         ArrayList<Song> songs = new ArrayList<>();
         for(long songId : selectedSongs){ // the form returns a list with ids of selected songs
             Song song = songService.getSongById(songId);

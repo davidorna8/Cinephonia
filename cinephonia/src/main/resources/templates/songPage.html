@@ -67,20 +67,20 @@
         <!--button that shows the full film list so the user can add films to the song-->
         <br>
         <div class="container justify-content-center" id="filmCheckBox">
-            <form id="filmForm" action="#" method="post" onsubmit="submitAction('{{song.id}}')">
+            <form id="filmForm">
                 {{#song.films}}
                 <div class="col-3">
-                    <label><input type="checkbox" name="selectedFilms" value="{{id}}" checked>{{name}}</label>
+                    <label><input type="checkbox" name="selectedFilms" class="checkBoxes" value="{{id}}" checked>{{name}}</label>
                     <!--these films are already part of the song, so they appear checked-->
                 </div>
                 {{/song.films}}
                 {{#filmList}}
                 <div class="col-3">
-                    <label><input type="checkbox" name="selectedFilms" value="{{id}}">{{name}}</label>
+                    <label><input type="checkbox" name="selectedFilms" class="checkBoxes" value="{{id}}">{{name}}</label>
                     <!--checkboxes values are the films' ids, so we can receive a list of ids and then transform it to a Film list and add it to the song-->
                 </div>
                 {{/filmList}}
-                <input type="submit" class="submitButton" value="Submit">
+                <input type="submit" class="submitButton" value="Submit" onclick="submitAction('{{song.id}}')">
                 <!--when the submit button is clicked, a javascript method is called.
                 This method takes the checked checkboxes list and "gives" it to the URL of the song info
                 where the list is set to the song-->

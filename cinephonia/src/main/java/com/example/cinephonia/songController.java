@@ -116,14 +116,16 @@ public class songController { // Controller for pages containing songs
     }
 
 
-    @PostMapping("/song/{id}")
+    @PostMapping("/song/{id}") // in the song page when the user adds films to the song
     public String addFilms(Model model,@RequestParam List<Long> selectedFilms, @PathVariable long id){
+        // song id is taken from the URL, films list from the form of the html file
         Song song = songService.getSongById(id);
+        songService.deleteSongFromFilms(song); // delete from the previous film list where the song appeared
         ArrayList<Film> films = new ArrayList<>();
-        for(long filmId : selectedFilms){
+        for(long filmId : selectedFilms){ // the form returns a list with ids of selected films
             Film film = filmService.getFilmById(filmId);
-            films.add(film);
-            filmService.addSong(filmId,song);
+            films.add(film); //add films to the films list of the song
+            filmService.addSong(filmId,song); // add the song to the songs list of each film
         }
         song.setFilms(films);
         model.addAttribute("song", song);
