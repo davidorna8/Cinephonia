@@ -104,7 +104,7 @@
         </div>
     </div>
     <!--Songs-->
-    <div id="allSongs" class="container mx-3 my-5">
+    <div id="allSongs" class="container p-1">
         <div class="row row-cols-md-4 row-cols-1 g-2">
             <!--each song is placed in a card which occupies 3 columns, so we can show 4 songs in a row -->
             {{#songs}}
@@ -114,7 +114,7 @@
                         <h5 class="titles">{{name}}</h5>
                         <p>{{author}}</p>
                     </div>
-                    <div class="card-body">
+                    <div class="card-footer text-center">
                         <a href="/song/{{id}}" class="darkLink">See more</a> <!--song info-->
                         <a onclick="deleteSong('{{id}}','{{name}}')" class="darkLink">Delete</a> <!--Delete song, shows an alert to confirm-->
                         <a href="/updateSong/{{id}}" class="darkLink">Update</a> <!--Update song: redirects to a new page in which the user can change some values-->

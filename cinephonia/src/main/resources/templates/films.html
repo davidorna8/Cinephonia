@@ -115,14 +115,16 @@
             {{#films}}
             <div class="col">
                 <div class="card h-100">
-                    <img alt="{{name}}" src="/covers/{{cover.imageURL}}" class="card-img-top"/>
-                    <div class="card-body">
+                    <abbr title="Directed by {{director}} in {{year}}">
+                        <img alt="{{name}}" src="/covers/{{cover.imageURL}}" class="card-img-top"/>
+                    </abbr>
+                    <div class="card-body ">
                         <h5 class="titles">{{name}}</h5>
-                        <p class="synopsis">
+                        <p>
                             {{synopsis}}
                         </p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer text-center">
                         <a href="/films/{{id}}" class="darkLink">See more</a> <!--Film info-->
                         <a class="darkLink" onclick="deleteFilm('{{id}}','{{name}}')">Delete</a> <!--Delete film, shows an alert to confirm-->
                         <a href="/updateFilm/{{id}}" class="darkLink">Update</a> <!--Update film: redirects to a new page in which the user can change some values-->
