@@ -1,4 +1,4 @@
-package com.example.cinephonia;
+package com.example.cinephonia.Models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;

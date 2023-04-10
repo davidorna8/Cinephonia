@@ -1,5 +1,8 @@
-package com.example.cinephonia;
+package com.example.cinephonia.Controllers;
 
+import com.example.cinephonia.Models.Film;
+import com.example.cinephonia.Models.Song;
+import com.example.cinephonia.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -17,11 +19,11 @@ public class songController { // Controller for pages containing songs
     Services
      */
     @Autowired
-    songService songService;
+    com.example.cinephonia.Services.songService songService;
     @Autowired
-    userService userService;
+    com.example.cinephonia.Services.userService userService;
     @Autowired
-    filmService filmService;
+    com.example.cinephonia.Services.filmService filmService;
     @GetMapping("/songs") // songs main page
     public String songsSection(Model model){
 

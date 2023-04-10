@@ -1,11 +1,15 @@
-package com.example.cinephonia;
+package com.example.cinephonia.Controllers;
 
+import com.example.cinephonia.Models.Film;
+import com.example.cinephonia.Models.Song;
+import com.example.cinephonia.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,11 +30,46 @@ public class filmController { // Controller for different pages containing films
     Services used in the controller
      */
     @Autowired
-    filmService filmService;
+    com.example.cinephonia.Services.filmService filmService;
     @Autowired
-    userService userService;
+    com.example.cinephonia.Services.userService userService;
     @Autowired
-    songService songService;
+    com.example.cinephonia.Services.songService songService;
+
+    @PostConstruct
+    public void init(){ // initial lists for N:M relationship
+        Film loveActually= filmService.getFilmById(1);
+        Song troubleLove = songService.getSongById(1);
+        loveActually.addSong(troubleLove);
+        troubleLove.addFilm(loveActually);
+
+        Film interstellar = filmService.getFilmById(2);
+        Song cornfield = songService.getSongById(2);
+        interstellar.addSong(cornfield);
+        cornfield.addFilm(interstellar);
+
+        Film forrest = filmService.getFilmById(4);
+        Song allAlong = songService.getSongById(3);
+        forrest.addSong(allAlong);
+        allAlong.addFilm(forrest);
+        Song mrsRobinson = songService.getSongById(5);
+        forrest.addSong(mrsRobinson);
+        mrsRobinson.addFilm(forrest);
+        Song california = songService.getSongById(6);
+        forrest.addSong(california);
+        california.addFilm(forrest);
+
+        Film theGraduate = filmService.getFilmById(5);
+        theGraduate.addSong(mrsRobinson);
+        mrsRobinson.addFilm(theGraduate);
+        theGraduate.addSong(allAlong);
+        allAlong.addFilm(theGraduate);
+
+        Film madagascar = filmService.getFilmById(6);
+        Song stayin = songService.getSongById(4);
+        madagascar.addSong(stayin);
+        stayin.addFilm(madagascar);
+    }
     @GetMapping("/films") // Films main page
     public String filmsSection(Model model){
 

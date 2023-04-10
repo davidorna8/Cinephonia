@@ -1,4 +1,4 @@
-package com.example.cinephonia;
+package com.example.cinephonia.Models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
@@ -15,8 +15,8 @@ public class Song { // Java class for songs
     /*
     Interfaces for JsonView
      */
-    interface Basic {}
-    interface Films {}
+    public interface Basic {}
+    public interface Films {}
     /*
     Attributes
      */
@@ -125,7 +125,12 @@ public class Song { // Java class for songs
         this.films = films;
     }
 
+    /* Methods for N:M relationship */
     public boolean containsFilm(Film film){
         return films.contains(film);
+    }
+
+    public void addFilm(Film film){
+        films.add(film);
     }
 }

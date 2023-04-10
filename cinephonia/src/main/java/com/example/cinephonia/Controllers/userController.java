@@ -1,5 +1,8 @@
-package com.example.cinephonia;
+package com.example.cinephonia.Controllers;
 
+import com.example.cinephonia.Models.Film;
+import com.example.cinephonia.Models.Song;
+import com.example.cinephonia.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +18,11 @@ public class userController {
     Services
      */
     @Autowired
-    userService userService;
+    com.example.cinephonia.Services.userService userService;
     @Autowired
-    filmService filmService;
+    com.example.cinephonia.Services.filmService filmService;
     @Autowired
-    songService songService;
+    com.example.cinephonia.Services.songService songService;
 
     @GetMapping("/users") // users main page
     public String usersMain(Model model){

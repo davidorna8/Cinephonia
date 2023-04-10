@@ -1,20 +1,20 @@
-package com.example.cinephonia;
+package com.example.cinephonia.RESTControllers;
 
+import com.example.cinephonia.Models.Film;
+import com.example.cinephonia.Models.Song;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @RequestMapping("/api/")
 @RestController
 public class songRESTController {
     @Autowired
-    songService songService;
+    com.example.cinephonia.Services.songService songService;
 
     interface SongDetail extends Film.Basic, Song.Basic, Song.Films{}
 

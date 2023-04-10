@@ -1,4 +1,4 @@
-package com.example.cinephonia;
+package com.example.cinephonia.Models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

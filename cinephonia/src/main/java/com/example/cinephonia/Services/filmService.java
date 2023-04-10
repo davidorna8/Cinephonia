@@ -1,5 +1,7 @@
-package com.example.cinephonia;
+package com.example.cinephonia.Services;
 
+import com.example.cinephonia.Models.Film;
+import com.example.cinephonia.Models.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,7 @@ public class filmService {
         film.setId(id);
         film.createCover("loveactually.jpg","Collage");
         films.put(id,film);
+
         film = new Film("Interstellar", "2014", "Christopher Nolan",
                 "In the near future Earth has been devastated by drought and " +
                         "famine, causing a scarcity in food and extreme changes in climate. " +
@@ -41,6 +44,7 @@ public class filmService {
         film.setId(id);
         film.createCover("interstellar.jpg","Landscape");
         films.put(id,film);
+
         film= new Film("The little Mermaid","2023","Rob Marshall",
                 "The mermaid Ariel, daughter of King Triton, is fascinated with " +
                         "humans. She falls in love with the human prince Eric after she " +

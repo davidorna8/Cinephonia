@@ -1,5 +1,6 @@
-package com.example.cinephonia;
+package com.example.cinephonia.RESTControllers;
 
+import com.example.cinephonia.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import java.util.Collection;
 @RestController
 public class userRESTController {
     @Autowired
-    userService userService;
+    com.example.cinephonia.Services.userService userService;
 
    @GetMapping("/users/{id}") // get user by Id
     public ResponseEntity<User> getUser(@PathVariable long id){

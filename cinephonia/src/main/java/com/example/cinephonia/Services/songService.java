@@ -1,6 +1,7 @@
-package com.example.cinephonia;
+package com.example.cinephonia.Services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.cinephonia.Models.Film;
+import com.example.cinephonia.Models.Song;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

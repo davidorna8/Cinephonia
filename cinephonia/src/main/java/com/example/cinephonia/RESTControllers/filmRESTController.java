@@ -1,5 +1,7 @@
-package com.example.cinephonia;
+package com.example.cinephonia.RESTControllers;
 
+import com.example.cinephonia.Models.Film;
+import com.example.cinephonia.Models.Song;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,18 +14,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @RequestMapping("/api/")
 @RestController
 public class filmRESTController {
     @Autowired
-    filmService filmService; // Service
+    com.example.cinephonia.Services.filmService filmService; // Service
 
     // Interface for JsonView
-    interface FilmDetail extends Film.Basic, Film.Songs, Song.Basic{}
+    interface FilmDetail extends Film.Basic, Film.Songs, Song.Basic {}
 
     @JsonView(FilmDetail.class)
     @GetMapping("/films/{id}")
