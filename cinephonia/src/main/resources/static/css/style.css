@@ -160,6 +160,11 @@ body{
     font-family: "Copperplate";
 }
 
+#welcomeText{
+    text-align: center;
+    color: lightcyan;
+}
+
 #congratsText{
     color: snow;
 }

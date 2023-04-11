@@ -104,6 +104,7 @@ public class songController { // Controller for pages containing songs
     public String updateSong(Model model,Song song,@PathVariable long id){
         Song oldSong = songService.getSongById(id);// the old song values are needed in order to mantain the id
         song.setFilms(oldSong.getFilms());
+        song.setUserId(oldSong.getUserId());
         song.setId(id);
 
         // Model the song in order to show its information

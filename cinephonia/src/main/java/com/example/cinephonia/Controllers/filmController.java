@@ -168,6 +168,7 @@ public class filmController { // Controller for different pages containing films
         film.setCover(oldFilm.getCover());
         film.setId(id);
         film.setSongs(oldFilm.getSongs());
+        film.setUserId(oldFilm.getUserId());
         String username= userService.getUserById(film.getUserId()).getUsername();
 
         // Model the film in order to show its information
