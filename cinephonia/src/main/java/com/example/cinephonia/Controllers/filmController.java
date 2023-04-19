@@ -1,5 +1,6 @@
 package com.example.cinephonia.Controllers;
 
+import com.example.cinephonia.Models.Cover;
 import com.example.cinephonia.Models.Film;
 import com.example.cinephonia.Models.Song;
 import com.example.cinephonia.Models.User;
@@ -36,12 +37,30 @@ public class filmController { // Controller for different pages containing films
     @Autowired
     com.example.cinephonia.Services.songService songService;
 
+    @Autowired
+    com.example.cinephonia.Services.coverService coverService;
+    @Autowired
+    com.example.cinephonia.Repositories.filmRepository filmRepository;
+    @Autowired
+    com.example.cinephonia.Repositories.songRepository songRepository;
+
     @PostConstruct
     public void init(){ // initial lists for N:M relationship
-        Film loveActually= filmService.getFilmById(1);
-        Song troubleLove = songService.getSongById(1);
+        Film film = new Film("Love Actually","2003", "Richard Curtis",
+                "This ultimate romantic comedy weaves together a spectacular number " +
+                        "of love affairs into one amazing story. Set almost entirely in London, " +
+                        "England during five frantic weeks before Christmas follows a web-like " +
+                        "pattern of inter-related, losely related and unrelated stories of a dozen " +
+                        "or more various individuals with their love lives, or lack of them."
+                ,"Romance");
+        Cover cover=coverService.createCover("loveactually.jpg","Collage");
+        film.setCoverId(cover.getId());
+
+        Film loveActually= filmRepository.findById(1L).get();
+        Song troubleLove = songRepository.findById(1L).get();
         loveActually.addSong(troubleLove);
         troubleLove.addFilm(loveActually);
+        filmRepository.save(film);
 
         Film interstellar = filmService.getFilmById(2);
         Song cornfield = songService.getSongById(2);
@@ -103,7 +122,8 @@ public class filmController { // Controller for different pages containing films
             try {
                 Path completePath = Paths.get(absolutePath + "//" + imageURL.getOriginalFilename());
                 Files.write(completePath, imageURL.getBytes());
-                film.createCover(imageURL.getOriginalFilename(), style);
+                Cover cover=coverService.createCover(imageURL.getOriginalFilename(), style);
+                film.setCoverId(cover.getId());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -165,7 +185,7 @@ public class filmController { // Controller for different pages containing films
     // once the user updates film information, it is redirected to a page showing the new information
     public String updateFilm(Model model,Film film,@PathVariable long id){
         Film oldFilm = filmService.getFilmById(id); // the old film values are needed to mantain the cover and id
-        film.setCover(oldFilm.getCover());
+        film.setCoverId(oldFilm.getCoverId());
         film.setId(id);
         film.setSongs(oldFilm.getSongs());
         film.setUserId(oldFilm.getUserId());

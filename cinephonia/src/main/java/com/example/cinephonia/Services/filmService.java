@@ -1,5 +1,6 @@
 package com.example.cinephonia.Services;
 
+import com.example.cinephonia.Models.Cover;
 import com.example.cinephonia.Models.Film;
 import com.example.cinephonia.Models.Song;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,30 +20,23 @@ import java.util.concurrent.atomic.AtomicLong;
 public class filmService {
     private Map<Long, Film> films = new ConcurrentHashMap<>();
     private AtomicLong lastid = new AtomicLong();
+    @Autowired
+    coverService coverService;
 
     public filmService() throws IOException { // initial films
-        Film film = new Film("Love Actually","2003", "Richard Curtis",
-                "This ultimate romantic comedy weaves together a spectacular number " +
-                        "of love affairs into one amazing story. Set almost entirely in London, " +
-                        "England during five frantic weeks before Christmas follows a web-like " +
-                        "pattern of inter-related, losely related and unrelated stories of a dozen " +
-                        "or more various individuals with their love lives, or lack of them."
-                ,"Romance");
-        long id = lastid.incrementAndGet();
-        film.setId(id);
-        film.createCover("loveactually.jpg","Collage");
-        films.put(id,film);
 
-        film = new Film("Interstellar", "2014", "Christopher Nolan",
+
+        Film film = new Film("Interstellar", "2014", "Christopher Nolan",
                 "In the near future Earth has been devastated by drought and " +
                         "famine, causing a scarcity in food and extreme changes in climate. " +
                         "When humanity is facing extinction, a mysterious rip in the space-time " +
                         "continuum is discovered, giving mankind the opportunity to widen their " +
                         "lifespan. A group of explorers must travel beyond our solar system in " +
                         "search of a planet that can sustain life.", "Science fiction");
-        id = lastid.incrementAndGet();
+        long id = lastid.incrementAndGet();
         film.setId(id);
-        film.createCover("interstellar.jpg","Landscape");
+        Cover cover=coverService.createCover("interstellar.jpg","Landscape");
+        film.setCoverId(cover.getId());
         films.put(id,film);
 
         film= new Film("The little Mermaid","2023","Rob Marshall",
@@ -57,7 +51,8 @@ public class filmService {
                         "schemes to ensure that Ariel fails.", "Fantasy");
         id = lastid.incrementAndGet();
         film.setId(id);
-        film.createCover("littlemermaid.jpg","Photograph");
+        cover=coverService.createCover("littlemermaid.jpg","Photograph");
+        film.setCoverId(cover.getId());
         films.put(id,film);
 
         film= new Film("Forrest Gump","1994","Robert Zemeckis",
@@ -70,7 +65,7 @@ public class filmService {
                 , "Drama");
         id = lastid.incrementAndGet();
         film.setId(id);
-        film.createCover("forrestgump.jpg","Photograph");
+        cover=coverService.createCover("forrestgump.jpg","Photograph");
         film.setUserId(1);
         films.put(id,film);
 
@@ -82,7 +77,8 @@ public class filmService {
                         " woman even as he falls for her daughter, Elaine (Katharine Ross).","Romance");
         id = lastid.incrementAndGet();
         film.setId(id);
-        film.createCover("thegraduate.jpg","Photograph");
+        cover=coverService.createCover("thegraduate.jpg","Photograph");
+        film.setCoverId(cover.getId());
         films.put(id,film);
 
         film= new Film("Madagascar","2005","Eric Darnell",
@@ -94,7 +90,8 @@ public class filmService {
         id = lastid.incrementAndGet();
         film.setId(id);
         film.setUserId(2);
-        film.createCover("madagascar.jpg","Animation");
+        cover=coverService.createCover("madagascar.jpg","Animation");
+        film.setCoverId(cover.getId());
         films.put(id,film);
 
         Files.createDirectories(Paths.get("C:/Cinephonia/covers"));

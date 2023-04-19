@@ -1,5 +1,6 @@
 package com.example.cinephonia.RESTControllers;
 
+import com.example.cinephonia.Models.Cover;
 import com.example.cinephonia.Models.Film;
 import com.example.cinephonia.Models.Song;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -21,6 +22,8 @@ import java.util.Collection;
 public class filmRESTController {
     @Autowired
     com.example.cinephonia.Services.filmService filmService; // Service
+    @Autowired
+    com.example.cinephonia.Services.coverService coverService;
 
     // Interface for JsonView
     interface FilmDetail extends Film.Basic, Film.Songs, Song.Basic {}
@@ -50,7 +53,7 @@ public class filmRESTController {
     public Film newFilm(@RequestBody Film film){
         filmService.createFilm(film);
         // image not introduced, we save a copy of the default one with the introduced filename
-        String imageURL = film.getCover().getImageURL();
+        String imageURL = coverService.getCoverById(film.getCoverId()).getImageURL();
         if (imageURL != null && !imageURL.isEmpty()) {
             String absolutePath = "C://Cinephonia//covers";
             try {
@@ -78,7 +81,8 @@ public class filmRESTController {
             try {
                 Path completePath = Paths.get(absolutePath + "//" + imageURL.getOriginalFilename());
                 Files.write(completePath, imageURL.getBytes());
-                film.createCover(imageURL.getOriginalFilename(), style);
+                Cover cover=coverService.createCover(imageURL.getOriginalFilename(), style);
+                film.setCoverId(cover.getId());
             } catch (IOException e) {
                 e.printStackTrace();
             }

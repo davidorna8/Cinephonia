@@ -5,12 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Film { // Java class for Films
     /*
     Interfaces for JsonView
@@ -33,9 +38,11 @@ public class Film { // Java class for Films
     @JsonView(Basic.class)
     private long userId; // each film is uploaded by one user (1:N relationship) (user foreign key)
     @JsonView(Basic.class)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @JsonView(Basic.class)
-    private Cover cover; // each film has one cover (1:1 relationship)
+    private long coverId; // each film has one cover (1:1 relationship)
     @JsonView(Songs.class)
     private List<Song> songs= new ArrayList<>(); // each film has many songs (N:M relationship)
     /*
@@ -99,16 +106,12 @@ public class Film { // Java class for Films
         this.id = id;
     }
 
-    public Cover getCover() {
-        return cover;
+    public long getCoverId() {
+        return coverId;
     }
 
-    public void createCover(String url, String style) {
-        this.cover = new Cover(url,style);
-    }
-
-    public void setCover(Cover cover){
-        this.cover=cover;
+    public void setCoverId(long cover){
+        this.coverId=cover;
     }
     public long getUserId() {
         return userId;
