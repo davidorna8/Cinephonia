@@ -26,6 +26,10 @@ public class userController {
     com.example.cinephonia.Services.songService songService;
     @Autowired
     com.example.cinephonia.Repositories.userRepository userRepository;
+    @Autowired
+    com.example.cinephonia.Repositories.filmRepository filmRepository;
+    @Autowired
+    com.example.cinephonia.Repositories.songRepository songRepository;
 
     @PostConstruct
     public void init(){
@@ -42,7 +46,7 @@ public class userController {
 
     @GetMapping("/users") // users main page
     public String usersMain(Model model){
-        List<User>userList=new ArrayList<>( userService.userList());
+        List<User>userList=userRepository.findAll();
         //userList=userList.subList(1,userList.size());
         model.addAttribute("users",userList);
         return "users";
@@ -56,7 +60,7 @@ public class userController {
 
     @PostMapping("/register/newuser") // once you complete the form the new user is saved
     public String newUser(Model model, User user){
-        userService.createUser(user);
+        userRepository.save(user);
 
         model.addAttribute("username",user.getUsername());
         return "newuser";
@@ -64,7 +68,7 @@ public class userController {
 
     @GetMapping("/users/{id}") // full user information (attributes, song list and film list)
     public String userPage(Model model, @PathVariable long id){
-        User user=userService.getUserById(id);
+        User user=userRepository.findById(id).get();
         model.addAttribute("id",user.getId());
         model.addAttribute("user",user);
         List<Song> songList=userService.getSongList(user.getId());
@@ -76,9 +80,10 @@ public class userController {
 
     @GetMapping("/users/delete/{id}") // confirmation of user deletion, it is removed from the map
     public String deleteUser(Model model, @PathVariable long id){
-        User user = userService.removeUser(id);
+        User user = userRepository.findById(id).get();
         model.addAttribute("name",user.getUsername());
         // when a user is deleted, the films and songs of the deleted user are property of user 0 (admin)
+        userRepository.delete(user);
         filmService.deleteUser(id);
         songService.deleteUser(id);
         return "deleted";
@@ -86,7 +91,7 @@ public class userController {
 
     @GetMapping("/updateUser/{id}") // update page with a form with the user information
     public String updateUserPage(Model model, @PathVariable long id){
-        User user = userService.getUserById(id); // get the user by id (URL)
+        User user = userRepository.findById(id).get(); // get the user by id (URL)
         model.addAttribute("user",user); // model to complete the form fields
         List<String> regList= Arrays.asList(regionList);
         model.addAttribute("regionList",regList);

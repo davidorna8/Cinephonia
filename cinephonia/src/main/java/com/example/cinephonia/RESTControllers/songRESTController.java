@@ -9,20 +9,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RequestMapping("/api/")
 @RestController
 public class songRESTController {
     @Autowired
     com.example.cinephonia.Services.songService songService;
+    @Autowired
+    com.example.cinephonia.Repositories.songRepository songRepository;
 
     interface SongDetail extends Film.Basic, Song.Basic, Song.Films{}
 
     @JsonView(SongDetail.class)
     @GetMapping("/songs/{id}")
     public ResponseEntity<Song> getSong(@PathVariable long id){
-        Song song = songService.getSongById(id);
-        if(song!=null){
+        Optional<Song> optionalSong = songRepository.findById(id);
+        if(optionalSong.isPresent()){
+            Song song=optionalSong.get();
             return new ResponseEntity<>(song, HttpStatus.OK);
         }
         else{
@@ -32,23 +36,25 @@ public class songRESTController {
     @JsonView(Song.Basic.class)
     @GetMapping("/songs")
     public Collection<Song> showSongs(){
-        return songService.songList();
+        return songRepository.findAll();
     }
 
     @JsonView(Song.Basic.class)
     @PostMapping("/songs")
     @ResponseStatus(HttpStatus.CREATED)
     public Song newSong(@RequestBody Song song){
-        songService.createSong(song);
+        songRepository.save(song);
         return song;
     }
 
     @JsonView(Song.Basic.class)
     @DeleteMapping("/songs/{id}")
     public ResponseEntity<Song> deleteSong(@PathVariable long id){
-        Song song=songService.removeSong(id);
-        if(song!=null){
+        Optional<Song> optionalSong=songRepository.findById(id);
+        if(optionalSong.isPresent()){
+            Song song=songRepository.findById(id).get();
             songService.deleteSongFromFilms(song);
+            songRepository.delete(song);
             return new ResponseEntity<>(song, HttpStatus.OK);
         }
         else{
