@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +25,38 @@ public class songController { // Controller for pages containing songs
     com.example.cinephonia.Services.userService userService;
     @Autowired
     com.example.cinephonia.Services.filmService filmService;
+    @Autowired
+    com.example.cinephonia.Repositories.songRepository songRepository;
+
+    @PostConstruct
+    public void init(){
+        Song song = new Song("The Trouble With Love Is", "2003",
+                "3","41","Kelly Clarkson", "Pop");
+        songRepository.save(song);
+
+        song = new Song("Cornfield Chase","2014","2", "6",
+                "Hans Zimmer","Original Soundtrack");
+        songRepository.save(song);
+
+        song = new Song("All Along the Watchtower","1968","4", "1",
+                "Jimi Hendrix","Rock");
+        songRepository.save(song);
+
+        song = new Song("Stayin' Alive","1977","4", "9",
+                "Bee Gees","Rock");
+        song.setUserId(2);
+        songRepository.save(song);
+
+        song = new Song("Mrs. Robinson","1967","3", "55",
+                "Simon and Garfunkel","Original Soundtrack");
+        song.setUserId(1);
+        songRepository.save(song);
+
+        song = new Song("California Somnolienta","1965","3", "2",
+                "The Mamas and The Papas","Soul");
+        song.setUserId(3);
+        songRepository.save(song);
+    }
     @GetMapping("/songs") // songs main page
     public String songsSection(Model model){
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 
 @Controller
@@ -23,6 +24,21 @@ public class userController {
     com.example.cinephonia.Services.filmService filmService;
     @Autowired
     com.example.cinephonia.Services.songService songService;
+    @Autowired
+    com.example.cinephonia.Repositories.userRepository userRepository;
+
+    @PostConstruct
+    public void init(){
+        User user= new User("Admin", "", "admin", "", "admin", "admin@admin.com", "");
+        user.setId(0);
+        userRepository.save(user);
+        user=new User("David","Orna","david345","20","urjclol23","de.orna.2020@alumnos.urjc.es","Western Europe");
+        userRepository.save(user);
+        user=new User("Eva","Gomez","eva.g","20","%Ri8#kKl92","e.gomezf.2020@alumnos.urjc.es","Western Europe");
+        userRepository.save(user);
+        user=new User("John","Doe","yondou","56","JJnewof7","j.doe.fresh@hotmail.com","Asia");
+        userRepository.save(user);
+    }
 
     @GetMapping("/users") // users main page
     public String usersMain(Model model){
