@@ -62,32 +62,91 @@ public class filmController { // Controller for different pages containing films
         troubleLove.addFilm(loveActually);
         filmRepository.save(film);
 
-        Film interstellar = filmService.getFilmById(2);
-        Song cornfield = songService.getSongById(2);
+        film = new Film("Interstellar", "2014", "Christopher Nolan",
+                "In the near future Earth has been devastated by drought and " +
+                        "famine, causing a scarcity in food and extreme changes in climate. " +
+                        "When humanity is facing extinction, a mysterious rip in the space-time " +
+                        "continuum is discovered, giving mankind the opportunity to widen their " +
+                        "lifespan. A group of explorers must travel beyond our solar system in " +
+                        "search of a planet that can sustain life.", "Science fiction");
+        cover=coverService.createCover("interstellar.jpg","Landscape");
+        film.setCoverId(cover.getId());
+
+        Film interstellar = filmRepository.findById(2L).get();
+        Song cornfield = songRepository.findById(2L).get();
         interstellar.addSong(cornfield);
         cornfield.addFilm(interstellar);
+        filmRepository.save(film);
 
-        Film forrest = filmService.getFilmById(4);
-        Song allAlong = songService.getSongById(3);
+        film= new Film("The little Mermaid","2023","Rob Marshall",
+                "The mermaid Ariel, daughter of King Triton, is fascinated with " +
+                        "humans. She falls in love with the human prince Eric after she " +
+                        "rescues him from a shipwreck. Condemned by her father for engaging " +
+                        "in illicit contact with the surface world, Ariel then receives an offer " +
+                        "from the scheming sea witch Ursula - Ursula will turn her into a human for " +
+                        "three days, but during this time she must win the kiss of true love from Eric " +
+                        "otherwise Ursula will own her forever. Ariel agrees but to add to the " +
+                        "difficulty Ursula also takes Ariel's voice as price of the deal and then " +
+                        "schemes to ensure that Ariel fails.", "Fantasy");
+        cover=coverService.createCover("littlemermaid.jpg","Photograph");
+        film.setCoverId(cover.getId());
+        filmRepository.save(film);
+
+        film= new Film("Forrest Gump","1994","Robert Zemeckis",
+                "Despite Forrest's (Tom Hanks) low IQ, he is not your average guy. " +
+                        "Learning early on from his mother (Sally Field) that 'life is like a box of chocolates, you never know what you're gonna get'," +
+                        " Gump, without trying, stumbles upon some exciting events. " +
+                        "Meanwhile, as the remarkable parade of his life goes by, Forrest never forgets Jenny (Robin Wright), " +
+                        "the girl he loved as a boy, who makes her own journey through the turbulence of the 1960s and 1970s " +
+                        "that is far more troubled than the path Forrest happens upon."
+                , "Drama");
+        cover=coverService.createCover("forrestgump.jpg","Photograph");
+        film.setCoverId(cover.getId());
+        film.setUserId(1);
+
+        Film forrest = filmRepository.findById(4L).get();
+        Song allAlong = songRepository.findById(3L).get();
         forrest.addSong(allAlong);
         allAlong.addFilm(forrest);
-        Song mrsRobinson = songService.getSongById(5);
+        Song mrsRobinson = songRepository.findById(5L).get();
         forrest.addSong(mrsRobinson);
         mrsRobinson.addFilm(forrest);
-        Song california = songService.getSongById(6);
+        Song california = songRepository.findById(6L).get();
         forrest.addSong(california);
         california.addFilm(forrest);
+        filmRepository.save(film);
 
-        Film theGraduate = filmService.getFilmById(5);
+        film= new Film("The Graduate","1967","Mike Nichols",
+                "In the mid-1960s, Benjamin Braddock (Dustin Hoffman), a confused college graduate, is pulled in myriad " +
+                        "directions by his wealthy family, friends, and associates just days after receiving his degree." +
+                        " Seduced by alcoholic and a neurotic Mrs. Robinson (Anne Bancroft), an older friend of the" +
+                        " family and the wife of his father's law partner, Ben carries on an affair with the married" +
+                        " woman even as he falls for her daughter, Elaine (Katharine Ross).","Romance");
+        cover=coverService.createCover("thegraduate.jpg","Photograph");
+        film.setCoverId(cover.getId());
+
+        Film theGraduate = filmRepository.findById(5L).get();
         theGraduate.addSong(mrsRobinson);
         mrsRobinson.addFilm(theGraduate);
         theGraduate.addSong(allAlong);
         allAlong.addFilm(theGraduate);
+        filmRepository.save(film);
 
-        Film madagascar = filmService.getFilmById(6);
-        Song stayin = songService.getSongById(4);
+        film= new Film("Madagascar","2005","Eric Darnell",
+                "At New York's Central Park Zoo, a lion, a zebra, a giraffe, and a hippo are best friends and stars of " +
+                        "the show. But when one of the animals goes missing from their cage, the other three break free " +
+                        "to look for him, only to find themselves reunited ... on a ship en route to Africa. When their" +
+                        " vessel is hijacked, however, the friends, who have all been raised in captivity, learn " +
+                        "first-hand what life can be like in the wild.","Comedy");
+        film.setUserId(2);
+        cover=coverService.createCover("madagascar.jpg","Animation");
+        film.setCoverId(cover.getId());
+
+        Film madagascar = filmRepository.findById(6L).get();
+        Song stayin = songRepository.findById(4L).get();
         madagascar.addSong(stayin);
         stayin.addFilm(madagascar);
+        filmRepository.save(film);
     }
     @GetMapping("/films") // Films main page
     public String filmsSection(Model model){
