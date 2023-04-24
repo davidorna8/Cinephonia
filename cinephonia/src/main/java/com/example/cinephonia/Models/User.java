@@ -5,12 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name="\"user\"")
 public class User { // Java class for users
     /*
     Attributes
@@ -26,10 +28,10 @@ public class User { // Java class for users
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @OneToMany(mappedBy = "songUser")
-    private List<Song> songs;
+    private List<Song> songs=new ArrayList<>();
 
-    @OneToMany(mappedBy = "filmUser")
-    private List<Song> films;
+    @OneToMany(fetch=FetchType.EAGER,mappedBy = "filmUser")
+    private List<Film> films=new ArrayList<>();
     /*
     Constructors
      */
@@ -107,5 +109,11 @@ public class User { // Java class for users
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public User copy(){
+        User user = new User(this.name,this.surname,this.username,this.age,this.password,this.email,this.region);
+        user.setId(this.id);
+        return user;
     }
 }

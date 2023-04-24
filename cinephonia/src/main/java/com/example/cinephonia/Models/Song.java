@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Data
@@ -34,6 +35,7 @@ public class Song { // Java class for songs
     private String author;
     @JsonView(Basic.class)
     private String genre;
+    @JoinColumn(name="\"user\"")
     @ManyToOne
     @JsonView(Basic.class)
     private User songUser; // each song is uploaded by one user (1:N relationship) (user foreign key)
@@ -41,6 +43,7 @@ public class Song { // Java class for songs
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonView(Basic.class)
     private long id;
+    @ManyToMany
     @JsonView(Films.class)
     private List<Film> films= new ArrayList<>(); // each song has many films (N:M relationship)
     /*
@@ -142,4 +145,11 @@ public class Song { // Java class for songs
     public void addFilm(Film film){
         films.add(film);
     }
+
+    public Song copy(){
+        Song song = new Song(this.name,this.year,this.minutes,this.seconds,this.author,this.genre);
+        song.setId(this.id);
+        return song;
+    }
+
 }

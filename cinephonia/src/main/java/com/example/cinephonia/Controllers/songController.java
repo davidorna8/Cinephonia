@@ -28,32 +28,7 @@ public class songController { // Controller for pages containing songs
 
     @PostConstruct
     public void init(){
-        Song song = new Song("The Trouble With Love Is", "2003",
-                "3","41","Kelly Clarkson", "Pop");
-        songService.createSong(song);
 
-        song = new Song("Cornfield Chase","2014","2", "6",
-                "Hans Zimmer","Original Soundtrack");
-        songService.createSong(song);
-
-        song = new Song("All Along the Watchtower","1968","4", "1",
-                "Jimi Hendrix","Rock");
-        songService.createSong(song);
-
-        song = new Song("Stayin' Alive","1977","4", "9",
-                "Bee Gees","Rock");
-        song.setSongUser(userService.getUserById(2));
-        songService.createSong(song);
-
-        song = new Song("Mrs. Robinson","1967","3", "55",
-                "Simon and Garfunkel","Original Soundtrack");
-        song.setSongUser(userService.getUserById(1));
-        songService.createSong(song);
-
-        song = new Song("California Somnolienta","1965","3", "2",
-                "The Mamas and The Papas","Soul");
-        song.setSongUser(userService.getUserById(3));
-        songService.createSong(song);
     }
     @GetMapping("/songs") // songs main page
     public String songsSection(Model model){
@@ -62,7 +37,7 @@ public class songController { // Controller for pages containing songs
         List<String> genresList= Arrays.asList(genreList);
         model.addAttribute("genreList",genresList);
         List<User> usersList = new ArrayList<>(userService.userList());
-        usersList= usersList.subList(1,usersList.size());
+        //usersList= usersList.subList(1,usersList.size());
         model.addAttribute("users",usersList);
         // Model full songs list
         List<Song> songList=new ArrayList<>(songService.songList());
@@ -72,10 +47,11 @@ public class songController { // Controller for pages containing songs
 
     @PostMapping("/songInfo") // once the user has uploaded a new song, it is redirected to this page
     public String newSong(Model model, Song song, @RequestParam String username){
-        songService.createSong(song); // creates the song with form data
+
         // it takes the username of the user that uploaded the film in order to take its id
         long userId=userService.getUserByUsername(username).getId();
         song.setSongUser(userService.getUserById(userId));
+        songService.createSong(song); // creates the song with form data
         // Model for the page (username and all film information)
         model.addAttribute("username",username);
         List<Film> filmList= new ArrayList<>();
@@ -158,11 +134,12 @@ public class songController { // Controller for pages containing songs
         songService.deleteSongFromFilms(song); // delete from the previous film list where the song appeared
         ArrayList<Film> films = new ArrayList<>();
         for(long filmId : selectedFilms){ // the form returns a list with ids of selected films
-            Film film = filmService.getFilmById(id);
+            Film film = filmService.getFilmById(filmId);
             films.add(film); //add films to the films list of the song
             filmService.addSong(filmId,song); // add the song to the songs list of each film
         }
         song.setFilms(films);
+        songService.putSong(song,id);
         model.addAttribute("song", song);
         return "redirect:/song/{id}";
     }

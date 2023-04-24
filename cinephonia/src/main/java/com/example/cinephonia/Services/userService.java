@@ -21,6 +21,22 @@ public class userService {
    @Autowired
     filmService filmService;
 
+   /*public userService(){
+       User user= new User("Admin", "", "admin", "", "admin", "admin@admin.com", "");
+       createUser(user);
+       user.setId(0);
+       User admin=user.copy();
+       user=new User("David","Orna","david345","20","urjclol23","de.orna.2020@alumnos.urjc.es","Western Europe");
+       createUser(user);
+       User david=user.copy();
+       user=new User("Eva","Gomez","eva.g","20","%Ri8#kKl92","e.gomezf.2020@alumnos.urjc.es","Western Europe");
+       createUser(user);
+       User eva=user.copy();
+       user=new User("John","Doe","yondou","56","JJnewof7","j.doe.fresh@hotmail.com","Asia");
+       createUser(user);
+       User john=user.copy();
+   }*/
+
     // create User method
     public void createUser(User user){
         userRepository.save(user);
@@ -77,5 +93,7 @@ public class userService {
         }
         return userFilmList;
     }
+
+
 
 }

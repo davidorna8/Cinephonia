@@ -44,8 +44,53 @@ public class filmController { // Controller for different pages containing films
     @Autowired
     com.example.cinephonia.Repositories.songRepository songRepository;
 
-    @PostConstruct
+    /*@PostConstruct
     public void init(){ // initial lists for N:M relationship
+        User user= new User("Admin", "", "admin", "", "admin", "admin@admin.com", "");
+        userService.createUser(user);
+        user.setId(0);
+        User admin=user.copy();
+        user=new User("David","Orna","david345","20","urjclol23","de.orna.2020@alumnos.urjc.es","Western Europe");
+        userService.createUser(user);
+        User david=user.copy();
+        user=new User("Eva","Gomez","eva.g","20","%Ri8#kKl92","e.gomezf.2020@alumnos.urjc.es","Western Europe");
+        userService.createUser(user);
+        User eva=user.copy();
+        user=new User("John","Doe","yondou","56","JJnewof7","j.doe.fresh@hotmail.com","Asia");
+        userService.createUser(user);
+        User john=user.copy();
+        Song song = new Song("The Trouble With Love Is", "2003",
+                "3","41","Kelly Clarkson", "Pop");
+        songService.createSong(song);
+        Song troubleLove = song.copy();
+
+        song = new Song("Cornfield Chase","2014","2", "6",
+                "Hans Zimmer","Original Soundtrack");
+        songService.createSong(song);
+        Song cornfield = song.copy();
+
+        song = new Song("All Along the Watchtower","1968","4", "1",
+                "Jimi Hendrix","Rock");
+        songService.createSong(song);
+        Song allAlong = song.copy();
+
+        song = new Song("Stayin' Alive","1977","4", "9",
+                "Bee Gees","Rock");
+        song.setSongUser(eva);
+        songService.createSong(song);
+        Song stayin = song.copy();
+
+        song = new Song("Mrs. Robinson","1967","3", "55",
+                "Simon and Garfunkel","Original Soundtrack");
+        song.setSongUser(david);
+        songService.createSong(song);
+        Song mrsRobinson = song.copy();
+
+        song = new Song("California Somnolienta","1965","3", "2",
+                "The Mamas and The Papas","Soul");
+        song.setSongUser(john);
+        songService.createSong(song);
+        Song california = song.copy();
         Film film = new Film("Love Actually","2003", "Richard Curtis",
                 "This ultimate romantic comedy weaves together a spectacular number " +
                         "of love affairs into one amazing story. Set almost entirely in London, " +
@@ -57,7 +102,6 @@ public class filmController { // Controller for different pages containing films
         film.setCover(cover);
         filmService.createFilm(film);
         Film loveActually= filmService.getFilmById(film.getId());
-        Song troubleLove = songRepository.findById(1L).get();
         loveActually.addSong(troubleLove);
         troubleLove.addFilm(loveActually);
 
@@ -73,7 +117,6 @@ public class filmController { // Controller for different pages containing films
         film.setCover(cover);
         filmService.createFilm(film);
         Film interstellar = filmService.getFilmById(film.getId());
-        Song cornfield = songRepository.findById(2L).get();
         interstellar.addSong(cornfield);
         cornfield.addFilm(interstellar);
 
@@ -102,16 +145,13 @@ public class filmController { // Controller for different pages containing films
                 , "Drama");
         cover=coverService.createCover("forrestgump.jpg","Photograph");
         film.setCover(cover);
-        film.setUser(userService.getUserById(1));
+        film.setUser(david);
         filmService.createFilm(film);
         Film forrest = filmService.getFilmById(film.getId());
-        Song allAlong = songRepository.findById(3L).get();
         forrest.addSong(allAlong);
         allAlong.addFilm(forrest);
-        Song mrsRobinson = songRepository.findById(5L).get();
         forrest.addSong(mrsRobinson);
         mrsRobinson.addFilm(forrest);
-        Song california = songRepository.findById(6L).get();
         forrest.addSong(california);
         california.addFilm(forrest);
 
@@ -138,16 +178,15 @@ public class filmController { // Controller for different pages containing films
                         "to look for him, only to find themselves reunited ... on a ship en route to Africa. When their" +
                         " vessel is hijacked, however, the friends, who have all been raised in captivity, learn " +
                         "first-hand what life can be like in the wild.","Comedy");
-        film.setUser(userService.getUserById(2));
+        film.setUser(eva);
         cover=coverService.createCover("madagascar.jpg","Animation");
         film.setCover(cover);
         filmService.createFilm(film);
         Film madagascar = filmService.getFilmById(film.getId());
-        Song stayin = songRepository.findById(4L).get();
         madagascar.addSong(stayin);
         stayin.addFilm(madagascar);
 
-    }
+    }*/
     @GetMapping("/films") // Films main page
     public String filmsSection(Model model){
 
@@ -157,7 +196,7 @@ public class filmController { // Controller for different pages containing films
         List<String> styleList= Arrays.asList(stylesList);
         model.addAttribute("styleList",styleList);
         List<User> usersList = new ArrayList<>(userService.userList());
-        usersList= usersList.subList(1,usersList.size());
+        //usersList= usersList.subList(1,usersList.size());
         model.addAttribute("users",usersList);
 
         // Model the full film list
@@ -170,7 +209,7 @@ public class filmController { // Controller for different pages containing films
     @PostMapping("/filmInfo") // once the user has uploaded a new film, it is redirected to this page
     public String newFilm(Model model, Film film, @RequestParam("imageURL") MultipartFile imageURL,
                           @RequestParam String style, @RequestParam String username) throws IOException {
-        filmService.createFilm(film); // creates the film with form data
+
         // it takes the username of the user that uploaded the film in order to take its id
         User user= userService.getUserByUsername(username);
         film.setUser(user);
@@ -187,6 +226,7 @@ public class filmController { // Controller for different pages containing films
                 e.printStackTrace();
             }
         }
+        filmService.createFilm(film); // creates the film with form data
         // Model for the page (username and all film information)
         model.addAttribute("username",username);
         model.addAttribute("film",film);
@@ -272,6 +312,7 @@ public class filmController { // Controller for different pages containing films
             songService.addFilm(songId,film); // add the film to the films list of each song
         }
         film.setSongs(songs);
+        filmService.putFilm(film,id);
         model.addAttribute("film", film);
         return "redirect:/films/{id}";
     }

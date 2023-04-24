@@ -16,6 +16,40 @@ public class songService {
     @Autowired
     com.example.cinephonia.Repositories.songRepository songRepository;
 
+    /*public songService(){
+        Song song = new Song("The Trouble With Love Is", "2003",
+                "3","41","Kelly Clarkson", "Pop");
+        createSong(song);
+        Song troubleLove = song.copy();
+
+        song = new Song("Cornfield Chase","2014","2", "6",
+                "Hans Zimmer","Original Soundtrack");
+        createSong(song);
+        Song cornfield = song.copy();
+
+        song = new Song("All Along the Watchtower","1968","4", "1",
+                "Jimi Hendrix","Rock");
+        createSong(song);
+        Song allAlong = song.copy();
+
+        song = new Song("Stayin' Alive","1977","4", "9",
+                "Bee Gees","Rock");
+        //song.setSongUser(eva);
+        createSong(song);
+        Song stayin = song.copy();
+
+        song = new Song("Mrs. Robinson","1967","3", "55",
+                "Simon and Garfunkel","Original Soundtrack");
+        //song.setSongUser(david);
+        createSong(song);
+        Song mrsRobinson = song.copy();
+
+        song = new Song("California Somnolienta","1965","3", "2",
+                "The Mamas and The Papas","Soul");
+        //song.setSongUser(john);
+        createSong(song);
+        Song california = song.copy();
+    }*/
     // create Song method
     public void createSong(Song song){
         songRepository.save(song);
@@ -48,7 +82,7 @@ public class songService {
         // when a user is deleted, its songs will be admin's (user 0) property
         for(Song s: songRepository.findAll()){
             if(s.getUserId()==userId){
-                s.setUserId(0);
+
             }
         }
     }

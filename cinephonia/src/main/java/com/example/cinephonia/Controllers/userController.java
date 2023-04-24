@@ -27,15 +27,7 @@ public class userController {
 
     @PostConstruct
     public void init(){
-        User user= new User("Admin", "", "admin", "", "admin", "admin@admin.com", "");
-        userService.createUser(user);
-        user.setId(0);
-        user=new User("David","Orna","david345","20","urjclol23","de.orna.2020@alumnos.urjc.es","Western Europe");
-        userService.createUser(user);
-        user=new User("Eva","Gomez","eva.g","20","%Ri8#kKl92","e.gomezf.2020@alumnos.urjc.es","Western Europe");
-        userService.createUser(user);
-        user=new User("John","Doe","yondou","56","JJnewof7","j.doe.fresh@hotmail.com","Asia");
-        userService.createUser(user);
+
     }
 
     @GetMapping("/users") // users main page
