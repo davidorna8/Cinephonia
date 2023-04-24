@@ -16,7 +16,6 @@ public class coverService {
 
     public Cover createCover(String url, String style){
         Cover cover= new Cover(url,style);
-        coverRepository.save(cover);
         return cover;
     }
 

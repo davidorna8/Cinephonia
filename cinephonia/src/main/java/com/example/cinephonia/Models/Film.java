@@ -39,6 +39,7 @@ public class Film { // Java class for Films
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @OneToOne
     @JsonView(Basic.class)
     private Cover cover; // each film has one cover (1:1 relationship)
     @JsonView(Songs.class)

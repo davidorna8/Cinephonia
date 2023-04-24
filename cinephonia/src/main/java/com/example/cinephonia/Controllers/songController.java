@@ -42,17 +42,17 @@ public class songController { // Controller for pages containing songs
 
         song = new Song("Stayin' Alive","1977","4", "9",
                 "Bee Gees","Rock");
-        song.setUserId(2);
+        song.setSongUser(userService.getUserById(2));
         songService.createSong(song);
 
         song = new Song("Mrs. Robinson","1967","3", "55",
                 "Simon and Garfunkel","Original Soundtrack");
-        song.setUserId(1);
+        song.setSongUser(userService.getUserById(1));
         songService.createSong(song);
 
         song = new Song("California Somnolienta","1965","3", "2",
                 "The Mamas and The Papas","Soul");
-        song.setUserId(3);
+        song.setSongUser(userService.getUserById(3));
         songService.createSong(song);
     }
     @GetMapping("/songs") // songs main page
@@ -75,7 +75,7 @@ public class songController { // Controller for pages containing songs
         songService.createSong(song); // creates the song with form data
         // it takes the username of the user that uploaded the film in order to take its id
         long userId=userService.getUserByUsername(username).getId();
-        song.setUserId(userId);
+        song.setSongUser(userService.getUserById(userId));
         // Model for the page (username and all film information)
         model.addAttribute("username",username);
         List<Film> filmList= new ArrayList<>();
@@ -135,7 +135,7 @@ public class songController { // Controller for pages containing songs
     public String updateSong(Model model,Song song,@PathVariable long id){
         Song oldSong = songService.getSongById(id);// the old song values are needed in order to mantain the id
         song.setFilms(oldSong.getFilms());
-        song.setUserId(oldSong.getUserId());
+        song.setSongUser(oldSong.getSongUser());
 
 
         // Model the song in order to show its information
