@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +32,9 @@ public class Film { // Java class for Films
     private String synopsis;
     @JsonView(Basic.class)
     private String genre;
+    @ManyToOne
     @JsonView(Basic.class)
-    private long userId; // each film is uploaded by one user (1:N relationship) (user foreign key)
+    private User filmUser; // each film is uploaded by one user (1:N relationship) (user foreign key)
     @JsonView(Basic.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -115,11 +113,15 @@ public class Film { // Java class for Films
     }
 
     public long getUserId() {
-        return userId;
+        return filmUser.getId();
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public User getUser() {
+        return filmUser;
+    }
+
+    public void setUser(User user) {
+        filmUser=user;
     }
 
     public List<Song> getSongs() {

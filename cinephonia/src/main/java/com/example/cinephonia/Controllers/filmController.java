@@ -102,7 +102,7 @@ public class filmController { // Controller for different pages containing films
                 , "Drama");
         cover=coverService.createCover("forrestgump.jpg","Photograph");
         film.setCover(cover);
-        film.setUserId(1);
+        film.setUser(userService.getUserById(1));
         filmService.createFilm(film);
         Film forrest = filmService.getFilmById(film.getId());
         Song allAlong = songRepository.findById(3L).get();
@@ -138,7 +138,7 @@ public class filmController { // Controller for different pages containing films
                         "to look for him, only to find themselves reunited ... on a ship en route to Africa. When their" +
                         " vessel is hijacked, however, the friends, who have all been raised in captivity, learn " +
                         "first-hand what life can be like in the wild.","Comedy");
-        film.setUserId(2);
+        film.setUser(userService.getUserById(2));
         cover=coverService.createCover("madagascar.jpg","Animation");
         film.setCover(cover);
         filmService.createFilm(film);
@@ -172,8 +172,8 @@ public class filmController { // Controller for different pages containing films
                           @RequestParam String style, @RequestParam String username) throws IOException {
         filmService.createFilm(film); // creates the film with form data
         // it takes the username of the user that uploaded the film in order to take its id
-        long userId= userService.getUserByUsername(username).getId();
-        film.setUserId(userId);
+        User user= userService.getUserByUsername(username);
+        film.setUser(user);
 
         // image saving:
         if(!imageURL.isEmpty()) {
@@ -246,7 +246,7 @@ public class filmController { // Controller for different pages containing films
         Film oldFilm = filmService.getFilmById(id); // the old film values are needed to mantain the cover and id
         film.setCover(oldFilm.getCover());
         film.setSongs(oldFilm.getSongs());
-        film.setUserId(oldFilm.getUserId());
+        film.setUser(oldFilm.getUser());
         String username= userService.getUserById(film.getUserId()).getUsername();
 
         // Model the film in order to show its information
