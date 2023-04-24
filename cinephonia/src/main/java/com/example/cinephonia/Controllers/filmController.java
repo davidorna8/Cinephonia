@@ -54,7 +54,7 @@ public class filmController { // Controller for different pages containing films
                         "or more various individuals with their love lives, or lack of them."
                 ,"Romance");
         Cover cover=coverService.createCover("loveactually.jpg","Collage");
-        film.setCoverId(cover.getId());
+        film.setCover(cover);
         filmService.createFilm(film);
         Film loveActually= filmService.getFilmById(film.getId());
         Song troubleLove = songRepository.findById(1L).get();
@@ -70,7 +70,7 @@ public class filmController { // Controller for different pages containing films
                         "lifespan. A group of explorers must travel beyond our solar system in " +
                         "search of a planet that can sustain life.", "Science fiction");
         cover=coverService.createCover("interstellar.jpg","Landscape");
-        film.setCoverId(cover.getId());
+        film.setCover(cover);
         filmService.createFilm(film);
         Film interstellar = filmService.getFilmById(film.getId());
         Song cornfield = songRepository.findById(2L).get();
@@ -89,7 +89,7 @@ public class filmController { // Controller for different pages containing films
                         "difficulty Ursula also takes Ariel's voice as price of the deal and then " +
                         "schemes to ensure that Ariel fails.", "Fantasy");
         cover=coverService.createCover("littlemermaid.jpg","Photograph");
-        film.setCoverId(cover.getId());
+        film.setCover(cover);
         filmService.createFilm(film);
 
         film= new Film("Forrest Gump","1994","Robert Zemeckis",
@@ -101,7 +101,7 @@ public class filmController { // Controller for different pages containing films
                         "that is far more troubled than the path Forrest happens upon."
                 , "Drama");
         cover=coverService.createCover("forrestgump.jpg","Photograph");
-        film.setCoverId(cover.getId());
+        film.setCover(cover);
         film.setUserId(1);
         filmService.createFilm(film);
         Film forrest = filmService.getFilmById(film.getId());
@@ -123,7 +123,7 @@ public class filmController { // Controller for different pages containing films
                         " family and the wife of his father's law partner, Ben carries on an affair with the married" +
                         " woman even as he falls for her daughter, Elaine (Katharine Ross).","Romance");
         cover=coverService.createCover("thegraduate.jpg","Photograph");
-        film.setCoverId(cover.getId());
+        film.setCover(cover);
         filmService.createFilm(film);
         Film theGraduate = filmService.getFilmById(film.getId());
         theGraduate.addSong(mrsRobinson);
@@ -140,7 +140,7 @@ public class filmController { // Controller for different pages containing films
                         "first-hand what life can be like in the wild.","Comedy");
         film.setUserId(2);
         cover=coverService.createCover("madagascar.jpg","Animation");
-        film.setCoverId(cover.getId());
+        film.setCover(cover);
         filmService.createFilm(film);
         Film madagascar = filmService.getFilmById(film.getId());
         Song stayin = songRepository.findById(4L).get();
@@ -182,7 +182,7 @@ public class filmController { // Controller for different pages containing films
                 Path completePath = Paths.get(absolutePath + "//" + imageURL.getOriginalFilename());
                 Files.write(completePath, imageURL.getBytes());
                 Cover cover=coverService.createCover(imageURL.getOriginalFilename(), style);
-                film.setCoverId(cover.getId());
+                film.setCover(cover);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -244,7 +244,7 @@ public class filmController { // Controller for different pages containing films
     // once the user updates film information, it is redirected to a page showing the new information
     public String updateFilm(Model model,Film film,@PathVariable long id){
         Film oldFilm = filmService.getFilmById(id); // the old film values are needed to mantain the cover and id
-        film.setCoverId(oldFilm.getCoverId());
+        film.setCover(oldFilm.getCover());
         film.setSongs(oldFilm.getSongs());
         film.setUserId(oldFilm.getUserId());
         String username= userService.getUserById(film.getUserId()).getUsername();

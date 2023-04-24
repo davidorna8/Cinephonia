@@ -55,7 +55,7 @@ public class filmRESTController {
     public Film newFilm(@RequestBody Film film){
         filmService.createFilm(film);
         // image not introduced, we save a copy of the default one with the introduced filename
-        String imageURL = coverService.getCoverById(film.getCoverId()).getImageURL();
+        String imageURL = film.getCover().getImageURL();
         if (imageURL != null && !imageURL.isEmpty()) {
             String absolutePath = "C://Cinephonia//covers";
             try {
@@ -84,7 +84,7 @@ public class filmRESTController {
                 Path completePath = Paths.get(absolutePath + "//" + imageURL.getOriginalFilename());
                 Files.write(completePath, imageURL.getBytes());
                 Cover cover=coverService.createCover(imageURL.getOriginalFilename(), style);
-                film.setCoverId(cover.getId());
+                film.setCover(cover);
             } catch (IOException e) {
                 e.printStackTrace();
             }

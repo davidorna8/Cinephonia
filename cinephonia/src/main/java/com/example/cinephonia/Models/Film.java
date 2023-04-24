@@ -42,7 +42,7 @@ public class Film { // Java class for Films
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @JsonView(Basic.class)
-    private long coverId; // each film has one cover (1:1 relationship)
+    private Cover cover; // each film has one cover (1:1 relationship)
     @JsonView(Songs.class)
     private List<Song> songs= new ArrayList<>(); // each film has many songs (N:M relationship)
     /*
@@ -106,13 +106,14 @@ public class Film { // Java class for Films
         this.id = id;
     }
 
-    public long getCoverId() {
-        return coverId;
+    public Cover getCover() {
+        return cover;
     }
 
-    public void setCoverId(long cover){
-        this.coverId=cover;
+    public void setCover(Cover cover) {
+        this.cover = cover;
     }
+
     public long getUserId() {
         return userId;
     }

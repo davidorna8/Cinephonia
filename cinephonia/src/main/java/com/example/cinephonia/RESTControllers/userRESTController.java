@@ -38,7 +38,7 @@ public class userRESTController {
     }
     @DeleteMapping("/users/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable long id){
-        Optional<User> optionalUser=userService.getOptional(); //remove the user from the map
+        Optional<User> optionalUser=userService.getOptional(id); //remove the user from the map
         if(optionalUser.isPresent()){ // if it was found
             User user=optionalUser.get();
             userService.removeUser(id);
