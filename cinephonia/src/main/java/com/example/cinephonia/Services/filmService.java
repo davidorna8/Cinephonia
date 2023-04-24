@@ -1,6 +1,5 @@
 package com.example.cinephonia.Services;
 
-import com.example.cinephonia.Models.Cover;
 import com.example.cinephonia.Models.Film;
 import com.example.cinephonia.Models.Song;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,14 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
+
 @Service
 public class filmService {
-    private Map<Long, Film> films = new ConcurrentHashMap<>();
-    private AtomicLong lastid = new AtomicLong();
     @Autowired
     coverService coverService;
+    @Autowired
+    com.example.cinephonia.Repositories.filmRepository filmRepository;
 
     public filmService() throws IOException { // initial film covers
         Files.createDirectories(Paths.get("C:/Cinephonia/covers"));
@@ -41,33 +39,34 @@ public class filmService {
 
     // create Film method
     public void createFilm(Film film){
-        long id=lastid.incrementAndGet(); // increment id
-        film.setId(id);
-        films.put(id,film); // add film to the map
+        filmRepository.save(film);
     }
 
     public Collection<Film> filmList(){
-        return films.values();
+        return filmRepository.findAll();
     }
 
     public Film removeFilm(long id){
-
-        return films.remove(id);
+        Film film = filmRepository.findById(id).get();
+        filmRepository.delete(film);
+        return film;
     }
 
     public void putFilm(Film film, long id){ // change an existing film
+        filmRepository.save(film);
         film.setId(id);
-        films.put(id,film);
-
     }
 
     public Film getFilmById(long id){
-        return films.get(id);
+        return filmRepository.findById(id).get();
     } // returns film knowing its id
 
+    public Optional<Film> getOptional(long id){
+        return filmRepository.findById(id);
+    }
     public void deleteUser(long userId){
         // when a user is deleted, its films are admin's (user 0) property
-        for(Film f: films.values()){
+        for(Film f: filmRepository.findAll()){
             if(f.getUserId()==userId){
                 f.setUserId(0);
             }

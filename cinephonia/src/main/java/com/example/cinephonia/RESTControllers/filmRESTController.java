@@ -25,8 +25,6 @@ public class filmRESTController {
     com.example.cinephonia.Services.filmService filmService; // Service
     @Autowired
     com.example.cinephonia.Services.coverService coverService;
-    @Autowired
-    com.example.cinephonia.Repositories.filmRepository filmRepository;
 
     // Interface for JsonView
     interface FilmDetail extends Film.Basic, Film.Songs, Song.Basic {}
@@ -34,7 +32,7 @@ public class filmRESTController {
     @JsonView(FilmDetail.class)
     @GetMapping("/films/{id}")
     public ResponseEntity<Film> getFilm(@PathVariable long id){
-        Optional<Film> optionalFilm = filmRepository.findById(id); // get the film
+        Optional<Film> optionalFilm = filmService.getOptional(id); // get the film
         if(optionalFilm.isPresent()){
             Film film = optionalFilm.get();
             return new ResponseEntity<>(film, HttpStatus.OK); // if it is found, return OK
@@ -47,7 +45,7 @@ public class filmRESTController {
     @JsonView(Film.Basic.class)
     @GetMapping("/films")
     public Collection<Film> showFilms(){
-        return filmRepository.findAll();
+        return filmService.filmList();
     } // full film list
 
     // create film with body (raw) of the API REST client (Postman)
@@ -55,7 +53,7 @@ public class filmRESTController {
     @PostMapping("/films")
     @ResponseStatus(HttpStatus.CREATED)
     public Film newFilm(@RequestBody Film film){
-        filmRepository.save(film);
+        filmService.createFilm(film);
         // image not introduced, we save a copy of the default one with the introduced filename
         String imageURL = coverService.getCoverById(film.getCoverId()).getImageURL();
         if (imageURL != null && !imageURL.isEmpty()) {
@@ -78,7 +76,7 @@ public class filmRESTController {
     @ResponseStatus(HttpStatus.CREATED)
     public Film addImage(@RequestParam MultipartFile imageURL, @RequestParam String style,
                          @PathVariable long id) {
-        Film film = filmRepository.findById(id).get();
+        Film film = filmService.getFilmById(id);
         // image saving:
         if(!imageURL.isEmpty()) {
             String absolutePath = "C://Cinephonia//covers";
@@ -97,11 +95,11 @@ public class filmRESTController {
     @JsonView(Film.Basic.class)
     @DeleteMapping("/films/{id}")
     public ResponseEntity<Film> deleteFilm(@PathVariable long id){
-        Optional<Film> optionalFilm = filmRepository.findById(id); // gets the film by id
+        Optional<Film> optionalFilm = filmService.getOptional(id); // gets the film by id
         if(optionalFilm.isPresent()){ // if it is found the film is deleted, from the list and the films list of each song
             Film film = optionalFilm.get();
             filmService.deleteFilmFromSongs(film);
-            filmRepository.delete(film);
+            filmService.removeFilm(id);
             return new ResponseEntity<>(film, HttpStatus.OK);
         }
         else{
@@ -112,12 +110,10 @@ public class filmRESTController {
     @JsonView(Film.Basic.class)
     @PutMapping("/films/{id}")
     public ResponseEntity<Film> putFilm(@PathVariable long id, @RequestBody Film fm){
-        Optional<Film> optionalFilm = filmRepository.findById(id);
+        Optional<Film> optionalFilm = filmService.getOptional(id);
         if(optionalFilm.isPresent()){ // if the film exists
-            filmRepository.save(fm);
-            fm.setId(id);
             Film film = optionalFilm.get();
-            //filmService.putFilm(fm,id); // update film in the map
+            filmService.putFilm(fm,id); // update film in the map
             filmService.updateFilmFromSongs(fm,film,id);
             return new ResponseEntity<>(fm,HttpStatus.OK);
         }else{

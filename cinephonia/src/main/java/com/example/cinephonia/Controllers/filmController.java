@@ -39,12 +39,10 @@ public class filmController { // Controller for different pages containing films
 
     @Autowired
     com.example.cinephonia.Services.coverService coverService;
-    @Autowired
-    com.example.cinephonia.Repositories.filmRepository filmRepository;
+
+    ///CAMBIAR ESTOOOOOOOOOOOOOOOOOOOOOOO
     @Autowired
     com.example.cinephonia.Repositories.songRepository songRepository;
-    @Autowired
-    com.example.cinephonia.Repositories.userRepository userRepository;
 
     @PostConstruct
     public void init(){ // initial lists for N:M relationship
@@ -57,12 +55,12 @@ public class filmController { // Controller for different pages containing films
                 ,"Romance");
         Cover cover=coverService.createCover("loveactually.jpg","Collage");
         film.setCoverId(cover.getId());
-
-        Film loveActually= filmRepository.findById(1L).get();
+        filmService.createFilm(film);
+        Film loveActually= filmService.getFilmById(film.getId());
         Song troubleLove = songRepository.findById(1L).get();
         loveActually.addSong(troubleLove);
         troubleLove.addFilm(loveActually);
-        filmRepository.save(film);
+
 
         film = new Film("Interstellar", "2014", "Christopher Nolan",
                 "In the near future Earth has been devastated by drought and " +
@@ -73,12 +71,12 @@ public class filmController { // Controller for different pages containing films
                         "search of a planet that can sustain life.", "Science fiction");
         cover=coverService.createCover("interstellar.jpg","Landscape");
         film.setCoverId(cover.getId());
-
-        Film interstellar = filmRepository.findById(2L).get();
+        filmService.createFilm(film);
+        Film interstellar = filmService.getFilmById(film.getId());
         Song cornfield = songRepository.findById(2L).get();
         interstellar.addSong(cornfield);
         cornfield.addFilm(interstellar);
-        filmRepository.save(film);
+
 
         film= new Film("The little Mermaid","2023","Rob Marshall",
                 "The mermaid Ariel, daughter of King Triton, is fascinated with " +
@@ -92,7 +90,7 @@ public class filmController { // Controller for different pages containing films
                         "schemes to ensure that Ariel fails.", "Fantasy");
         cover=coverService.createCover("littlemermaid.jpg","Photograph");
         film.setCoverId(cover.getId());
-        filmRepository.save(film);
+        filmService.createFilm(film);
 
         film= new Film("Forrest Gump","1994","Robert Zemeckis",
                 "Despite Forrest's (Tom Hanks) low IQ, he is not your average guy. " +
@@ -105,8 +103,8 @@ public class filmController { // Controller for different pages containing films
         cover=coverService.createCover("forrestgump.jpg","Photograph");
         film.setCoverId(cover.getId());
         film.setUserId(1);
-
-        Film forrest = filmRepository.findById(4L).get();
+        filmService.createFilm(film);
+        Film forrest = filmService.getFilmById(film.getId());
         Song allAlong = songRepository.findById(3L).get();
         forrest.addSong(allAlong);
         allAlong.addFilm(forrest);
@@ -116,7 +114,7 @@ public class filmController { // Controller for different pages containing films
         Song california = songRepository.findById(6L).get();
         forrest.addSong(california);
         california.addFilm(forrest);
-        filmRepository.save(film);
+
 
         film= new Film("The Graduate","1967","Mike Nichols",
                 "In the mid-1960s, Benjamin Braddock (Dustin Hoffman), a confused college graduate, is pulled in myriad " +
@@ -126,13 +124,13 @@ public class filmController { // Controller for different pages containing films
                         " woman even as he falls for her daughter, Elaine (Katharine Ross).","Romance");
         cover=coverService.createCover("thegraduate.jpg","Photograph");
         film.setCoverId(cover.getId());
-
-        Film theGraduate = filmRepository.findById(5L).get();
+        filmService.createFilm(film);
+        Film theGraduate = filmService.getFilmById(film.getId());
         theGraduate.addSong(mrsRobinson);
         mrsRobinson.addFilm(theGraduate);
         theGraduate.addSong(allAlong);
         allAlong.addFilm(theGraduate);
-        filmRepository.save(film);
+
 
         film= new Film("Madagascar","2005","Eric Darnell",
                 "At New York's Central Park Zoo, a lion, a zebra, a giraffe, and a hippo are best friends and stars of " +
@@ -143,12 +141,12 @@ public class filmController { // Controller for different pages containing films
         film.setUserId(2);
         cover=coverService.createCover("madagascar.jpg","Animation");
         film.setCoverId(cover.getId());
-
-        Film madagascar = filmRepository.findById(6L).get();
+        filmService.createFilm(film);
+        Film madagascar = filmService.getFilmById(film.getId());
         Song stayin = songRepository.findById(4L).get();
         madagascar.addSong(stayin);
         stayin.addFilm(madagascar);
-        filmRepository.save(film);
+
     }
     @GetMapping("/films") // Films main page
     public String filmsSection(Model model){
@@ -158,12 +156,12 @@ public class filmController { // Controller for different pages containing films
         model.addAttribute("genreList",genresList);
         List<String> styleList= Arrays.asList(stylesList);
         model.addAttribute("styleList",styleList);
-        List<User> usersList = userRepository.findAll();
+        List<User> usersList = new ArrayList<>(userService.userList());
         usersList= usersList.subList(1,usersList.size());
         model.addAttribute("users",usersList);
 
         // Model the full film list
-        List<Film> filmList= filmRepository.findAll();
+        List<Film> filmList= new ArrayList<>(filmService.filmList());
         model.addAttribute("films",filmList);
 
         return "films";
@@ -172,7 +170,7 @@ public class filmController { // Controller for different pages containing films
     @PostMapping("/filmInfo") // once the user has uploaded a new film, it is redirected to this page
     public String newFilm(Model model, Film film, @RequestParam("imageURL") MultipartFile imageURL,
                           @RequestParam String style, @RequestParam String username) throws IOException {
-        filmRepository.save(film); // creates the film with form data
+        filmService.createFilm(film); // creates the film with form data
         // it takes the username of the user that uploaded the film in order to take its id
         long userId= userService.getUserByUsername(username).getId();
         film.setUserId(userId);
@@ -194,7 +192,7 @@ public class filmController { // Controller for different pages containing films
         model.addAttribute("film",film);
         long id=film.getId();
         model.addAttribute("id",id);
-        List<Song> songList = songRepository.findAll();
+        List<Song> songList = new ArrayList<>(songService.songList());
         model.addAttribute("songList", songList);
         return "filmPage";
     }
@@ -202,17 +200,17 @@ public class filmController { // Controller for different pages containing films
     @GetMapping("/films/{id}") // when the user clicks "See more" we show the information of the film
     public String filmPage(Model model, @PathVariable long id){
         // take the film by id and model it
-        Film film=filmRepository.findById(id).get();
+        Film film=filmService.getFilmById(id);
         model.addAttribute("id",film.getId());
         model.addAttribute("film",film);
 
         // user that uploaded the film:
-        User u = userRepository.findById(film.getUserId()).get();
+        User u = userService.getUserById(film.getUserId());
         model.addAttribute("username",u.getUsername());
 
         // songs that don't appear in the film
         List<Song> songList = new ArrayList<>();
-        for(Song song: songRepository.findAll()){
+        for(Song song: songService.songList()){
             if(!film.containsSong(song)){
                 songList.add(song);
             }
@@ -224,19 +222,18 @@ public class filmController { // Controller for different pages containing films
     @GetMapping("/films/delete/{id}") // page returned when you delete a film from the website
     public String deleteFilm(Model model, @PathVariable long id){
         // remove it from the map
-        Film film= filmRepository.findById(id).get();
+        Film film= filmService.removeFilm(id);
         model.addAttribute("name",film.getName());
         filmService.deleteFilmFromSongs(film);
-        filmRepository.delete(film);
         return "deleted";
     }
 
     @GetMapping("/updateFilm/{id}") // page with a form where the user can change some attributes values
     public String updateFilmPage(Model model, @PathVariable long id){
         // get the film by the id in the URL and model it to show its information in the form fields
-        Film film = filmRepository.findById(id).get();
+        Film film = filmService.getFilmById(id);
         model.addAttribute("film",film);
-        String username= userRepository.findById(film.getUserId()).get().getUsername();
+        String username= userService.getUserById(film.getUserId()).getUsername();
         model.addAttribute("username",username);
         List<String> genresList= Arrays.asList(genreList);
         model.addAttribute("genreList",genresList);
@@ -246,19 +243,18 @@ public class filmController { // Controller for different pages containing films
     @PostMapping("/filmInfo/{id}")
     // once the user updates film information, it is redirected to a page showing the new information
     public String updateFilm(Model model,Film film,@PathVariable long id){
-        Film oldFilm = filmRepository.findById(id).get(); // the old film values are needed to mantain the cover and id
+        Film oldFilm = filmService.getFilmById(id); // the old film values are needed to mantain the cover and id
         film.setCoverId(oldFilm.getCoverId());
         film.setSongs(oldFilm.getSongs());
         film.setUserId(oldFilm.getUserId());
-        String username= userRepository.findById(film.getUserId()).get().getUsername();
+        String username= userService.getUserById(film.getUserId()).getUsername();
 
         // Model the film in order to show its information
         model.addAttribute("username",username);
         model.addAttribute("film",film);
-        //filmService.putFilm(film,id); // the new film (info taken from the form) is put in the map
-        filmRepository.save(film);
+        filmService.putFilm(film,id); // the new film (info taken from the form) is put in the map
         film.setId(id);
-        List<Song> songList = songRepository.findAll();
+        List<Song> songList = new ArrayList<>(songService.songList());
         model.addAttribute("songList", songList);
         filmService.updateFilmFromSongs(film,oldFilm,id);
         return "redirect:/films/{id}";
@@ -267,11 +263,11 @@ public class filmController { // Controller for different pages containing films
     @PostMapping("/films/{id}") // in the film page when the user adds songs to the film
     public String addSongs(Model model,@RequestParam List<Long> selectedSongs, @PathVariable long id){
         // film id is taken from the URL, songs list from the form of the html file
-        Film film = filmRepository.findById(id).get();
+        Film film = filmService.getFilmById(id);
         filmService.deleteFilmFromSongs(film); // delete from the previous song list where the film appeared
         ArrayList<Song> songs = new ArrayList<>();
         for(long songId : selectedSongs){ // the form returns a list with ids of selected songs
-            Song song = songRepository.findById(songId).get();
+            Song song = songService.getSongById(songId);
             songs.add(song); //add songs to the songs list of the film
             songService.addFilm(songId,film); // add the film to the films list of each song
         }
