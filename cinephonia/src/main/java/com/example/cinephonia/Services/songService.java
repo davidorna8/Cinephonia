@@ -2,46 +2,51 @@ package com.example.cinephonia.Services;
 
 import com.example.cinephonia.Models.Film;
 import com.example.cinephonia.Models.Song;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class songService {
-    private Map<Long, Song> songs = new ConcurrentHashMap<>();
-    private AtomicLong lastid = new AtomicLong();
+    //private Map<Long, Song> songs = new ConcurrentHashMap<>();
+    //private AtomicLong lastid = new AtomicLong();
+
+    @Autowired
+    com.example.cinephonia.Repositories.songRepository songRepository;
 
     // create Song method
     public void createSong(Song song){
-        long id=lastid.incrementAndGet();
-        song.setId(id);
-        songs.put(id,song);
+        songRepository.save(song);
     }
 
     public Collection<Song> songList(){
-        return songs.values();
+        return songRepository.findAll();
     }
 
     public Song removeSong(long id){
-        return songs.remove(id);
+        Song song=songRepository.findById(id).get();
+        songRepository.delete(song);
+        return song;
     }
 
     public void putSong(Song song, long id){ // change an existing song
+        songRepository.save(song);
         song.setId(id);
-        songs.put(id,song);
     }
 
     public Song getSongById(long id){
-        return songs.get(id);
+        return songRepository.findById(id).get();
     } // returns a song knowing its id
+
+    public Optional<Song> getOptional(long id){
+        return songRepository.findById(id);
+    }
 
     public void deleteUser(long userId){
         // when a user is deleted, its songs will be admin's (user 0) property
-        for(Song s: songs.values()){
+        for(Song s: songRepository.findAll()){
             if(s.getUserId()==userId){
                 s.setUserId(0);
             }

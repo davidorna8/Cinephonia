@@ -16,15 +16,13 @@ import java.util.Optional;
 public class songRESTController {
     @Autowired
     com.example.cinephonia.Services.songService songService;
-    @Autowired
-    com.example.cinephonia.Repositories.songRepository songRepository;
 
     interface SongDetail extends Film.Basic, Song.Basic, Song.Films{}
 
     @JsonView(SongDetail.class)
     @GetMapping("/songs/{id}")
     public ResponseEntity<Song> getSong(@PathVariable long id){
-        Optional<Song> optionalSong = songRepository.findById(id);
+        Optional<Song> optionalSong = songService.getOptional(id);
         if(optionalSong.isPresent()){
             Song song=optionalSong.get();
             return new ResponseEntity<>(song, HttpStatus.OK);
@@ -36,25 +34,25 @@ public class songRESTController {
     @JsonView(Song.Basic.class)
     @GetMapping("/songs")
     public Collection<Song> showSongs(){
-        return songRepository.findAll();
+        return songService.songList();
     }
 
     @JsonView(Song.Basic.class)
     @PostMapping("/songs")
     @ResponseStatus(HttpStatus.CREATED)
     public Song newSong(@RequestBody Song song){
-        songRepository.save(song);
+        songService.createSong(song);
         return song;
     }
 
     @JsonView(Song.Basic.class)
     @DeleteMapping("/songs/{id}")
     public ResponseEntity<Song> deleteSong(@PathVariable long id){
-        Optional<Song> optionalSong=songRepository.findById(id);
+        Optional<Song> optionalSong=songService.getOptional(id);
         if(optionalSong.isPresent()){
-            Song song=songRepository.findById(id).get();
+            Song song=optionalSong.get();
             songService.deleteSongFromFilms(song);
-            songRepository.delete(song);
+            songService.removeSong(id);
             return new ResponseEntity<>(song, HttpStatus.OK);
         }
         else{
@@ -65,8 +63,9 @@ public class songRESTController {
     @JsonView(Song.Basic.class)
     @PutMapping("/songs/{id}")
     public ResponseEntity<Song> putSong(@PathVariable long id, @RequestBody Song sn){
-        Song song = songService.getSongById(id);
-        if(song!=null){
+        Optional<Song> optionalSong = songService.getOptional(id);
+        if(optionalSong.isPresent()){
+            Song song=optionalSong.get();
             songService.putSong(sn,id);
             songService.updateSongFromFilms(sn,song,id);
             return new ResponseEntity<>(sn,HttpStatus.OK);
