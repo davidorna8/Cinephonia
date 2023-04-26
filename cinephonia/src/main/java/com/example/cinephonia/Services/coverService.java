@@ -15,8 +15,7 @@ public class coverService {
     com.example.cinephonia.Repositories.coverRepository coverRepository;
 
     public Cover createCover(String url, String style){
-        Cover cover= new Cover(url,style);
-        coverRepository.save(cover);
+        Cover cover= coverRepository.save(new Cover(url,style));
         return cover;
     }
 

@@ -27,11 +27,6 @@ public class User { // Java class for users
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToMany(mappedBy = "songUser")
-    private List<Song> songs=new ArrayList<>();
-
-    @OneToMany(fetch=FetchType.EAGER,mappedBy = "filmUser")
-    private List<Film> films=new ArrayList<>();
     /*
     Constructors
      */
@@ -111,9 +106,4 @@ public class User { // Java class for users
         this.id = id;
     }
 
-    public User copy(){
-        User user = new User(this.name,this.surname,this.username,this.age,this.password,this.email,this.region);
-        user.setId(this.id);
-        return user;
-    }
 }

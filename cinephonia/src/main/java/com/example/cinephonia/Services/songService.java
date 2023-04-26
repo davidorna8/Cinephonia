@@ -51,8 +51,9 @@ public class songService {
         Song california = song.copy();
     }*/
     // create Song method
-    public void createSong(Song song){
-        songRepository.save(song);
+    public Song createSong(Song song){
+        Song s =songRepository.save(song);
+        return s;
     }
 
     public Collection<Song> songList(){

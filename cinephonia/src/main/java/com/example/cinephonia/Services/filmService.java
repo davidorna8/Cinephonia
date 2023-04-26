@@ -134,8 +134,9 @@ public class filmService {
     }*/
 
     // create Film method
-    public void createFilm(Film film){
-        filmRepository.save(film);
+    public Film createFilm(Film film){
+        Film f=filmRepository.save(film);
+        return f;
     }
 
     public Collection<Film> filmList(){

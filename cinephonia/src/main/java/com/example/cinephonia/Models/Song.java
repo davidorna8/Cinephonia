@@ -146,10 +146,5 @@ public class Song { // Java class for songs
         films.add(film);
     }
 
-    public Song copy(){
-        Song song = new Song(this.name,this.year,this.minutes,this.seconds,this.author,this.genre);
-        song.setId(this.id);
-        return song;
-    }
 
 }

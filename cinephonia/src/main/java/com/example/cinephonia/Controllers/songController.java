@@ -91,7 +91,7 @@ public class songController { // Controller for pages containing songs
         // remove it from the map
         Song song = songService.removeSong(id);
         model.addAttribute("name",song.getName());
-        songService.deleteSongFromFilms(song);
+        //songService.deleteSongFromFilms(song);
         return "deleted";
     }
 
