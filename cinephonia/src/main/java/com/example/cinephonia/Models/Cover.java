@@ -14,8 +14,8 @@ import javax.persistence.Id;
 @Entity
 public class Cover { // java class for film covers
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id=1L;
 
     @JsonView(Film.Basic.class)
     private String imageURL; // image path

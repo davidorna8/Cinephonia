@@ -44,30 +44,37 @@ public class filmController { // Controller for different pages containing films
     @Autowired
     com.example.cinephonia.Repositories.songRepository songRepository;
 
-    /*@PostConstruct
+    @PostConstruct
     public void init(){ // initial lists for N:M relationship
         User admin= userService.createUser(new User("Admin", "", "admin", "", "admin", "admin@admin.com", ""));
-        admin.setId(0);
         User david= userService.createUser(new User("David","Orna","david345","20","urjclol23","de.orna.2020@alumnos.urjc.es","Western Europe"));
         User eva= userService.createUser(new User("Eva","Gomez","eva.g","20","%Ri8#kKl92","e.gomezf.2020@alumnos.urjc.es","Western Europe"));
         User john= userService.createUser(new User("John","Doe","yondou","56","JJnewof7","j.doe.fresh@hotmail.com","Asia"));
 
         Song troubleLove = songService.createSong(new Song("The Trouble With Love Is", "2003",
                 "3","41","Kelly Clarkson", "Pop"));
+        troubleLove.setSongUser(admin);
+        songService.createSong(troubleLove);
         Song cornfield = songService.createSong(new Song("Cornfield Chase","2014","2", "6",
                 "Hans Zimmer","Original Soundtrack"));
+        cornfield.setSongUser(admin);
+        songService.createSong(cornfield);
         Song allAlong = songService.createSong(new Song("All Along the Watchtower","1968","4", "1",
                 "Jimi Hendrix","Rock"));
+        allAlong.setSongUser(john);
+        songService.createSong(allAlong);
         Song stayin = songService.createSong(new Song("Stayin' Alive","1977","4", "9",
                 "Bee Gees","Rock"));
         stayin.setSongUser(eva);
+        songService.createSong(stayin);
         Song mrsRobinson= songService.createSong(new Song("Mrs. Robinson","1967","3", "55",
                 "Simon and Garfunkel","Original Soundtrack"));
         mrsRobinson.setSongUser(david);
+        songService.createSong(mrsRobinson);
         Song california = songService.createSong(new Song("California Somnolienta","1965","3", "2",
                 "The Mamas and The Papas","Soul"));
         california.setSongUser(john);
-
+        songService.createSong(california);
         Film loveActually = filmService.createFilm(new Film("Love Actually","2003", "Richard Curtis",
                 "This ultimate romantic comedy weaves together a spectacular number " +
                         "of love affairs into one amazing story. Set almost entirely in London, " +
@@ -77,8 +84,11 @@ public class filmController { // Controller for different pages containing films
                 ,"Romance"));
         Cover loveCover=coverService.createCover("loveactually.jpg","Collage");
         loveActually.setCover(loveCover);
-        loveActually.addSong(troubleLove);
-        troubleLove.addFilm(loveActually);
+        loveActually.setUser(userService.getUserByUsername("admin"));
+        filmService.createFilm(loveActually);
+
+        //loveActually.addSong(troubleLove);
+        //troubleLove.addFilm(loveActually);
 
         Film interstellar = filmService.createFilm(new Film("Interstellar", "2014", "Christopher Nolan",
                 "In the near future Earth has been devastated by drought and " +
@@ -89,9 +99,10 @@ public class filmController { // Controller for different pages containing films
                         "search of a planet that can sustain life.", "Science fiction"));
         Cover interCover=coverService.createCover("interstellar.jpg","Landscape");
         interstellar.setCover(interCover);
-        interstellar.addSong(cornfield);
-        cornfield.addFilm(interstellar);
-
+        interstellar.setUser(userService.getUserByUsername("admin"));
+        filmService.createFilm(interstellar);
+        //interstellar.addSong(cornfield);
+        //cornfield.addFilm(interstellar);
         Film littleMermaid= filmService.createFilm(new Film("The little Mermaid","2023","Rob Marshall",
                 "The mermaid Ariel, daughter of King Triton, is fascinated with " +
                         "humans. She falls in love with the human prince Eric after she " +
@@ -104,6 +115,8 @@ public class filmController { // Controller for different pages containing films
                         "schemes to ensure that Ariel fails.", "Fantasy"));
         Cover littleCover=coverService.createCover("littlemermaid.jpg","Photograph");
         littleMermaid.setCover(littleCover);
+        littleMermaid.setUser(userService.getUserByUsername("admin"));
+        filmService.createFilm(littleMermaid);
 
         Film forrest= filmService.createFilm(new Film("Forrest Gump","1994","Robert Zemeckis",
                 "Despite Forrest's (Tom Hanks) low IQ, he is not your average guy. " +
@@ -115,13 +128,14 @@ public class filmController { // Controller for different pages containing films
                 , "Drama"));
         Cover forrestCover=coverService.createCover("forrestgump.jpg","Photograph");
         forrest.setCover(forrestCover);
-        forrest.setUser(david);
-        forrest.addSong(allAlong);
+        forrest.setUser(userService.getUserByUsername("admin"));
+        /*forrest.addSong(allAlong);
         allAlong.addFilm(forrest);
         forrest.addSong(mrsRobinson);
         mrsRobinson.addFilm(forrest);
         forrest.addSong(california);
-        california.addFilm(forrest);
+        california.addFilm(forrest);*/
+        filmService.createFilm(forrest);
 
         Film theGraduate = filmService.createFilm(new Film("The Graduate","1967","Mike Nichols",
                 "In the mid-1960s, Benjamin Braddock (Dustin Hoffman), a confused college graduate, is pulled in myriad " +
@@ -131,10 +145,12 @@ public class filmController { // Controller for different pages containing films
                         " woman even as he falls for her daughter, Elaine (Katharine Ross).","Romance"));
         Cover graduateCover =coverService.createCover("thegraduate.jpg","Photograph");
         theGraduate.setCover(graduateCover);
-        theGraduate.addSong(mrsRobinson);
+        theGraduate.setUser(david);
+        /*theGraduate.addSong(mrsRobinson);
         mrsRobinson.addFilm(theGraduate);
         theGraduate.addSong(allAlong);
-        allAlong.addFilm(theGraduate);
+        allAlong.addFilm(theGraduate);*/
+        filmService.createFilm(theGraduate);
 
         Film madagascar= filmService.createFilm(new Film("Madagascar","2005","Eric Darnell",
                 "At New York's Central Park Zoo, a lion, a zebra, a giraffe, and a hippo are best friends and stars of " +
@@ -146,10 +162,11 @@ public class filmController { // Controller for different pages containing films
         madagascar.setUser(eva);
         Cover madagascarCover=coverService.createCover("madagascar.jpg","Animation");
         madagascar.setCover(madagascarCover);
-        madagascar.addSong(stayin);
-        stayin.addFilm(madagascar);
+        filmService.createFilm(madagascar);
+        /*madagascar.addSong(stayin);
+        stayin.addFilm(madagascar);*/
 
-    }*/
+    }
     @GetMapping("/films") // Films main page
     public String filmsSection(Model model){
 

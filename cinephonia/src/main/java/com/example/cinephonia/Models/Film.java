@@ -29,7 +29,7 @@ public class Film { // Java class for Films
     private String year;
     @JsonView(Basic.class)
     private String director;
-    @Column(length = 500)
+    @Column(columnDefinition = "TEXT")
     @JsonView(Basic.class)
     private String synopsis;
     @JsonView(Basic.class)
@@ -40,12 +40,12 @@ public class Film { // Java class for Films
     private User filmUser; // each film is uploaded by one user (1:N relationship) (user foreign key)
     @JsonView(Basic.class)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id=1L;
     @OneToOne
     @JsonView(Basic.class)
     private Cover cover; // each film has one cover (1:1 relationship)
-    @ManyToMany
+    @ManyToMany(mappedBy = "films")
     @JsonView(Songs.class)
     private List<Song> songs= new ArrayList<>(); // each film has many songs (N:M relationship)
     /*

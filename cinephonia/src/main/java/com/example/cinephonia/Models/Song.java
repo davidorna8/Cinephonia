@@ -40,9 +40,9 @@ public class Song { // Java class for songs
     @JsonView(Basic.class)
     private User songUser; // each song is uploaded by one user (1:N relationship) (user foreign key)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(Basic.class)
-    private long id;
+    private long id=1L;
     @ManyToMany
     @JsonView(Films.class)
     private List<Film> films= new ArrayList<>(); // each song has many films (N:M relationship)

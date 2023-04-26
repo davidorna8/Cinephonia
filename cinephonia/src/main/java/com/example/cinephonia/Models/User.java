@@ -25,8 +25,8 @@ public class User { // Java class for users
     private String email;
     private String region;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id=0L;
     /*
     Constructors
      */
