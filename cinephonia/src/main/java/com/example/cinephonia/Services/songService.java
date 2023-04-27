@@ -2,6 +2,7 @@ package com.example.cinephonia.Services;
 
 import com.example.cinephonia.Models.Film;
 import com.example.cinephonia.Models.Song;
+import com.example.cinephonia.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ public class songService {
 
     @Autowired
     com.example.cinephonia.Repositories.songRepository songRepository;
+    @Autowired
+    com.example.cinephonia.Repositories.filmRepository filmRepository;
 
     /*public songService(){
         Song song = new Song("The Trouble With Love Is", "2003",
@@ -66,9 +69,16 @@ public class songService {
         return song;
     }
 
-    public void putSong(Song song, long id){ // change an existing song
+    public void putSong(Song newSong, Song song){ // change an existing song
+        //song.setSongUser(newSong.getSongUser());
+        song.setAuthor(newSong.getAuthor());
+        song.setMinutes(newSong.getMinutes());
+        song.setSeconds(newSong.getSeconds());
+        song.setName(newSong.getName());
+        song.setGenre(newSong.getGenre());
+        song.setYear(newSong.getYear());
+        //song.setFilms(newSong.getFilms());
         songRepository.save(song);
-        song.setId(id);
     }
 
     public Song getSongById(long id){
@@ -79,11 +89,12 @@ public class songService {
         return songRepository.findById(id);
     }
 
-    public void deleteUser(long userId){
+    public void deleteUser(long userId, User admin){
         // when a user is deleted, its songs will be admin's (user 0) property
         for(Song s: songRepository.findAll()){
             if(s.getUserId()==userId){
-
+                s.setSongUser(admin);
+                songRepository.save(s);
             }
         }
     }
@@ -123,6 +134,7 @@ public class songService {
                 }
             }
             film.setSongs(newsongs);
+
         }
     }
 }

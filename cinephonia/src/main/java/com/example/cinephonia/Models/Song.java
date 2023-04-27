@@ -20,6 +20,7 @@ public class Song { // Java class for songs
      */
     public interface Basic {}
     public interface Films {}
+    public interface Users {}
     /*
     Attributes
      */
@@ -37,7 +38,7 @@ public class Song { // Java class for songs
     private String genre;
     @JoinColumn(name="\"user\"")
     @ManyToOne
-    @JsonView(Basic.class)
+    @JsonView(Users.class)
     private User songUser; // each song is uploaded by one user (1:N relationship) (user foreign key)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

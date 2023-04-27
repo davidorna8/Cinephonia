@@ -20,6 +20,7 @@ public class Film { // Java class for Films
      */
     public interface Basic{}
     public interface Songs{}
+    public interface Users{}
     /*
     Attributes
      */
@@ -36,13 +37,13 @@ public class Film { // Java class for Films
     private String genre;
     @JoinColumn(name="\"user\"")
     @ManyToOne
-    @JsonView(Basic.class)
+    @JsonView(Users.class)
     private User filmUser; // each film is uploaded by one user (1:N relationship) (user foreign key)
     @JsonView(Basic.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id=1L;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JsonView(Basic.class)
     private Cover cover; // each film has one cover (1:1 relationship)
     @ManyToMany(mappedBy = "films")

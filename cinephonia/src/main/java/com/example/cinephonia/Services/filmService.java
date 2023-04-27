@@ -3,6 +3,7 @@ package com.example.cinephonia.Services;
 import com.example.cinephonia.Models.Cover;
 import com.example.cinephonia.Models.Film;
 import com.example.cinephonia.Models.Song;
+import com.example.cinephonia.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,8 @@ public class filmService {
     coverService coverService;
     @Autowired
     com.example.cinephonia.Repositories.filmRepository filmRepository;
+    @Autowired
+    com.example.cinephonia.Repositories.songRepository songRepository;
 
 
     /*public filmService() throws IOException { // initial film covers
@@ -149,9 +152,14 @@ public class filmService {
         return film;
     }
 
-    public void putFilm(Film film, long id){ // change an existing film
+    public void putFilm(Film newFilm, Film film){ // change an existing film
+        film.setDirector(newFilm.getDirector());
+        film.setYear(newFilm.getYear());
+        film.setSynopsis(newFilm.getSynopsis());
+        film.setName(newFilm.getName());
+        film.setGenre(newFilm.getGenre());
         filmRepository.save(film);
-        film.setId(id);
+
     }
 
     public Film getFilmById(long id){
@@ -161,13 +169,15 @@ public class filmService {
     public Optional<Film> getOptional(long id){
         return filmRepository.findById(id);
     }
-    public void deleteUser(long userId){
+    public void deleteUser(long userId, User admin){
         // when a user is deleted, its films are admin's (user 0) property
         for(Film f: filmRepository.findAll()){
             if(f.getUserId()==userId){
-                //f.setUser(userService.);
+                f.setUser(admin);
+                filmRepository.save(f);
             }
         }
+
     }
 
     public void addSong(long id, Song song){ // add one song to the songs list of a film knowing its id
@@ -188,6 +198,7 @@ public class filmService {
                 }
             }
             song.setFilms(newfilms);
+
         }
     }
 

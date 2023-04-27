@@ -44,7 +44,7 @@ public class filmController { // Controller for different pages containing films
     @Autowired
     com.example.cinephonia.Repositories.songRepository songRepository;
 
-    @PostConstruct
+    /*@PostConstruct
     public void init(){ // initial lists for N:M relationship
         User admin= userService.createUser(new User("Admin", "", "admin", "", "admin", "admin@admin.com", ""));
         User david= userService.createUser(new User("David","Orna","david345","20","urjclol23","de.orna.2020@alumnos.urjc.es","Western Europe"));
@@ -135,7 +135,7 @@ public class filmController { // Controller for different pages containing films
         mrsRobinson.addFilm(forrest);
         forrest.addSong(california);
         california.addFilm(forrest);*/
-        filmService.createFilm(forrest);
+        /*filmService.createFilm(forrest);
 
         Film theGraduate = filmService.createFilm(new Film("The Graduate","1967","Mike Nichols",
                 "In the mid-1960s, Benjamin Braddock (Dustin Hoffman), a confused college graduate, is pulled in myriad " +
@@ -150,7 +150,7 @@ public class filmController { // Controller for different pages containing films
         mrsRobinson.addFilm(theGraduate);
         theGraduate.addSong(allAlong);
         allAlong.addFilm(theGraduate);*/
-        filmService.createFilm(theGraduate);
+        /*filmService.createFilm(theGraduate);
 
         Film madagascar= filmService.createFilm(new Film("Madagascar","2005","Eric Darnell",
                 "At New York's Central Park Zoo, a lion, a zebra, a giraffe, and a hippo are best friends and stars of " +
@@ -166,7 +166,7 @@ public class filmController { // Controller for different pages containing films
         /*madagascar.addSong(stayin);
         stayin.addFilm(madagascar);*/
 
-    }
+    //}
     @GetMapping("/films") // Films main page
     public String filmsSection(Model model){
 
@@ -175,8 +175,12 @@ public class filmController { // Controller for different pages containing films
         model.addAttribute("genreList",genresList);
         List<String> styleList= Arrays.asList(stylesList);
         model.addAttribute("styleList",styleList);
-        List<User> usersList = new ArrayList<>(userService.userList());
-        //usersList= usersList.subList(1,usersList.size());
+        List<User> usersList=new ArrayList<>();
+        for(User u:userService.userList()){
+            if(!u.getUsername().equals("admin")){
+                usersList.add(u);
+            }
+        }
         model.addAttribute("users",usersList);
 
         // Model the full film list
@@ -241,10 +245,11 @@ public class filmController { // Controller for different pages containing films
 
     @GetMapping("/films/delete/{id}") // page returned when you delete a film from the website
     public String deleteFilm(Model model, @PathVariable long id){
+        Film film=filmService.getFilmById(id);
+        filmService.deleteFilmFromSongs(film);
         // remove it from the map
-        Film film= filmService.removeFilm(id);
+        filmService.removeFilm(id);
         model.addAttribute("name",film.getName());
-        //filmService.deleteFilmFromSongs(film);
         return "deleted";
     }
 
@@ -272,7 +277,7 @@ public class filmController { // Controller for different pages containing films
         // Model the film in order to show its information
         model.addAttribute("username",username);
         model.addAttribute("film",film);
-        filmService.putFilm(film,id); // the new film (info taken from the form) is put in the map
+        filmService.createFilm(film); // the new film (info taken from the form) is put in the map
         film.setId(id);
         List<Song> songList = new ArrayList<>(songService.songList());
         model.addAttribute("songList", songList);
@@ -292,7 +297,7 @@ public class filmController { // Controller for different pages containing films
             songService.addFilm(songId,film); // add the film to the films list of each song
         }
         film.setSongs(songs);
-        filmService.putFilm(film,id);
+        filmService.createFilm(film);
         model.addAttribute("film", film);
         return "redirect:/films/{id}";
     }

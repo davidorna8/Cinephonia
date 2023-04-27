@@ -89,6 +89,7 @@ public class filmRESTController {
                 e.printStackTrace();
             }
         }
+        filmService.createFilm(film);
         return film;
     }
 
@@ -113,7 +114,7 @@ public class filmRESTController {
         Optional<Film> optionalFilm = filmService.getOptional(id);
         if(optionalFilm.isPresent()){ // if the film exists
             Film film = optionalFilm.get();
-            filmService.putFilm(fm,id); // update film in the map
+            filmService.putFilm(fm,film); // update film in the map
             filmService.updateFilmFromSongs(fm,film,id);
             return new ResponseEntity<>(fm,HttpStatus.OK);
         }else{

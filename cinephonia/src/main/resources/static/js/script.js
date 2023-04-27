@@ -69,7 +69,7 @@ function deleteSong(id,name){ // the user must confirm if the song is deleted
 }
 
 function deleteUser(id,name){
-    if(id=="0"){ // it is not allowed to delete admin
+    if(name=="admin"){ // it is not allowed to delete admin
         alert("You can't delete user admin.")
     }
     else {
@@ -80,8 +80,8 @@ function deleteUser(id,name){
     }
 }
 
-function updateUser(id) { // alert to notify that admin can not be updated
-    if (id == "0") {
+function updateUser(id,name) { // alert to notify that admin can not be updated
+    if (name == "admin") {
         alert("You can't update user admin.")
     } else {
         location.href = "/updateUser/" + id;

@@ -66,11 +66,14 @@ public class userController {
 
     @GetMapping("/users/delete/{id}") // confirmation of user deletion, it is removed from the map
     public String deleteUser(Model model, @PathVariable long id){
+
+        // when a user is deleted, the films and songs of the deleted user are property of user 0 (admin)
+        User admin=userService.getUserByUsername("admin");
+        filmService.deleteUser(id,admin);
+        songService.deleteUser(id,admin);
+
         User user =userService.removeUser(id);;
         model.addAttribute("name",user.getUsername());
-        // when a user is deleted, the films and songs of the deleted user are property of user 0 (admin)
-        filmService.deleteUser(id);
-        songService.deleteUser(id);
         return "deleted";
     }
 

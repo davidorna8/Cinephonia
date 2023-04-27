@@ -17,7 +17,7 @@ public class songRESTController {
     @Autowired
     com.example.cinephonia.Services.songService songService;
 
-    interface SongDetail extends Film.Basic, Song.Basic, Song.Films{}
+    interface SongDetail extends Film.Basic, Song.Basic, Song.Films, Song.Users{}
 
     @JsonView(SongDetail.class)
     @GetMapping("/songs/{id}")
@@ -66,7 +66,7 @@ public class songRESTController {
         Optional<Song> optionalSong = songService.getOptional(id);
         if(optionalSong.isPresent()){
             Song song=optionalSong.get();
-            songService.putSong(sn,id);
+            songService.putSong(sn,song);
             songService.updateSongFromFilms(sn,song,id);
             return new ResponseEntity<>(sn,HttpStatus.OK);
         }else{

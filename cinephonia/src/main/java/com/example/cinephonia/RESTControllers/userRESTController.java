@@ -15,6 +15,9 @@ import java.util.Optional;
 public class userRESTController {
     @Autowired
     com.example.cinephonia.Services.userService userService;
+    @Autowired
+    com.example.cinephonia.Services.filmService filmService;
+    @Autowired com.example.cinephonia.Services.songService songService;
    @GetMapping("/users/{id}") // get user by Id
     public ResponseEntity<User> getUser(@PathVariable long id){
         Optional<User> optionalUser=userService.getOptional(id);
@@ -41,7 +44,11 @@ public class userRESTController {
         Optional<User> optionalUser=userService.getOptional(id); //remove the user from the map
         if(optionalUser.isPresent()){ // if it was found
             User user=optionalUser.get();
+            User admin=userService.getUserByUsername("admin");
+            filmService.deleteUser(user.getId(),admin);
+            songService.deleteUser(user.getId(),admin);
             userService.removeUser(id);
+
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
         else{

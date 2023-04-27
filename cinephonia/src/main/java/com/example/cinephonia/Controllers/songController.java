@@ -36,8 +36,12 @@ public class songController { // Controller for pages containing songs
         // Model different lists for selects in the form
         List<String> genresList= Arrays.asList(genreList);
         model.addAttribute("genreList",genresList);
-        List<User> usersList = new ArrayList<>(userService.userList());
-        //usersList= usersList.subList(1,usersList.size());
+        List <User> usersList=new ArrayList<>();
+        for(User u:userService.userList()){
+            if(!u.getUsername().equals("admin")){
+                usersList.add(u);
+            }
+        }
         model.addAttribute("users",usersList);
         // Model full songs list
         List<Song> songList=new ArrayList<>(songService.songList());
@@ -139,7 +143,7 @@ public class songController { // Controller for pages containing songs
             filmService.addSong(filmId,song); // add the song to the songs list of each film
         }
         song.setFilms(films);
-        songService.putSong(song,id);
+        songService.createSong(song);
         model.addAttribute("song", song);
         return "redirect:/song/{id}";
     }
