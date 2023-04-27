@@ -227,3 +227,16 @@ hr{
 #allSongs{
     display: none;
 }
+
+/* Rich Text */
+
+#richTextArea{
+    display: none;
+}
+
+#richTextField{
+    background-color: whitesmoke;
+    border-radius: 5px;
+    width: 350px;
+    height: 100px;
+}

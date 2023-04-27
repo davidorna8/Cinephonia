@@ -8,7 +8,7 @@ INSERT INTO user(name, surname, username, age, password, email, region) VALUES (
 
 INSERT INTO user(name, surname, username, age, password, email, region) VALUES ('John', 'Doe', 'yondou', '56', 'JJnewof7', 'j.doe.fresh@hotmail.com', 'Asia');
 
-#SONGS
+#SONGS;
 
 INSERT INTO song(name, year, minutes, seconds, author, genre, user) VALUES ('The Trouble With Love Is', '2003',
  '3','41','Kelly Clarkson', 'Pop', (SELECT id FROM user WHERE username='admin'));
@@ -28,8 +28,7 @@ INSERT INTO song(name, year, minutes, seconds, author, genre, user) VALUES ('Mrs
 INSERT INTO song(name, year, minutes, seconds, author, genre, user) VALUES ('California Somnolienta', '1965',
  '3','2','The Mamas and The Papas', 'Soul', (SELECT id FROM user WHERE username='yondou'));
 
-
-#COVERS
+#COVERS;
 
 INSERT INTO cover(imageURL, style) VALUES ('loveactually.jpg','Collage');
 INSERT INTO cover(imageURL, style) VALUES ('interstellar.jpg','Landscape');
@@ -38,7 +37,7 @@ INSERT INTO cover(imageURL, style) VALUES ('forrestgump.jpg','Photograph');
 INSERT INTO cover(imageURL, style) VALUES ('thegraduate.jpg','Photograph');
 INSERT INTO cover(imageURL, style) VALUES ('madagascar.jpg','Animation');
 
-#FILMS
+#FILMS;
 
 INSERT INTO film(name, year, director, synopsis, genre, user, cover_id) VALUES ('Love Actually','2003', 'Richard Curtis', 'This ultimate romantic comedy weaves together a spectacular number of love affairs into one amazing story. Set almost entirely in London, England during five frantic weeks before Christmas follows a web-like pattern of inter-related, losely related and unrelated stories of a dozen or more various individuals with their love lives, or lack of them.','Romance',(SELECT id FROM user WHERE username='admin'),(SELECT id FROM cover WHERE imageURL='loveactually.jpg'));
 
@@ -52,7 +51,7 @@ INSERT INTO film(name, year, director, synopsis, genre, user, cover_id) VALUES (
 
 INSERT INTO film(name, year, director, synopsis, genre, user, cover_id) VALUES ('Madagascar','2005', 'Eric Darnell', 'At New Yorks Central Park Zoo, a lion, a zebra, a giraffe, and a hippo are best friends and stars of the show. But when one of the animals goes missing from their cage, the other three break free to look for him, only to find themselves reunited ... on a ship en route to Africa. When their vessel is hijacked, however, the friends, who have all been raised in captivity, learn first-hand what life can be like in the wild.','Comedy',(SELECT id FROM user WHERE username='eva.g'),(SELECT id FROM cover WHERE imageURL='madagascar.jpg'));
 
-#N:MRELATIONSHIP
+#N:MRELATIONSHIP;
 
 INSERT INTO song_films(songs_id,films_id) VALUES((SELECT id FROM song WHERE name='The Trouble With Love Is'), (SELECT id FROM film WHERE name='Love Actually'));
 
