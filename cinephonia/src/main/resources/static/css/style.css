@@ -230,13 +230,12 @@ hr{
 
 /* Rich Text */
 
-#richTextArea{
+#synopsis{
     display: none;
 }
 
 #richTextField{
     background-color: whitesmoke;
     border-radius: 5px;
-    width: 350px;
     height: 100px;
 }

@@ -62,7 +62,7 @@
     <!--required: the form is not valid if there are empty fields-->
     <div id="uploadFilms">
         <div class="text-center container d-flex justify-content-center">
-            <form type="Submit" enctype="multipart/form-data" class="text-center" onsubmit="newFilm()" method="post" action="/filmInfo">
+            <form type="Submit" id="filmForm" enctype="multipart/form-data" class="text-center" onsubmit="newFilm()" method="post" action="/filmInfo">
                 <div class="row d-flex mb-2">
                     <select class="form-control" name="username" required>
                         <option value="">Who are you?</option>
@@ -85,8 +85,16 @@
                 <div class="row d-flex mb-2">
                     <div id="richTextButtons">
                         <input type="button" onclick="boldText()" value="Bold">
+                        <input type="button" onclick="italicText()" value="Italic">
+                        <input type="button" onclick="underlinedText()" value="Underlined">
+                        <input type="button" onclick="colorBlack()" value="Color black">
+                        <input type="button" onclick="colorRed()" value="Color red">
+                        <input type="button" onclick="colorBlue()" value="Color blue">
+                        <input type="button" onclick="colorGreen()" value="Color green">
                     </div>
-                    <textarea id="richTextArea" class="form-control" placeholder="Synopsis" name="synopsis" required></textarea>
+                </div>
+                <div class="row d-flex mb-2">
+                    <textarea id="synopsis" class="form-control" placeholder="Synopsis" name="synopsis"></textarea>
                     <iframe name="richTextField" id="richTextField"></iframe>
                 </div>
                 <div class="row d-flex mb-2">
@@ -126,7 +134,7 @@
                     <div class="card-body ">
                         <h5 class="titles">{{name}}</h5>
                         <p>
-                            {{synopsis}}
+                            {{{synopsis}}}
                         </p>
                     </div>
                     <div class="card-footer text-center">

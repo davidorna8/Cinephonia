@@ -21,10 +21,6 @@ function showSongsForm(){ // the same as in showFilmsForm()
     let content3=document.getElementById('allSongs');
     content3.style.display='none';
 }
-function newFilm() { // alert to notify the user a new film is created
-    alert("Film correctly registered!");
-    return false;
-}
 function newSong(){ // alert to notify the user a new song is created
     alert("Song correctly registered!");
     return false;
