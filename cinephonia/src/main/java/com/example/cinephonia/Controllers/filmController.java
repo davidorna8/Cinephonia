@@ -40,133 +40,6 @@ public class filmController { // Controller for different pages containing films
     @Autowired
     com.example.cinephonia.Services.coverService coverService;
 
-    ///CAMBIAR ESTOOOOOOOOOOOOOOOOOOOOOOO
-    @Autowired
-    com.example.cinephonia.Repositories.songRepository songRepository;
-
-    /*@PostConstruct
-    public void init(){ // initial lists for N:M relationship
-        User admin= userService.createUser(new User("Admin", "", "admin", "", "admin", "admin@admin.com", ""));
-        User david= userService.createUser(new User("David","Orna","david345","20","urjclol23","de.orna.2020@alumnos.urjc.es","Western Europe"));
-        User eva= userService.createUser(new User("Eva","Gomez","eva.g","20","%Ri8#kKl92","e.gomezf.2020@alumnos.urjc.es","Western Europe"));
-        User john= userService.createUser(new User("John","Doe","yondou","56","JJnewof7","j.doe.fresh@hotmail.com","Asia"));
-
-        Song troubleLove = songService.createSong(new Song("The Trouble With Love Is", "2003",
-                "3","41","Kelly Clarkson", "Pop"));
-        troubleLove.setSongUser(admin);
-        songService.createSong(troubleLove);
-        Song cornfield = songService.createSong(new Song("Cornfield Chase","2014","2", "6",
-                "Hans Zimmer","Original Soundtrack"));
-        cornfield.setSongUser(admin);
-        songService.createSong(cornfield);
-        Song allAlong = songService.createSong(new Song("All Along the Watchtower","1968","4", "1",
-                "Jimi Hendrix","Rock"));
-        allAlong.setSongUser(john);
-        songService.createSong(allAlong);
-        Song stayin = songService.createSong(new Song("Stayin' Alive","1977","4", "9",
-                "Bee Gees","Rock"));
-        stayin.setSongUser(eva);
-        songService.createSong(stayin);
-        Song mrsRobinson= songService.createSong(new Song("Mrs. Robinson","1967","3", "55",
-                "Simon and Garfunkel","Original Soundtrack"));
-        mrsRobinson.setSongUser(david);
-        songService.createSong(mrsRobinson);
-        Song california = songService.createSong(new Song("California Somnolienta","1965","3", "2",
-                "The Mamas and The Papas","Soul"));
-        california.setSongUser(john);
-        songService.createSong(california);
-        Film loveActually = filmService.createFilm(new Film("Love Actually","2003", "Richard Curtis",
-                "This ultimate romantic comedy weaves together a spectacular number " +
-                        "of love affairs into one amazing story. Set almost entirely in London, " +
-                        "England during five frantic weeks before Christmas follows a web-like " +
-                        "pattern of inter-related, losely related and unrelated stories of a dozen " +
-                        "or more various individuals with their love lives, or lack of them."
-                ,"Romance"));
-        Cover loveCover=coverService.createCover("loveactually.jpg","Collage");
-        loveActually.setCover(loveCover);
-        loveActually.setUser(userService.getUserByUsername("admin"));
-        filmService.createFilm(loveActually);
-
-        //loveActually.addSong(troubleLove);
-        //troubleLove.addFilm(loveActually);
-
-        Film interstellar = filmService.createFilm(new Film("Interstellar", "2014", "Christopher Nolan",
-                "In the near future Earth has been devastated by drought and " +
-                        "famine, causing a scarcity in food and extreme changes in climate. " +
-                        "When humanity is facing extinction, a mysterious rip in the space-time " +
-                        "continuum is discovered, giving mankind the opportunity to widen their " +
-                        "lifespan. A group of explorers must travel beyond our solar system in " +
-                        "search of a planet that can sustain life.", "Science fiction"));
-        Cover interCover=coverService.createCover("interstellar.jpg","Landscape");
-        interstellar.setCover(interCover);
-        interstellar.setUser(userService.getUserByUsername("admin"));
-        filmService.createFilm(interstellar);
-        //interstellar.addSong(cornfield);
-        //cornfield.addFilm(interstellar);
-        Film littleMermaid= filmService.createFilm(new Film("The little Mermaid","2023","Rob Marshall",
-                "The mermaid Ariel, daughter of King Triton, is fascinated with " +
-                        "humans. She falls in love with the human prince Eric after she " +
-                        "rescues him from a shipwreck. Condemned by her father for engaging " +
-                        "in illicit contact with the surface world, Ariel then receives an offer " +
-                        "from the scheming sea witch Ursula - Ursula will turn her into a human for " +
-                        "three days, but during this time she must win the kiss of true love from Eric " +
-                        "otherwise Ursula will own her forever. Ariel agrees but to add to the " +
-                        "difficulty Ursula also takes Ariel's voice as price of the deal and then " +
-                        "schemes to ensure that Ariel fails.", "Fantasy"));
-        Cover littleCover=coverService.createCover("littlemermaid.jpg","Photograph");
-        littleMermaid.setCover(littleCover);
-        littleMermaid.setUser(userService.getUserByUsername("admin"));
-        filmService.createFilm(littleMermaid);
-
-        Film forrest= filmService.createFilm(new Film("Forrest Gump","1994","Robert Zemeckis",
-                "Despite Forrest's (Tom Hanks) low IQ, he is not your average guy. " +
-                        "Learning early on from his mother (Sally Field) that 'life is like a box of chocolates, you never know what you're gonna get'," +
-                        " Gump, without trying, stumbles upon some exciting events. " +
-                        "Meanwhile, as the remarkable parade of his life goes by, Forrest never forgets Jenny (Robin Wright), " +
-                        "the girl he loved as a boy, who makes her own journey through the turbulence of the 1960s and 1970s " +
-                        "that is far more troubled than the path Forrest happens upon."
-                , "Drama"));
-        Cover forrestCover=coverService.createCover("forrestgump.jpg","Photograph");
-        forrest.setCover(forrestCover);
-        forrest.setUser(userService.getUserByUsername("admin"));
-        /*forrest.addSong(allAlong);
-        allAlong.addFilm(forrest);
-        forrest.addSong(mrsRobinson);
-        mrsRobinson.addFilm(forrest);
-        forrest.addSong(california);
-        california.addFilm(forrest);*/
-        /*filmService.createFilm(forrest);
-
-        Film theGraduate = filmService.createFilm(new Film("The Graduate","1967","Mike Nichols",
-                "In the mid-1960s, Benjamin Braddock (Dustin Hoffman), a confused college graduate, is pulled in myriad " +
-                        "directions by his wealthy family, friends, and associates just days after receiving his degree." +
-                        " Seduced by alcoholic and a neurotic Mrs. Robinson (Anne Bancroft), an older friend of the" +
-                        " family and the wife of his father's law partner, Ben carries on an affair with the married" +
-                        " woman even as he falls for her daughter, Elaine (Katharine Ross).","Romance"));
-        Cover graduateCover =coverService.createCover("thegraduate.jpg","Photograph");
-        theGraduate.setCover(graduateCover);
-        theGraduate.setUser(david);
-        /*theGraduate.addSong(mrsRobinson);
-        mrsRobinson.addFilm(theGraduate);
-        theGraduate.addSong(allAlong);
-        allAlong.addFilm(theGraduate);*/
-        /*filmService.createFilm(theGraduate);
-
-        Film madagascar= filmService.createFilm(new Film("Madagascar","2005","Eric Darnell",
-                "At New York's Central Park Zoo, a lion, a zebra, a giraffe, and a hippo are best friends and stars of " +
-                        "the show. But when one of the animals goes missing from their cage, the other three break free " +
-                        "to look for him, only to find themselves reunited ... on a ship en route to Africa. When their" +
-                        " vessel is hijacked, however, the friends, who have all been raised in captivity, learn " +
-                        "first-hand what life can be like in the wild.","Comedy"));
-
-        madagascar.setUser(eva);
-        Cover madagascarCover=coverService.createCover("madagascar.jpg","Animation");
-        madagascar.setCover(madagascarCover);
-        filmService.createFilm(madagascar);
-        /*madagascar.addSong(stayin);
-        stayin.addFilm(madagascar);*/
-
-    //}
     @GetMapping("/films") // Films main page
     public String filmsSection(Model model){
 
@@ -300,5 +173,13 @@ public class filmController { // Controller for different pages containing films
         filmService.createFilm(film);
         model.addAttribute("film", film);
         return "redirect:/films/{id}";
+    }
+    @GetMapping("/filterFilms")
+    public String filter(Model model,@RequestParam String genre,@RequestParam String year){
+        List<Film> filmList =new ArrayList<>(filmService.filterFilm(genre,year));
+        model.addAttribute("films",filmList);
+        model.addAttribute("genre",genre);
+        model.addAttribute("year",year);
+        return "filteredFilms";
     }
 }
